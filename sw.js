@@ -1,9 +1,10 @@
 const CACHE_NAME = 'lev-schedule-v1';
 const ASSETS_TO_CACHE = [
   './',
-  './fix songs_4.html',
+  './index.html',
   './manifest.json',
-  './icon-192.png'
+  './icon-192.png',
+  './icon-512.png'
 ];
 
 // התקנת ה-Service Worker ושמירת הקבצים במטמון
