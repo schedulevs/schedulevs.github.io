@@ -1569,32 +1569,32 @@
                 const body = document.getElementById('evModalBody');
                 const trainClients = DATA.clients;
                 body.innerHTML = `
-                <div class="type-picker" id="typePicker">
-                  ${Object.keys(TYPE_META).map(t => `<button class="type-opt ${draft.type === t ? 'selected' : ''}" data-type="${t}" style="--c:${TYPE_META[t].color};--cbg:${TYPE_META[t].bg}">${TYPE_META[t].icon}<span>${TYPE_META[t].label}</span></button>`).join('')}
-                </div>
-                <label>כותרת (אופציונלי)</label>
-                <input id="f_title" value="${escapeHtml(draft.title || '')}" placeholder="${TYPE_META[draft.type].label}">
-                <div class="field-row">
-                  <div><label>תאריך</label><input type="date" id="f_date" value="${draft.date}"></div>
-                  <div></div>
-                </div>
-                <div class="field-row">
-                  <div><label>שעת התחלה</label><input type="time" id="f_start" value="${draft.startTime}"></div>
-                  <div><label>שעת סיום</label><input type="time" id="f_end" value="${draft.endTime}"></div>
-                </div>
-                <div id="typeExtra"></div>
-                <div class="toggle-row">
-                  <div><div class="t-main">חסימת זמן נסיעה/התארגנות</div><div class="t-sub">${DATA.settings.bufferMinutes} דק' לפני ואחרי</div></div>
-                  <div class="switch ${draft.useBuffer !== false ? 'on' : ''}" id="f_buffer"></div>
-                </div>
-                <label>הערות</label>
-                <textarea id="f_notes" rows="2" placeholder="הערות חופשיות...">${escapeHtml(draft.notes || '')}</textarea>
-                <div id="conflictBox"></div>
-                <div class="row-btns">
-                  ${draft.id ? '<button class="btn btn-danger" id="delEvBtn">מחיקה</button>' : ''}
-                  <button class="btn btn-primary" id="saveEvBtn">שמירה</button>
-                </div>
-              `;
+                    <div class="type-picker" id="typePicker">
+                      ${Object.keys(TYPE_META).map(t => `<button class="type-opt ${draft.type === t ? 'selected' : ''}" data-type="${t}" style="--c:${TYPE_META[t].color};--cbg:${TYPE_META[t].bg}">${TYPE_META[t].icon}<span>${TYPE_META[t].label}</span></button>`).join('')}
+                    </div>
+                    <label>כותרת (אופציונלי)</label>
+                    <input id="f_title" value="${escapeHtml(draft.title || '')}" placeholder="${TYPE_META[draft.type].label}">
+                    <div class="field-row">
+                      <div><label>תאריך</label><input type="date" id="f_date" value="${draft.date}"></div>
+                      <div></div>
+                    </div>
+                    <div class="field-row">
+                      <div><label>שעת התחלה</label><input type="time" id="f_start" value="${draft.startTime}"></div>
+                      <div><label>שעת סיום</label><input type="time" id="f_end" value="${draft.endTime}"></div>
+                    </div>
+                    <div id="typeExtra"></div>
+                    <div class="toggle-row">
+                      <div><div class="t-main">חסימת זמן נסיעה/התארגנות</div><div class="t-sub">${DATA.settings.bufferMinutes} דק' לפני ואחרי</div></div>
+                      <div class="switch ${draft.useBuffer !== false ? 'on' : ''}" id="f_buffer"></div>
+                    </div>
+                    <label>הערות</label>
+                    <textarea id="f_notes" rows="2" placeholder="הערות חופשיות...">${escapeHtml(draft.notes || '')}</textarea>
+                    <div id="conflictBox"></div>
+                    <div class="row-btns">
+                      ${draft.id ? '<button class="btn btn-danger" id="delEvBtn">מחיקה</button>' : ''}
+                      <button class="btn btn-primary" id="saveEvBtn">שמירה</button>
+                    </div>
+                  `;
                 document.getElementById('f_buffer').addEventListener('click', function () { this.classList.toggle('on'); refreshConflictPreview(draft); });
 
                 document.querySelectorAll('#typePicker .type-opt').forEach(btn => {
@@ -1613,18 +1613,18 @@
                     const box = document.getElementById('typeExtra');
                     if (d.type === 'mda') {
                         box.innerHTML = `<label>סוג משמרת</label>
-                  <select id="f_shift">
-                    <option value="morning" ${d.mdaShiftType === 'morning' ? 'selected' : ''}>בוקר</option>
-                    <option value="evening" ${d.mdaShiftType === 'evening' ? 'selected' : ''}>ערב</option>
-                    <option value="night" ${d.mdaShiftType === 'night' ? 'selected' : ''}>לילה</option>
-                  </select>`;
+                      <select id="f_shift">
+                        <option value="morning" ${d.mdaShiftType === 'morning' ? 'selected' : ''}>בוקר</option>
+                        <option value="evening" ${d.mdaShiftType === 'evening' ? 'selected' : ''}>ערב</option>
+                        <option value="night" ${d.mdaShiftType === 'night' ? 'selected' : ''}>לילה</option>
+                      </select>`;
                         document.getElementById('f_shift').addEventListener('change', e => { d.mdaShiftType = e.target.value; refreshConflictPreview(d); });
                     } else if (d.type === 'gym') {
                         box.innerHTML = `<label>עמלות מכירה במשמרת (₪)</label><input type="number" id="f_comm" value="${d.commission || 0}" min="0" step="5">`;
                     } else if (d.type === 'training') {
                         box.innerHTML = `<label>מתאמן</label>
-                  <select id="f_client"><option value="">— ללא שיוך —</option>${trainClients.map(c => `<option value="${c.id}" ${d.clientId === c.id ? 'selected' : ''}>${escapeHtml(c.name)}</option>`).join('')}</select>
-                  <label>תעריף לאימון (₪)</label><input type="number" id="f_price" value="${d.price != null ? d.price : DATA.settings.trainingPrice}" min="0" step="5">`;
+                      <select id="f_client"><option value="">— ללא שיוך —</option>${trainClients.map(c => `<option value="${c.id}" ${d.clientId === c.id ? 'selected' : ''}>${escapeHtml(c.name)}</option>`).join('')}</select>
+                      <label>תעריף לאימון (₪)</label><input type="number" id="f_price" value="${d.price != null ? d.price : DATA.settings.trainingPrice}" min="0" step="5">`;
                     } else {
                         box.innerHTML = '';
                     }
@@ -1706,9 +1706,9 @@
                     const div = document.createElement('div');
                     div.className = 'client-card';
                     div.innerHTML = `<div class="client-top">
-                  <div><div class="client-name">${escapeHtml(c.name)}</div>${c.phone ? '<div class="client-phone">' + escapeHtml(c.phone) + '</div>' : ''}</div>
-                  <span class="pkg-pill ${low ? 'low' : ''}">${remaining} נותרו</span>
-                </div>${c.goals ? '<div class="client-goals">🎯 ' + escapeHtml(c.goals) + '</div>' : ''}`;
+                      <div><div class="client-name">${escapeHtml(c.name)}</div>${c.phone ? '<div class="client-phone">' + escapeHtml(c.phone) + '</div>' : ''}</div>
+                      <span class="pkg-pill ${low ? 'low' : ''}">${remaining} נותרו</span>
+                    </div>${c.goals ? '<div class="client-goals">🎯 ' + escapeHtml(c.goals) + '</div>' : ''}`;
                     div.addEventListener('click', () => openClientDetail(c.id));
                     holder.appendChild(div);
                 });
@@ -1720,18 +1720,18 @@
                 document.getElementById('clModalTitle').textContent = c ? 'עריכת מתאמן' : 'מתאמן חדש';
                 const draft = c ? Object.assign({}, c) : { id: null, name: '', phone: '', goals: '', medical: '', packageTotal: 10, packageUsed: 0, history: [] };
                 document.getElementById('clModalBody').innerHTML = `
-                <label>שם מלא</label><input id="c_name" value="${escapeHtml(draft.name)}">
-                <label>טלפון</label><input id="c_phone" value="${escapeHtml(draft.phone || '')}" type="tel">
-                <label>מטרות כושר</label><input id="c_goals" value="${escapeHtml(draft.goals || '')}">
-                <label>הערות רפואיות / מגבלות</label><textarea id="c_med" rows="2">${escapeHtml(draft.medical || '')}</textarea>
-                <div class="field-row">
-                  <div><label>סה"כ אימונים בכרטיסייה</label><input id="c_total" type="number" min="0" value="${draft.packageTotal || 0}"></div>
-                  <div><label>נוצלו עד כה</label><input id="c_used" type="number" min="0" value="${draft.packageUsed || 0}"></div>
-                </div>
-                <div class="row-btns">
-                  ${draft.id ? '<button class="btn btn-danger" id="delClBtn">מחיקה</button>' : ''}
-                  <button class="btn btn-primary" id="saveClBtn">שמירה</button>
-                </div>`;
+                    <label>שם מלא</label><input id="c_name" value="${escapeHtml(draft.name)}">
+                    <label>טלפון</label><input id="c_phone" value="${escapeHtml(draft.phone || '')}" type="tel">
+                    <label>מטרות כושר</label><input id="c_goals" value="${escapeHtml(draft.goals || '')}">
+                    <label>הערות רפואיות / מגבלות</label><textarea id="c_med" rows="2">${escapeHtml(draft.medical || '')}</textarea>
+                    <div class="field-row">
+                      <div><label>סה"כ אימונים בכרטיסייה</label><input id="c_total" type="number" min="0" value="${draft.packageTotal || 0}"></div>
+                      <div><label>נוצלו עד כה</label><input id="c_used" type="number" min="0" value="${draft.packageUsed || 0}"></div>
+                    </div>
+                    <div class="row-btns">
+                      ${draft.id ? '<button class="btn btn-danger" id="delClBtn">מחיקה</button>' : ''}
+                      <button class="btn btn-primary" id="saveClBtn">שמירה</button>
+                    </div>`;
                 document.getElementById('saveClBtn').addEventListener('click', () => {
                     draft.name = document.getElementById('c_name').value.trim();
                     if (!draft.name) { alert('נא להזין שם'); return; }
@@ -1764,28 +1764,28 @@
                 const upcoming = DATA.events.filter(e => e.type === 'training' && e.clientId === id && parseDateStr(e.date) >= new Date(new Date().setHours(0, 0, 0, 0))).sort((a, b) => a.date.localeCompare(b.date));
                 const history = (c.history || []).slice().reverse();
                 document.getElementById('clDetailBody').innerHTML = `
-                <div class="modal-title">${escapeHtml(c.name)}</div>
-                ${c.phone ? '<div class="client-phone" style="margin-bottom:10px;">' + escapeHtml(c.phone) + '</div>' : ''}
-                <div class="stat-grid" style="margin:12px 0;">
-                  <div class="stat"><div class="num">${remaining}</div><div class="lbl">אימונים נותרו</div></div>
-                  <div class="stat"><div class="num">${c.packageUsed || 0}/${c.packageTotal || 0}</div><div class="lbl">נוצלו</div></div>
-                </div>
-                ${c.goals ? '<div class="section-title">מטרות</div><div>' + escapeHtml(c.goals) + '</div>' : ''}
-                ${c.medical ? '<div class="section-title">הערות רפואיות</div><div>' + escapeHtml(c.medical) + '</div>' : ''}
-                <div class="section-title">אימונים קרובים</div>
-                ${upcoming.length ? upcoming.map(e => `<div class="ev-card" style="--c:${TYPE_META.training.color};--cbg:${TYPE_META.training.bg}"><div class="ev-time"><div class="t1">${e.startTime}</div><div class="t2">${e.date.slice(5)}</div></div>
-                  <div class="ev-body"><div class="ev-title">${escapeHtml(e.title || 'אימון אישי')}</div>
-                  <div class="row-btns">
-                    <button class="btn btn-ghost btn-sm" data-checkin="${e.id}">${ICONS.check} הגיע</button>
-                    <button class="btn btn-danger btn-sm" data-cancel="${e.id}">ביטול</button>
-                  </div></div></div>`).join('') : '<div class="empty-note">אין אימונים עתידיים מתוזמנים</div>'}
-                <div class="section-title">היסטוריה</div>
-                ${history.length ? history.slice(0, 10).map(h => `<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:12.5px;">
-                  <span>${h.date}</span><span style="color:${h.status === 'attended' ? 'var(--training)' : 'var(--mda)'}">${h.status === 'attended' ? 'הגיע' : h.status === 'late-cancel' ? 'ביטול מאוחר' : 'ביטול'}</span></div>`).join('') : '<div class="empty-note">אין היסטוריה עדיין</div>'}
-                <div class="row-btns">
-                  <button class="btn btn-ghost" id="editClFromDetail">עריכת פרטים</button>
-                </div>
-              `;
+                    <div class="modal-title">${escapeHtml(c.name)}</div>
+                    ${c.phone ? '<div class="client-phone" style="margin-bottom:10px;">' + escapeHtml(c.phone) + '</div>' : ''}
+                    <div class="stat-grid" style="margin:12px 0;">
+                      <div class="stat"><div class="num">${remaining}</div><div class="lbl">אימונים נותרו</div></div>
+                      <div class="stat"><div class="num">${c.packageUsed || 0}/${c.packageTotal || 0}</div><div class="lbl">נוצלו</div></div>
+                    </div>
+                    ${c.goals ? '<div class="section-title">מטרות</div><div>' + escapeHtml(c.goals) + '</div>' : ''}
+                    ${c.medical ? '<div class="section-title">הערות רפואיות</div><div>' + escapeHtml(c.medical) + '</div>' : ''}
+                    <div class="section-title">אימונים קרובים</div>
+                    ${upcoming.length ? upcoming.map(e => `<div class="ev-card" style="--c:${TYPE_META.training.color};--cbg:${TYPE_META.training.bg}"><div class="ev-time"><div class="t1">${e.startTime}</div><div class="t2">${e.date.slice(5)}</div></div>
+                      <div class="ev-body"><div class="ev-title">${escapeHtml(e.title || 'אימון אישי')}</div>
+                      <div class="row-btns">
+                        <button class="btn btn-ghost btn-sm" data-checkin="${e.id}">${ICONS.check} הגיע</button>
+                        <button class="btn btn-danger btn-sm" data-cancel="${e.id}">ביטול</button>
+                      </div></div></div>`).join('') : '<div class="empty-note">אין אימונים עתידיים מתוזמנים</div>'}
+                    <div class="section-title">היסטוריה</div>
+                    ${history.length ? history.slice(0, 10).map(h => `<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:12.5px;">
+                      <span>${h.date}</span><span style="color:${h.status === 'attended' ? 'var(--training)' : 'var(--mda)'}">${h.status === 'attended' ? 'הגיע' : h.status === 'late-cancel' ? 'ביטול מאוחר' : 'ביטול'}</span></div>`).join('') : '<div class="empty-note">אין היסטוריה עדיין</div>'}
+                    <div class="row-btns">
+                      <button class="btn btn-ghost" id="editClFromDetail">עריכת פרטים</button>
+                    </div>
+                  `;
                 document.getElementById('editClFromDetail').addEventListener('click', () => { closeModal('modalClientDetail'); openClientModal(id); });
                 document.querySelectorAll('[data-checkin]').forEach(b => b.addEventListener('click', () => markTraining(b.dataset.checkin, 'attended')));
                 document.querySelectorAll('[data-cancel]').forEach(b => b.addEventListener('click', () => {
@@ -1835,29 +1835,29 @@
 
                 const holder = document.getElementById('financeHolder');
                 holder.innerHTML = `
-                <div class="card">
-                  <div class="section-title" style="margin-top:0;">סה"כ הכנסה חודשית</div>
-                  <div style="font-size:32px;font-weight:800;font-variant-numeric:tabular-nums;">${money(totalIncome)}</div>
-                </div>
-                <div class="stat-grid">
-                  <div class="stat"><div class="num">${money(gymIncome)}</div><div class="lbl">הכנסה מניהול</div></div>
-                  <div class="stat"><div class="num">${money(trainingIncome)}</div><div class="lbl">הכנסה מאימונים</div></div>
-                  <div class="stat"><div class="num">${gymHours.toFixed(1)}</div><div class="lbl">שעות ניהול</div></div>
-                  <div class="stat"><div class="num">${trainingCount}/${trainingScheduled}</div><div class="lbl">אימונים שבוצעו</div></div>
-                  <div class="stat"><div class="num">${mdaHours.toFixed(1)}</div><div class="lbl">שעות התנדבות מד"א</div></div>
-                  <div class="stat"><div class="num">${money(gymCommission)}</div><div class="lbl">עמלות מכירה</div></div>
-                </div>
-                <div class="section-title">פילוח הכנסה</div>
-                <div class="card">
-                  ${financeBar('ניהול', gymIncome, totalIncome || 1, 'var(--gym)')}
-                  ${financeBar('אימונים', trainingIncome, totalIncome || 1, 'var(--training)')}
-                </div>
-                <div class="section-title">חלוקת שעות</div>
-                <div class="card">
-                  ${financeBar('ניהול', gymHours, (gymHours + mdaHours) || 1, 'var(--gym)')}
-                  ${financeBar('מד"א (התנדבות)', mdaHours, (gymHours + mdaHours) || 1, 'var(--mda)')}
-                </div>
-              `;
+                    <div class="card">
+                      <div class="section-title" style="margin-top:0;">סה"כ הכנסה חודשית</div>
+                      <div style="font-size:32px;font-weight:800;font-variant-numeric:tabular-nums;">${money(totalIncome)}</div>
+                    </div>
+                    <div class="stat-grid">
+                      <div class="stat"><div class="num">${money(gymIncome)}</div><div class="lbl">הכנסה מניהול</div></div>
+                      <div class="stat"><div class="num">${money(trainingIncome)}</div><div class="lbl">הכנסה מאימונים</div></div>
+                      <div class="stat"><div class="num">${gymHours.toFixed(1)}</div><div class="lbl">שעות ניהול</div></div>
+                      <div class="stat"><div class="num">${trainingCount}/${trainingScheduled}</div><div class="lbl">אימונים שבוצעו</div></div>
+                      <div class="stat"><div class="num">${mdaHours.toFixed(1)}</div><div class="lbl">שעות התנדבות מד"א</div></div>
+                      <div class="stat"><div class="num">${money(gymCommission)}</div><div class="lbl">עמלות מכירה</div></div>
+                    </div>
+                    <div class="section-title">פילוח הכנסה</div>
+                    <div class="card">
+                      ${financeBar('ניהול', gymIncome, totalIncome || 1, 'var(--gym)')}
+                      ${financeBar('אימונים', trainingIncome, totalIncome || 1, 'var(--training)')}
+                    </div>
+                    <div class="section-title">חלוקת שעות</div>
+                    <div class="card">
+                      ${financeBar('ניהול', gymHours, (gymHours + mdaHours) || 1, 'var(--gym)')}
+                      ${financeBar('מד"א (התנדבות)', mdaHours, (gymHours + mdaHours) || 1, 'var(--mda)')}
+                    </div>
+                  `;
             }
             function financeBar(label, val, total, color) {
                 const pct = Math.max(2, Math.min(100, (val / total) * 100));
@@ -1869,6 +1869,12 @@
             // הוא פועל כל עוד הדפדפן/האפליקציה המותקנת רצים (ברקע אם התקנת אותה למסך הבית).
             // התראות Push אמיתיות שמגיעות גם כשהאפליקציה סגורה לחלוטין דורשות שרת דחיפה (Firebase Cloud Messaging + פונקציה בענן)
             // שלא ניתן להוסיף בקובץ סטטי בלבד - זה שיפור עתידי אפשרי אם תרצה.
+            function isStandaloneMode() {
+                return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+            }
+            function isIOSDevice() {
+                return /iphone|ipad|ipod/i.test(navigator.userAgent) && !window.MSStream;
+            }
             let deferredInstallPrompt = null;
             window.addEventListener('beforeinstallprompt', (e) => {
                 e.preventDefault();
@@ -1956,52 +1962,52 @@
                 else permNote = 'יש להפעיל את המתג כדי לאשר קבלת התראות מהדפדפן.';
 
                 holder.innerHTML = `
-                <div class="section-title" style="margin-top:0;">תעריפים</div>
-                <div class="card">
-                  <label>תעריף שעתי – ניהול (₪)</label><input type="number" id="s_rate" value="${s.gymHourlyRate}" step="0.1">
-                  <label>מחיר אימון אישי (₪)</label><input type="number" id="s_price" value="${s.trainingPrice}" step="5">
-                </div>
-                <div class="section-title">חסימות ומרווחים</div>
-                <div class="card">
-                  <label>זמן נסיעה/התארגנות בין פעילויות (דקות)</label><input type="number" id="s_buffer" value="${s.bufferMinutes}" step="5">
-                  <label>שעות מנוחה נדרשות אחרי משמרת לילה במד"א</label><input type="number" id="s_rest" value="${s.mdaRestHours}" step="0.5">
-                </div>
-                <div class="section-title">התראות ותזכורות</div>
-                <div class="card">
-                  <div class="toggle-row">
-                    <div><div class="t-main">תזכורות לפני פעילות</div><div class="t-sub">התראה בדפדפן/באפליקציה המותקנת לפני כל פעילות</div></div>
-                    <div class="switch ${s.notificationsEnabled ? 'on' : ''}" id="s_notif"></div>
-                  </div>
-                  <label>כמה דקות לפני להתריע</label><input type="number" id="s_remind_min" value="${s.reminderMinutes || 60}" min="5" step="5">
-                  <div class="toggle-row">
-                    <div><div class="t-main">סיכום בוקר יומי</div><div class="t-sub">התראה יומית עם רשימת הפעילויות של היום</div></div>
-                    <div class="switch ${s.morningSummaryEnabled ? 'on' : ''}" id="s_morning"></div>
-                  </div>
-                  <label>שעת סיכום בוקר</label><input type="time" id="s_morning_time" value="${s.morningSummaryTime || '07:00'}">
-                  <div class="alert soft">${ICONS.bell}<div><b>סטטוס הרשאה</b>${permNote}</div></div>
-                  <div class="alert soft">${ICONS.warn}<div><b>לתשומת לבך</b>התראות אלו פועלות כל עוד הדפדפן פתוח, או ברקע אם התקנת את האפליקציה למסך הבית. התראות שמגיעות גם כשהאפליקציה סגורה לחלוטין דורשות שרת דחיפה ייעודי ואינן זמינות בגרסה הזו.</div></div>
-                </div>
-                <div class="section-title">כללי</div>
-                <div class="card">
-                  <div class="toggle-row"><div><div class="t-main">מצב כהה</div><div class="t-sub">עיצוב נוח לעיניים בשעות החושך (ברירת מחדל, ניתן לשינוי)</div></div>
-                    <div class="switch ${s.theme === 'dark' ? 'on' : ''}" id="s_theme"></div></div>
-                </div>
-                <div class="section-title">התקנה ומצב לא-מקוון</div>
-                <div class="card">
-                  <div class="empty-note" style="padding:6px 0 12px;text-align:right;">התקנת האפליקציה למסך הבית מאפשרת פתיחה מהירה כמו אפליקציה רגילה, ועובדת גם עם קליטה חלשה - הנתונים יסתנכרנו אוטומטית ברגע שהאינטרנט יחזור.</div>
-                  <button class="btn btn-ghost" id="installAppBtn" style="display:${deferredInstallPrompt ? 'flex' : 'none'};margin-bottom:8px;">${ICONS.download} התקנת האפליקציה על המכשיר</button>
-                </div>
-                <div class="section-title">סנכרון יומן</div>
-                <div class="card">
-                  <div class="empty-note" style="padding:6px 0 12px;text-align:right;">סנכרון דו-כיווני מלא עם Google Calendar / Apple Calendar דורש חיבור לשרת חיצוני (למשל Supabase) שאינו זמין בתצוגה העצמאית הזו. אפשר לייצא את הלו"ז כקובץ ICS ולייבא אותו ידנית ליומן.</div>
-                  <button class="btn btn-ghost" id="exportIcsBtn">ייצוא ICS</button>
-                </div>
-                <div class="section-title">נתונים</div>
-                <div class="card">
-                  <button class="btn btn-danger" id="resetBtn">${ICONS.trash} איפוס כל הנתונים</button>
-                </div>
-                <div class="empty-note">הנתונים נשמרים באופן פרטי בחשבון שלך בלבד.</div>
-              `;
+                    <div class="section-title" style="margin-top:0;">תעריפים</div>
+                    <div class="card">
+                      <label>תעריף שעתי – ניהול (₪)</label><input type="number" id="s_rate" value="${s.gymHourlyRate}" step="0.1">
+                      <label>מחיר אימון אישי (₪)</label><input type="number" id="s_price" value="${s.trainingPrice}" step="5">
+                    </div>
+                    <div class="section-title">חסימות ומרווחים</div>
+                    <div class="card">
+                      <label>זמן נסיעה/התארגנות בין פעילויות (דקות)</label><input type="number" id="s_buffer" value="${s.bufferMinutes}" step="5">
+                      <label>שעות מנוחה נדרשות אחרי משמרת לילה במד"א</label><input type="number" id="s_rest" value="${s.mdaRestHours}" step="0.5">
+                    </div>
+                    <div class="section-title">התראות ותזכורות</div>
+                    <div class="card">
+                      <div class="toggle-row">
+                        <div><div class="t-main">תזכורות לפני פעילות</div><div class="t-sub">התראה בדפדפן/באפליקציה המותקנת לפני כל פעילות</div></div>
+                        <div class="switch ${s.notificationsEnabled ? 'on' : ''}" id="s_notif"></div>
+                      </div>
+                      <label>כמה דקות לפני להתריע</label><input type="number" id="s_remind_min" value="${s.reminderMinutes || 60}" min="5" step="5">
+                      <div class="toggle-row">
+                        <div><div class="t-main">סיכום בוקר יומי</div><div class="t-sub">התראה יומית עם רשימת הפעילויות של היום</div></div>
+                        <div class="switch ${s.morningSummaryEnabled ? 'on' : ''}" id="s_morning"></div>
+                      </div>
+                      <label>שעת סיכום בוקר</label><input type="time" id="s_morning_time" value="${s.morningSummaryTime || '07:00'}">
+                      <div class="alert soft">${ICONS.bell}<div><b>סטטוס הרשאה</b>${permNote}</div></div>
+                      <div class="alert soft">${ICONS.warn}<div><b>לתשומת לבך</b>התראות אלו פועלות כל עוד הדפדפן פתוח, או ברקע אם התקנת את האפליקציה למסך הבית. התראות שמגיעות גם כשהאפליקציה סגורה לחלוטין דורשות שרת דחיפה ייעודי ואינן זמינות בגרסה הזו.</div></div>
+                    </div>
+                    <div class="section-title">כללי</div>
+                    <div class="card">
+                      <div class="toggle-row"><div><div class="t-main">מצב כהה</div><div class="t-sub">עיצוב נוח לעיניים בשעות החושך (ברירת מחדל, ניתן לשינוי)</div></div>
+                        <div class="switch ${s.theme === 'dark' ? 'on' : ''}" id="s_theme"></div></div>
+                    </div>
+                    <div class="section-title">התקנה ומצב לא-מקוון</div>
+                    <div class="card">
+                      <div class="empty-note" style="padding:6px 0 12px;text-align:right;">התקנת האפליקציה למסך הבית מאפשרת פתיחה מהירה כמו אפליקציה רגילה, ועובדת גם עם קליטה חלשה - הנתונים יסתנכרנו אוטומטית ברגע שהאינטרנט יחזור.</div>
+                     <button class="btn btn-ghost" id="installAppBtn" style="display:${isStandaloneMode() ? 'none' : 'flex'};margin-bottom:8px;">${ICONS.download} התקנת האפליקציה על המכשיר</button>
+                    </div>
+                    <div class="section-title">סנכרון יומן</div>
+                    <div class="card">
+                      <div class="empty-note" style="padding:6px 0 12px;text-align:right;">סנכרון דו-כיווני מלא עם Google Calendar / Apple Calendar דורש חיבור לשרת חיצוני (למשל Supabase) שאינו זמין בתצוגה העצמאית הזו. אפשר לייצא את הלו"ז כקובץ ICS ולייבא אותו ידנית ליומן.</div>
+                      <button class="btn btn-ghost" id="exportIcsBtn">ייצוא ICS</button>
+                    </div>
+                    <div class="section-title">נתונים</div>
+                    <div class="card">
+                      <button class="btn btn-danger" id="resetBtn">${ICONS.trash} איפוס כל הנתונים</button>
+                    </div>
+                    <div class="empty-note">הנתונים נשמרים באופן פרטי בחשבון שלך בלבד.</div>
+                  `;
                 document.getElementById('s_theme').addEventListener('click', function () {
                     this.classList.toggle('on');
                     s.theme = this.classList.contains('on') ? 'dark' : 'light';
@@ -2062,12 +2068,16 @@
                 const installBtn = document.getElementById('installAppBtn');
                 if (installBtn) {
                     installBtn.addEventListener('click', function () {
-                        if (!deferredInstallPrompt) return;
-                        deferredInstallPrompt.prompt();
-                        deferredInstallPrompt.userChoice.then(function () {
-                            deferredInstallPrompt = null;
-                            installBtn.style.display = 'none';
-                        });
+                        if (deferredInstallPrompt) {
+                            deferredInstallPrompt.prompt();
+                            deferredInstallPrompt.userChoice.then(function () {
+                                deferredInstallPrompt = null;
+                            });
+                        } else if (isIOSDevice()) {
+                            alert('כדי להתקין באייפון/אייפד: לחצו על כפתור השיתוף (Share) בסרגל של ספארי, ואז "הוספה למסך הבית".');
+                        } else {
+                            alert('כדי להתקין: פתחו את תפריט הדפדפן (שלוש נקודות למעלה) ובחרו "התקנת אפליקציה" או "הוספה למסך הבית".');
+                        }
                     });
                 }
 
