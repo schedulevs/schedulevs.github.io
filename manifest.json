@@ -1,20 +1,22 @@
 {
-  "name": "לבלוז",
-  "short_name": "לבלוז",
-  "start_url": "/",
+  "name": "לו\"ז אישי",
+  "short_name": "לו\"ז לב",
+  "start_url": "./",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#000000",
+  "background_color": "#12141a",
+  "theme_color": "#12141a",
   "icons": [
     {
-      "src": "/lev.ico",
+      "src": "./icon-192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
     },
     {
-      "src": "/lev.ico",
+      "src": "./icon-512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
     }
   ]
 }
