@@ -1,0 +1,2112 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>לו"ז אישי של לב</title>
+    <link rel="icon" type="image/x-icon" href="./lev.ico">
+    <!-- PWA: מניפסט, צבע נושא ותמיכה במסך בית ב-iOS/Android -->
+    <link rel="manifest" href="./manifest.json">
+    <meta name="theme-color" content="#12141a">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="לו״ז לב">
+    <link rel="apple-touch-icon" href="./icon-192.png">
+    <style>
+        :root {
+            --bg: #12141a;
+            --surface: #1b1e26;
+            --surface-2: #232733;
+            --surface-3: #2a2f3c;
+            --border: #2c303c;
+            --text: #edeff3;
+            --text-muted: #9096a5;
+            --text-dim: #5b6072;
+            --accent: #f2a93b;
+            --accent-ink: #1a1206;
+            --mda: #e5484d;
+            --mda-bg: rgba(229,72,77,.14);
+            --gym: #4c8dff;
+            --gym-bg: rgba(76,141,255,.14);
+            --training: #34c38f;
+            --training-bg: rgba(52,195,143,.14);
+            --personal: #8890a0;
+            --personal-bg: rgba(136,144,160,.14);
+            --danger: #e5484d;
+            --ok: #34c38f;
+            --radius-lg: 18px;
+            --radius-md: 12px;
+            --radius-sm: 8px;
+            --shadow: 0 8px 24px rgba(0,0,0,.35);
+            --safe-b: env(safe-area-inset-bottom, 0px);
+        }
+
+        html[data-theme="light"] {
+            --bg: #f4f5f7;
+            --surface: #ffffff;
+            --surface-2: #f0f1f4;
+            --surface-3: #e7e9ee;
+            --border: #e1e3e9;
+            --text: #1a1c22;
+            --text-muted: #63687a;
+            --text-dim: #a2a6b3;
+            --accent: #c9791f;
+            --accent-ink: #fff7ec;
+            --mda: #d33338;
+            --mda-bg: rgba(211,51,56,.09);
+            --gym: #2f6fe0;
+            --gym-bg: rgba(47,111,224,.09);
+            --training: #1f9e73;
+            --training-bg: rgba(31,158,115,.09);
+            --personal: #6b7080;
+            --personal-bg: rgba(107,112,128,.09);
+            --shadow: 0 8px 24px rgba(20,20,30,.08);
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,Helvetica,sans-serif;
+            font-size: 14px;
+            line-height: 1.45;
+            overscroll-behavior-y: none;
+        }
+
+        button, input, select, textarea {
+            font-family: inherit;
+            color: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        input, select, textarea {
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            color: var(--text);
+            border-radius: var(--radius-sm);
+            padding: 10px 12px;
+            font-size: 14px;
+            width: 100%;
+        }
+
+            input:focus, select:focus, textarea:focus {
+                outline: 2px solid var(--accent);
+                outline-offset: 1px;
+            }
+
+        label {
+            display: block;
+            font-size: 12.5px;
+            color: var(--text-muted);
+            margin: 14px 0 6px;
+        }
+
+            label:first-child {
+                margin-top: 0;
+            }
+
+        h1, h2, h3 {
+            margin: 0;
+            font-weight: 700;
+        }
+
+        .app {
+            max-width: 520px;
+            margin: 0 auto;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        /* header */
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            background: var(--bg);
+            padding: 16px 16px 10px;
+        }
+
+        .topbar-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .greet {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: -.2px;
+        }
+
+            .greet .sub {
+                display: block;
+                font-size: 12.5px;
+                font-weight: 400;
+                color: var(--text-muted);
+                margin-top: 2px;
+            }
+
+        .icon-btn {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            width: 38px;
+            height: 38px;
+            border-radius: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+            .icon-btn svg {
+                width: 18px;
+                height: 18px;
+            }
+
+        main {
+            flex: 1;
+            padding: 0 16px 100px;
+        }
+
+        .view {
+            display: none;
+            animation: fade .18s ease;
+        }
+
+            .view.active {
+                display: block;
+            }
+
+        @keyframes fade {
+            from {
+                opacity: 0;
+                transform: translateY(4px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        /* segmented control */
+        .segmented {
+            display: flex;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 3px;
+            margin-bottom: 14px;
+        }
+
+            .segmented button {
+                flex: 1;
+                background: transparent;
+                border: 0;
+                padding: 8px 4px;
+                border-radius: 9px;
+                font-size: 13px;
+                color: var(--text-muted);
+                font-weight: 600;
+            }
+
+                .segmented button.active {
+                    background: var(--surface-3);
+                    color: var(--text);
+                }
+
+        /* date nav */
+        .datenav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 14px;
+        }
+
+            .datenav .label {
+                font-size: 15px;
+                font-weight: 700;
+            }
+
+            .datenav .arrows {
+                display: flex;
+                gap: 6px;
+            }
+
+            .datenav button {
+                background: var(--surface);
+                border: 1px solid var(--border);
+                width: 32px;
+                height: 32px;
+                border-radius: 9px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+                .datenav button svg {
+                    width: 15px;
+                    height: 15px;
+                }
+
+        .today-chip {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 12px;
+            padding: 6px 10px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+
+        /* week strip */
+        .weekstrip {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 16px;
+        }
+
+        .daychip {
+            flex: 1;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 8px 2px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            align-items: center;
+        }
+
+            .daychip .dow {
+                font-size: 10.5px;
+                color: var(--text-muted);
+            }
+
+            .daychip .num {
+                font-size: 15px;
+                font-weight: 700;
+            }
+
+            .daychip.selected {
+                background: var(--accent);
+                border-color: var(--accent);
+                color: var(--accent-ink);
+            }
+
+                .daychip.selected .dow {
+                    color: var(--accent-ink);
+                    opacity: .75;
+                }
+
+            .daychip .dots {
+                display: flex;
+                gap: 2px;
+                height: 5px;
+            }
+
+                .daychip .dots span {
+                    width: 4px;
+                    height: 4px;
+                    border-radius: 50%;
+                }
+
+        /* agenda list */
+        .agenda-empty {
+            text-align: center;
+            padding: 56px 20px;
+            color: var(--text-muted);
+        }
+
+            .agenda-empty .big {
+                font-size: 34px;
+                margin-bottom: 10px;
+            }
+
+            .agenda-empty .cta {
+                display: inline-block;
+                margin-top: 14px;
+            }
+
+        .ev-card {
+            display: flex;
+            gap: 12px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 12px 14px;
+            margin-bottom: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+            .ev-card::before {
+                content: "";
+                position: absolute;
+                inset-inline-start: 0;
+                top: 0;
+                bottom: 0;
+                width: 4px;
+                background: var(--c);
+            }
+
+        .ev-time {
+            min-width: 52px;
+            text-align: center;
+        }
+
+            .ev-time .t1 {
+                font-weight: 700;
+                font-size: 14px;
+            }
+
+            .ev-time .t2 {
+                font-size: 11.5px;
+                color: var(--text-muted);
+            }
+
+        .ev-body {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .ev-title-row {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .ev-icon {
+            width: 16px;
+            height: 16px;
+            color: var(--c);
+            flex: none;
+        }
+
+        .ev-title {
+            font-weight: 700;
+            font-size: 14px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .ev-meta {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .ev-tag {
+            display: inline-block;
+            font-size: 10.5px;
+            font-weight: 700;
+            padding: 2px 7px;
+            border-radius: 20px;
+            margin-top: 6px;
+            background: var(--cbg);
+            color: var(--c);
+        }
+
+        .ev-warn {
+            margin-top: 6px;
+            font-size: 11.5px;
+            color: var(--mda);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* month grid */
+        .month-grid {
+            display: grid;
+            grid-template-columns: repeat(7,1fr);
+            gap: 5px;
+        }
+
+        .month-dow {
+            text-align: center;
+            font-size: 11px;
+            color: var(--text-dim);
+            padding-bottom: 6px;
+            font-weight: 600;
+        }
+
+        .month-cell {
+            aspect-ratio: 1;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 3px;
+            position: relative;
+        }
+
+            .month-cell.out {
+                opacity: .32;
+            }
+
+            .month-cell.today {
+                border-color: var(--accent);
+            }
+
+            .month-cell.selected {
+                background: var(--accent);
+            }
+
+                .month-cell.selected .mc-num {
+                    color: var(--accent-ink);
+                }
+
+        .mc-num {
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .mc-dots {
+            display: flex;
+            gap: 2px;
+        }
+
+            .mc-dots span {
+                width: 4px;
+                height: 4px;
+                border-radius: 50%;
+            }
+
+        /* cards / sections */
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 16px;
+            margin-bottom: 14px;
+        }
+
+        .section-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-muted);
+            margin: 20px 0 10px;
+        }
+
+            .section-title:first-child {
+                margin-top: 0;
+            }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .stat {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 14px;
+        }
+
+            .stat .num {
+                font-size: 22px;
+                font-weight: 800;
+                font-variant-numeric: tabular-nums;
+            }
+
+            .stat .lbl {
+                font-size: 11.5px;
+                color: var(--text-muted);
+                margin-top: 2px;
+            }
+
+        .bar-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+            .bar-row .lbl {
+                width: 78px;
+                font-size: 12px;
+                color: var(--text-muted);
+                flex: none;
+            }
+
+        .bar-track {
+            flex: 1;
+            height: 10px;
+            background: var(--surface-2);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .bar-fill {
+            height: 100%;
+            border-radius: 6px;
+        }
+
+        .bar-row .val {
+            width: 70px;
+            text-align: left;
+            font-size: 12.5px;
+            font-weight: 700;
+            font-variant-numeric: tabular-nums;
+            flex: none;
+        }
+
+        /* client card */
+        .client-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 14px 16px;
+            margin-bottom: 10px;
+        }
+
+        .client-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 8px;
+        }
+
+        .client-name {
+            font-weight: 700;
+            font-size: 15px;
+        }
+
+        .client-phone {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 1px;
+        }
+
+        .pkg-pill {
+            font-size: 11.5px;
+            font-weight: 700;
+            padding: 4px 9px;
+            border-radius: 20px;
+            background: var(--training-bg);
+            color: var(--training);
+            white-space: nowrap;
+        }
+
+            .pkg-pill.low {
+                background: var(--mda-bg);
+                color: var(--mda);
+            }
+
+        .client-goals {
+            font-size: 12.5px;
+            color: var(--text-muted);
+            margin-top: 8px;
+        }
+
+        /* buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            border: 0;
+            border-radius: var(--radius-sm);
+            padding: 11px 16px;
+            font-weight: 700;
+            font-size: 13.5px;
+            width: 100%;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--accent-ink);
+        }
+
+        .btn-ghost {
+            background: var(--surface-2);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .btn-danger {
+            background: var(--mda-bg);
+            color: var(--mda);
+        }
+
+        .btn-sm {
+            width: auto;
+            padding: 8px 12px;
+            font-size: 12.5px;
+        }
+
+        .row-btns {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+            .row-btns .btn {
+                flex: 1;
+            }
+
+        /* type picker */
+        .type-picker {
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+            gap: 8px;
+        }
+
+        .type-opt {
+            background: var(--surface-2);
+            border: 1.5px solid var(--border);
+            border-radius: 12px;
+            padding: 10px 4px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+
+            .type-opt svg {
+                width: 18px;
+                height: 18px;
+                color: var(--c);
+            }
+
+            .type-opt span {
+                font-size: 11px;
+                font-weight: 700;
+            }
+
+            .type-opt.selected {
+                border-color: var(--c);
+                background: var(--cbg);
+            }
+
+        .field-row {
+            display: flex;
+            gap: 10px;
+        }
+
+            .field-row > div {
+                flex: 1;
+            }
+
+        .toggle-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 2px;
+            border-bottom: 1px solid var(--border);
+        }
+
+            .toggle-row:last-child {
+                border-bottom: 0;
+            }
+
+            .toggle-row .t-main {
+                font-size: 13.5px;
+                font-weight: 600;
+            }
+
+            .toggle-row .t-sub {
+                font-size: 11.5px;
+                color: var(--text-muted);
+                margin-top: 1px;
+            }
+
+        .switch {
+            position: relative;
+            width: 42px;
+            height: 24px;
+            background: var(--surface-3);
+            border-radius: 20px;
+            flex: none;
+            border: 1px solid var(--border);
+        }
+
+            .switch.on {
+                background: var(--accent);
+                border-color: var(--accent);
+            }
+
+            .switch::after {
+                content: "";
+                position: absolute;
+                top: 2px;
+                inset-inline-start: 2px;
+                width: 18px;
+                height: 18px;
+                background: #fff;
+                border-radius: 50%;
+                transition: transform .15s;
+            }
+
+            .switch.on::after {
+                transform: translateX(-18px);
+            }
+
+        html[data-theme="light"] .switch.on::after {
+            transform: translateX(18px);
+        }
+
+        html[data-theme="dark"] .switch.on::after {
+            transform: translateX(-18px);
+        }
+
+        .alert {
+            display: flex;
+            gap: 10px;
+            background: var(--mda-bg);
+            border: 1px solid rgba(229,72,77,.3);
+            color: var(--mda);
+            border-radius: var(--radius-md);
+            padding: 12px 14px;
+            font-size: 12.5px;
+            margin-top: 12px;
+        }
+
+            .alert svg {
+                width: 16px;
+                height: 16px;
+                flex: none;
+                margin-top: 1px;
+            }
+
+            .alert b {
+                display: block;
+                margin-bottom: 2px;
+                font-size: 13px;
+            }
+
+            .alert.soft {
+                background: var(--surface-2);
+                border-color: var(--border);
+                color: var(--text-muted);
+            }
+
+        /* nav */
+        .bottomnav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 30;
+        }
+
+        .bottomnav-inner {
+            max-width: 520px;
+            margin: 0 auto;
+            background: var(--surface);
+            border-top: 1px solid var(--border);
+            display: flex;
+            padding: 6px 6px calc(6px + var(--safe-b));
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-btn {
+            flex: 1;
+            background: transparent;
+            border: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+            padding: 7px 2px;
+            color: var(--text-dim);
+            border-radius: 10px;
+        }
+
+            .nav-btn svg {
+                width: 20px;
+                height: 20px;
+            }
+
+            .nav-btn span {
+                font-size: 10.5px;
+                font-weight: 600;
+            }
+
+            .nav-btn.active {
+                color: var(--accent);
+            }
+
+        .fab {
+            position: fixed;
+            bottom: calc(72px + var(--safe-b));
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 31;
+            background: var(--accent);
+            color: var(--accent-ink);
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            border: 0;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+            .fab svg {
+                width: 24px;
+                height: 24px;
+            }
+
+        /* modal */
+        .modal-wrap {
+            position: fixed;
+            inset: 0;
+            z-index: 50;
+            display: none;
+        }
+
+            .modal-wrap.open {
+                display: block;
+            }
+
+        .modal-backdrop {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,.55);
+        }
+
+        .modal {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            max-width: 520px;
+            margin: 0 auto;
+            background: var(--bg);
+            border-radius: 20px 20px 0 0;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 14px 18px calc(24px + var(--safe-b));
+            border: 1px solid var(--border);
+            border-bottom: 0;
+        }
+
+        .modal-handle {
+            width: 36px;
+            height: 4px;
+            background: var(--border);
+            border-radius: 3px;
+            margin: 0 auto 12px;
+        }
+
+        .modal-title {
+            font-size: 17px;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            width: 30px;
+            height: 30px;
+            border-radius: 9px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+            .modal-close svg {
+                width: 14px;
+                height: 14px;
+            }
+
+        .empty-note {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 12.5px;
+            padding: 30px 10px;
+        }
+
+        .divider {
+            height: 1px;
+            background: var(--border);
+            margin: 16px 0;
+        }
+
+        a.plain {
+            color: var(--gym);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        ::selection {
+            background: var(--accent);
+            color: var(--accent-ink);
+        }
+        /* הגבלות למצב אורח */
+        .guest-mode #fabAdd,
+        .guest-mode #addClientBtn,
+        .guest-mode #emptyAddBtn,
+        .guest-mode #saveEvBtn,
+        .guest-mode #delEvBtn,
+        .guest-mode #saveClBtn,
+        .guest-mode #delClBtn,
+        .guest-mode #resetBtn,
+        .guest-mode #editClFromDetail,
+        .guest-mode .row-btns .btn-danger,
+        .guest-mode .row-btns button[data-cancel] {
+            display: none !important;
+        }
+
+        .guest-mode input,
+        .guest-mode textarea,
+        .guest-mode select {
+            pointer-events: none;
+            opacity: 0.7;
+        }
+
+        .guest-mode .switch,
+        .guest-mode .type-opt {
+            pointer-events: none;
+        }
+    </style>
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+</head>
+<body>
+    <!-- מסך התחברות -->
+    <div id="loginOverlay" style="position: fixed; inset: 0; background: var(--bg); z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px;">
+        <h1 style="margin-bottom: 10px;">לו"ז אישי</h1>
+        <p style="color: var(--text-muted); margin-bottom: 20px;">נדרשת התחברות מאובטחת כדי לצפות בנתונים ולסנכרן אותם.</p>
+        <button class="btn btn-primary" id="loginBtn" style="width: auto; padding: 12px 24px; font-size: 16px;">התחברות עם Google</button>
+        <div id="loginError" style="color: var(--mda); margin-top: 15px; font-weight: bold;"></div>
+    </div>
+    <div class="app" id="app">
+
+        <div class="topbar">
+            <div class="topbar-row">
+                <div class="greet" id="greetText">שלום</div>
+                <button class="icon-btn" id="themeToggle" aria-label="מצב תצוגה"></button>
+            </div>
+        </div>
+
+        <main>
+            <!-- לו"ז -->
+            <section class="view active" id="view-schedule">
+                <div class="segmented" id="scheduleSeg">
+                    <button data-mode="day" class="active">יום</button>
+                    <button data-mode="week">שבוע</button>
+                    <button data-mode="month">חודש</button>
+                </div>
+
+                <div class="datenav">
+                    <div class="arrows">
+                        <button id="navPrev"></button>
+                        <button id="navNext"></button>
+                    </div>
+                    <div class="label" id="dateLabel">—</div>
+                    <button class="today-chip" id="navToday">היום</button>
+                </div>
+
+                <div id="weekStripHolder"></div>
+                <div id="monthGridHolder"></div>
+                <div id="agendaHolder"></div>
+            </section>
+
+            <!-- מתאמנים -->
+            <section class="view" id="view-clients">
+                <div class="datenav" style="margin-bottom:10px;">
+                    <div class="label">מתאמנים</div>
+                    <button class="btn btn-primary btn-sm" id="addClientBtn">מתאמן חדש +</button>
+                </div>
+                <div id="clientsHolder"></div>
+            </section>
+
+            <!-- כספים -->
+            <section class="view" id="view-finance">
+                <div class="datenav">
+                    <div class="arrows">
+                        <button id="finPrev"></button>
+                        <button id="finNext"></button>
+                    </div>
+                    <div class="label" id="finLabel">—</div>
+                    <span></span>
+                </div>
+                <div id="financeHolder"></div>
+            </section>
+
+            <!-- הגדרות -->
+            <section class="view" id="view-settings">
+                <div id="settingsHolder"></div>
+            </section>
+        </main>
+
+        <button class="fab" id="fabAdd" aria-label="הוספת אירוע"></button>
+
+        <nav class="bottomnav">
+            <div class="bottomnav-inner">
+                <button class="nav-btn active" data-view="schedule"><span class="ic"></span><span>לו"ז</span></button>
+                <button class="nav-btn" data-view="clients"><span class="ic"></span><span>מתאמנים</span></button>
+                <button class="nav-btn" data-view="finance"><span class="ic"></span><span>כספים</span></button>
+                <button class="nav-btn" data-view="settings"><span class="ic"></span><span>הגדרות</span></button>
+            </div>
+        </nav>
+
+        <!-- Modal: Add/Edit Event -->
+        <div class="modal-wrap" id="modalEvent">
+            <div class="modal-backdrop" data-close="modalEvent"></div>
+            <div class="modal">
+                <button class="modal-close" data-close="modalEvent"></button>
+                <div class="modal-handle"></div>
+                <div class="modal-title" id="evModalTitle">אירוע חדש</div>
+                <div id="evModalBody"></div>
+            </div>
+        </div>
+
+        <!-- Modal: Add/Edit Client -->
+        <div class="modal-wrap" id="modalClient">
+            <div class="modal-backdrop" data-close="modalClient"></div>
+            <div class="modal">
+                <button class="modal-close" data-close="modalClient"></button>
+                <div class="modal-handle"></div>
+                <div class="modal-title" id="clModalTitle">מתאמן חדש</div>
+                <div id="clModalBody"></div>
+            </div>
+        </div>
+
+        <!-- Modal: Client detail -->
+        <div class="modal-wrap" id="modalClientDetail">
+            <div class="modal-backdrop" data-close="modalClientDetail"></div>
+            <div class="modal">
+                <button class="modal-close" data-close="modalClientDetail"></button>
+                <div class="modal-handle"></div>
+                <div id="clDetailBody"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        (function () {
+            "use strict";
+
+            /* ---------------- ICONS ---------------- */
+            const ICONS = {
+                calendar: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18"/></svg>',
+                users: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6"/><circle cx="17.5" cy="9" r="2.6"/><path d="M15.5 14.2c2.8.4 5 2.6 5 5.8"/></svg>',
+                wallet: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="3"/><path d="M3 10h18"/><circle cx="16.5" cy="14.5" r="1.2" fill="currentColor" stroke="none"/></svg>',
+                settings: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 13.5a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.6v.2a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.6-1H2.5a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.6-1.1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3H8.7a1.7 1.7 0 0 0 1-1.6V2.5a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.6 1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9v.1a1.7 1.7 0 0 0 1.6 1h.2a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.6 1z"/></svg>',
+                plus: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>',
+                chevL: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>',
+                chevR: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>',
+                x: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>',
+                sun: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.2M12 19.8V22M4.9 4.9l1.5 1.5M17.6 17.6l1.5 1.5M2 12h2.2M19.8 12H22M4.9 19.1l1.5-1.5M17.6 6.4l1.5-1.5"/></svg>',
+                moon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a6.8 6.8 0 0 0 10.5 10.5z"/></svg>',
+                pulse: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 8.6a5.5 5.5 0 0 0-9.3-4A5.5 5.5 0 0 0 3 8.6c0 6 8.5 11.4 8.5 11.4s8.5-5.4 8.5-11.4z"/><path d="M6 12h2.5l1.5-3 2 6 1.5-3H16"/></svg>',
+                brief: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="7" width="19" height="13" rx="2.5"/><path d="M8 7V5.2A1.7 1.7 0 0 1 9.7 3.5h4.6A1.7 1.7 0 0 1 16 5.2V7M2.5 12.5h19"/></svg>',
+                dumb: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 8v8M4 9.5v5M17.5 8v8M20 9.5v5M6.5 12h11"/></svg>',
+                clock: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.3 2"/></svg>',
+                warn: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5 22 20.5H2z"/><path d="M12 9.5v5M12 18h.01"/></svg>',
+                trash: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M9 7V5a1.5 1.5 0 0 1 1.5-1.5h3A1.5 1.5 0 0 1 15 5v2M6 7l1 13a2 2 0 0 0 2 1.8h6a2 2 0 0 0 2-1.8l1-13"/></svg>',
+                check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg>',
+                bell: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>',
+                download: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0-4.5-4.5M12 15l4.5-4.5"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>'
+            };
+            const TYPE_META = {
+                mda: { label: 'מד"א', color: 'var(--mda)', bg: 'var(--mda-bg)', icon: ICONS.pulse },
+                gym: { label: 'משמרת ניהול', color: 'var(--gym)', bg: 'var(--gym-bg)', icon: ICONS.brief },
+                training: { label: 'אימון אישי', color: 'var(--training)', bg: 'var(--training-bg)', icon: ICONS.dumb },
+                personal: { label: 'זמן פרטי', color: 'var(--personal)', bg: 'var(--personal-bg)', icon: ICONS.moon }
+            };
+            /* ---------------- FIREBASE & STORAGE ---------------- */
+            const DEFAULT_DATA = {
+                events: [],
+                clients: [],
+                settings: {
+                    theme: 'dark',
+                    gymHourlyRate: 35.40,
+                    trainingPrice: 80,
+                    bufferMinutes: 45,
+                    mdaRestHours: 8,
+                    lateCancelHours: 12,
+                    notificationsEnabled: false,
+                    reminderMinutes: 60,
+                    morningSummaryEnabled: false,
+                    morningSummaryTime: '07:00'
+                }
+            };
+            let DATA = JSON.parse(JSON.stringify(DEFAULT_DATA));
+            let storageReady = false;
+            let saveTimer = null;
+            let dbUnsubscribe = null;
+            let isGuest = false;
+            // === החלף בפרטים שלך מ-Firebase Console ===
+            const firebaseConfig = {
+                apiKey: "AIzaSyBpry7D_rk6D2DGrd-ViaM8fKHV3jvoLr8",
+                authDomain: "scheduleapp-230f2.firebaseapp.com",
+                projectId: "scheduleapp-230f2",
+                storageBucket: "scheduleapp-230f2.firebasestorage.app",
+                messagingSenderId: "369647521158",
+                appId: "1:369647521158:web:cc0be71365abc1dac3b007",
+                measurementId: "G-9VKY09H392"
+            };
+
+            // אתחול Firebase
+            if (!firebase.apps.length) {
+                firebase.initializeApp(firebaseConfig);
+            }
+            const auth = firebase.auth();
+            const db = firebase.firestore();
+
+            // הפעלת שמירה מקומית (offline persistence) - כך שהאפליקציה תעבוד גם בלי אינטרנט
+            // ותסנכרן אוטומטית את מה שהצטבר ברגע שהחיבור חוזר.
+            try {
+                db.enablePersistence({ synchronizeTabs: true }).catch(function (err) {
+                    if (err.code === 'failed-precondition') {
+                        console.warn('שמירה לא מקוונת לא הופעלה - כנראה שיש כמה טאבים פתוחים במקביל.');
+                    } else if (err.code === 'unimplemented') {
+                        console.warn('הדפדפן הנוכחי לא תומך בשמירה לא מקוונת.');
+                    }
+                });
+            } catch (e) { console.warn('enablePersistence error', e); }
+
+            // רישום Service Worker - מאפשר פתיחת האפליקציה גם ללא אינטרנט (PWA)
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', function () {
+                    navigator.serviceWorker.register('./sw.js').catch(function (err) {
+                        console.warn('רישום Service Worker נכשל', err);
+                    });
+                });
+            }
+
+            // האזנה למצב ההתחברות של המשתמש
+            auth.onAuthStateChanged(user => {
+                if (user) {
+                    // בדיקה האם המשתמש המחובר הוא אתה או אורח
+                    isGuest = (user.email !== 'levloovmordehai@gmail.com');
+
+                    // אם זה אורח, נוסיף מחלקה שתחסום את אפשרויות העריכה
+                    if (isGuest) {
+                        document.body.classList.add('guest-mode');
+                    } else {
+                        document.body.classList.remove('guest-mode');
+                    }
+
+                    document.getElementById('loginOverlay').style.display = 'none';
+                    document.getElementById('app').style.display = 'flex';
+                    startRealtimeSync(user.uid);
+                } else {
+                    // המשתמש מנותק
+                    document.getElementById('loginOverlay').style.display = 'flex';
+                    document.getElementById('app').style.display = 'none';
+                    if (dbUnsubscribe) {
+                        dbUnsubscribe(); // עצירת סנכרון
+                    }
+                }
+            });
+
+            // התחברות עם כפתור
+            document.getElementById('loginBtn').addEventListener('click', () => {
+                const provider = new firebase.auth.GoogleAuthProvider();
+                auth.signInWithPopup(provider).catch(err => {
+                    console.error(err);
+                    document.getElementById('loginError').textContent = "שגיאה בהתחברות. נסה שוב.";
+                });
+            });
+
+            // פונקציה שמקשיבה לשינויים בענן (עובד דינמית על המחשב והטלפון)
+            function startRealtimeSync(uid) {
+                const docRef = db.collection('users').doc(uid);
+
+                dbUnsubscribe = docRef.onSnapshot(doc => {
+                    // השרת אישר!
+                    if (doc.exists) {
+                        const parsed = doc.data();
+                        DATA = Object.assign({}, DEFAULT_DATA, parsed);
+                        DATA.settings = Object.assign({}, DEFAULT_DATA.settings, parsed.settings || {});
+                    } else {
+                        // פעם ראשונה שמתחברים עם משתמש מורשה
+                        saveDataToFirebase();
+                    }
+                    storageReady = true;
+                    applyTheme();
+                    renderAll();
+                }, error => {
+                    // כאן הקסם של האבטחה עובד!
+                    console.error("שגיאה בהבאת נתונים:", error);
+
+                    // אם השרת של Firebase חסם את הגישה (כי המייל לא תואם ל-Rules)
+                    if (error.code === 'permission-denied') {
+                        auth.signOut(); // מנתקים אותו מיד
+                        document.getElementById('loginError').textContent = "גישה נדחתה ע\"י השרת: אימייל זה אינו מורשה.";
+                        document.getElementById('loginOverlay').style.display = 'flex';
+                        document.getElementById('app').style.display = 'none';
+                    }
+                });
+            }
+
+            // שמירת נתונים ל-Firebase
+            function saveData() {
+                if (saveTimer) clearTimeout(saveTimer);
+                saveTimer = setTimeout(() => {
+                    saveDataToFirebase();
+                }, 500); // השהייה קטנה למניעת עומס שמירות
+            }
+
+            function saveDataToFirebase() {
+                if (isGuest) return; // חסימה מוחלטת: אורח לא יכול לשמור נתונים
+
+                const user = auth.currentUser;
+                if (user) {
+                    db.collection('users').doc(user.uid).set(JSON.parse(JSON.stringify(DATA)))
+                        .catch(e => {
+                            console.error('שגיאת שמירה ב-Firebase', e);
+                            if (e.code === 'permission-denied') {
+                                alert("אין לך הרשאות לשמור נתונים.");
+                            }
+                        });
+                }
+            }
+
+            function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2, 7); }
+
+            /* ---------------- DATE HELPERS ---------------- */
+            const DOW = ['א', 'ב', 'ג', 'ד', 'ה', 'ו', 'ש'];
+            const MONTHS = ['ינואר', 'פברואר', 'מרץ', 'אפריל', 'מאי', 'יוני', 'יולי', 'אוגוסט', 'ספטמבר', 'אוקטובר', 'נובמבר', 'דצמבר'];
+            function pad(n) { return String(n).padStart(2, '0'); }
+            function toDateStr(d) { return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); }
+            function parseDateStr(s) { const [y, m, d] = s.split('-').map(Number); return new Date(y, m - 1, d); }
+            function addDays(d, n) { const r = new Date(d); r.setDate(r.getDate() + n); return r; }
+            function startOfWeek(d) { const r = new Date(d); const day = r.getDay(); return addDays(r, -day); }
+            function sameDate(a, b) { return toDateStr(a) === toDateStr(b); }
+            function combineDateTime(dateStr, timeStr) {
+                const [h, m] = (timeStr || '00:00').split(':').map(Number);
+                const d = parseDateStr(dateStr); d.setHours(h, m, 0, 0); return d;
+            }
+            function eventRange(ev) {
+                const start = combineDateTime(ev.date, ev.startTime);
+                let end = combineDateTime(ev.date, ev.endTime);
+                if (end.getTime() <= start.getTime()) end = addDays(end, 1);
+                return { start, end };
+            }
+            function fmtHM(mins) {
+                const h = Math.floor(mins / 60), m = Math.round(mins % 60);
+                if (h <= 0) return m + ' דק\'';
+                if (m === 0) return h + ' שע\'';
+                return h + ' שע\' ' + m + ' דק\'';
+            }
+            function money(n) { return '₪' + (Math.round(n * 100) / 100).toLocaleString('he-IL', { minimumFractionDigits: 0, maximumFractionDigits: 2 }); }
+
+            /* ---------------- STATE ---------------- */
+            let state = {
+                view: 'schedule',
+                scheduleMode: 'day',
+                selectedDate: new Date(),
+                financeMonth: new Date(),
+                editingEventId: null,
+                editingClientId: null,
+                detailClientId: null
+            };
+
+            /* ---------------- CONFLICT / FATIGUE LOGIC ---------------- */
+            function findConflicts(draftEv, excludeId) {
+                const { start: ns, end: ne } = eventRange(draftEv);
+                const buf = (draftEv.type !== 'personal' && draftEv.useBuffer !== false) ? DATA.settings.bufferMinutes * 60000 : 0;
+                const ps = new Date(ns.getTime() - buf), pe = new Date(ne.getTime() + buf);
+                return DATA.events.filter(ev => {
+                    if (ev.id === excludeId) return false;
+                    const { start: os, end: oe } = eventRange(ev);
+                    const obuf = (ev.type !== 'personal' && ev.useBuffer !== false) ? DATA.settings.bufferMinutes * 60000 : 0;
+                    const ops = new Date(os.getTime() - obuf), ope = new Date(oe.getTime() + obuf);
+                    return ps.getTime() < ope.getTime() && ops.getTime() < pe.getTime();
+                });
+            }
+            function findFatigueIssues(draftEv, excludeId) {
+                const issues = [];
+                const restMs = DATA.settings.mdaRestHours * 3600000;
+                const { start: ns, end: ne } = eventRange(draftEv);
+                if (draftEv.type !== 'mda' && draftEv.mdaShiftType !== 'night') {
+                    DATA.events.filter(ev => ev.type === 'mda' && ev.mdaShiftType === 'night' && ev.id !== excludeId).forEach(mda => {
+                        const { end: mdaEnd } = eventRange(mda);
+                        const restUntil = new Date(mdaEnd.getTime() + restMs);
+                        if (ns.getTime() < restUntil.getTime() && ne.getTime() > mdaEnd.getTime()) {
+                            issues.push({ type: 'blocked-after-shift', restUntil, mda });
+                        }
+                    });
+                }
+                if (draftEv.type === 'mda' && draftEv.mdaShiftType === 'night') {
+                    const restUntil = new Date(ne.getTime() + restMs);
+                    DATA.events.filter(ev => (ev.type === 'gym' || ev.type === 'training') && ev.id !== excludeId).forEach(ev => {
+                        const { start: os, end: oe } = eventRange(ev);
+                        if (os.getTime() < restUntil.getTime() && oe.getTime() > ne.getTime()) {
+                            issues.push({ type: 'conflicts-with-rest', restUntil, ev });
+                        }
+                    });
+                }
+                return issues;
+            }
+
+            /* ---------------- RENDER: NAV / THEME ---------------- */
+            function applyTheme() {
+                document.documentElement.setAttribute('data-theme', DATA.settings.theme);
+                document.getElementById('themeToggle').innerHTML = DATA.settings.theme === 'dark' ? ICONS.sun : ICONS.moon;
+            }
+            document.getElementById('themeToggle').addEventListener('click', () => {
+                DATA.settings.theme = DATA.settings.theme === 'dark' ? 'light' : 'dark';
+                applyTheme(); saveData(); renderSettings();
+            });
+
+            const navIcons = { schedule: ICONS.calendar, clients: ICONS.users, finance: ICONS.wallet, settings: ICONS.settings };
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.querySelector('.ic').innerHTML = navIcons[btn.dataset.view];
+                btn.addEventListener('click', () => switchView(btn.dataset.view));
+            });
+            document.getElementById('fabAdd').innerHTML = ICONS.plus;
+            document.getElementById('fabAdd').addEventListener('click', () => openEventModal(null));
+            document.getElementById('navPrev').innerHTML = ICONS.chevR;
+            document.getElementById('navNext').innerHTML = ICONS.chevL;
+            document.getElementById('finPrev').innerHTML = ICONS.chevR;
+            document.getElementById('finNext').innerHTML = ICONS.chevL;
+            document.querySelectorAll('.modal-close').forEach(b => b.innerHTML = ICONS.x);
+            document.getElementById('addClientBtn').addEventListener('click', () => openClientModal(null));
+
+            // מיישם רק את מצב התצוגה הפעיל (כרטיסיה/עיצוב), בלי לשנות את ה-view הנוכחי.
+            // חשוב: זו הפונקציה שמופעלת גם באתחול/רענון נתונים כדי שהמסך הראשון אכן יוצג מיד.
+            function setActiveView(v) {
+                document.querySelectorAll('.view').forEach(el => el.classList.remove('active'));
+                const target = document.getElementById('view-' + v);
+                if (target) target.classList.add('active');
+                document.querySelectorAll('.nav-btn').forEach(b => b.classList.toggle('active', b.dataset.view === v));
+                document.getElementById('fabAdd').style.display = (v === 'schedule') ? 'flex' : 'none';
+            }
+
+            function switchView(v) {
+                state.view = v;
+                setActiveView(v);
+                if (v === 'clients') renderClients();
+                if (v === 'finance') renderFinance();
+                if (v === 'settings') renderSettings();
+            }
+
+            function updateGreeting() {
+                const h = new Date().getHours();
+                let timeGreeting = 'ערב טוב';
+                if (h < 5) timeGreeting = 'לילה טוב';
+                else if (h < 12) timeGreeting = 'בוקר טוב';
+                else if (h < 17) timeGreeting = 'צהריים טובים';
+                else if (h < 20) timeGreeting = 'אחר הצהריים טובים';
+
+                const displayName = isGuest ? 'אורח' : 'לב';
+
+                const greetingEl = document.getElementById('greetText');
+                if (greetingEl) {
+                    greetingEl.textContent = timeGreeting + ', ' + displayName;
+                }
+            }
+
+            /* ---------------- SCHEDULE VIEW ---------------- */
+            document.querySelectorAll('#scheduleSeg button').forEach(b => {
+                b.addEventListener('click', () => {
+                    state.scheduleMode = b.dataset.mode;
+                    document.querySelectorAll('#scheduleSeg button').forEach(x => x.classList.toggle('active', x === b));
+                    renderSchedule();
+                });
+            });
+            document.getElementById('navPrev').addEventListener('click', () => shiftSchedule(1));
+            document.getElementById('navNext').addEventListener('click', () => shiftSchedule(-1));
+            document.getElementById('navToday').addEventListener('click', () => { state.selectedDate = new Date(); renderSchedule(); });
+            function shiftSchedule(dir) {
+                // dir: 1 = backward in time (prev, since RTL chevR means "next" visually but we map by function not arrow direction)
+                const m = state.scheduleMode;
+                if (m === 'day') state.selectedDate = addDays(state.selectedDate, dir * -1);
+                else if (m === 'week') state.selectedDate = addDays(state.selectedDate, dir * -7);
+                else { const d = new Date(state.selectedDate); d.setMonth(d.getMonth() + (dir * -1)); state.selectedDate = d; }
+                renderSchedule();
+            }
+
+            function renderSchedule() {
+                const mode = state.scheduleMode;
+                document.getElementById('weekStripHolder').innerHTML = '';
+                document.getElementById('monthGridHolder').innerHTML = '';
+                const label = document.getElementById('dateLabel');
+
+                if (mode === 'day') {
+                    label.textContent = DOW[state.selectedDate.getDay()] + "' " + state.selectedDate.getDate() + ' ב' + MONTHS[state.selectedDate.getMonth()];
+                    renderAgenda(state.selectedDate);
+                } else if (mode === 'week') {
+                    const wStart = startOfWeek(state.selectedDate);
+                    const wEnd = addDays(wStart, 6);
+                    label.textContent = wStart.getDate() + '–' + wEnd.getDate() + ' ב' + MONTHS[wEnd.getMonth()];
+                    const strip = document.createElement('div'); strip.className = 'weekstrip';
+                    for (let i = 0; i < 7; i++) {
+                        const d = addDays(wStart, i);
+                        const chip = document.createElement('button');
+                        chip.className = 'daychip' + (sameDate(d, state.selectedDate) ? ' selected' : '');
+                        const evs = eventsOnDate(d);
+                        const dotTypes = [...new Set(evs.map(e => e.type))];
+                        chip.innerHTML = '<span class="dow">' + DOW[d.getDay()] + '</span><span class="num">' + d.getDate() + '</span><span class="dots">' + dotTypes.map(t => '<span style="background:' + TYPE_META[t].color + '"></span>').join('') + '</span>';
+                        chip.addEventListener('click', () => { state.selectedDate = d; renderSchedule(); });
+                        strip.appendChild(chip);
+                    }
+                    document.getElementById('weekStripHolder').appendChild(strip);
+                    renderAgenda(state.selectedDate);
+                } else {
+                    const y = state.selectedDate.getFullYear(), m = state.selectedDate.getMonth();
+                    label.textContent = MONTHS[m] + ' ' + y;
+                    const grid = document.createElement('div'); grid.className = 'month-grid';
+                    DOW.forEach(d => { const c = document.createElement('div'); c.className = 'month-dow'; c.textContent = d; grid.appendChild(c); });
+                    const first = new Date(y, m, 1);
+                    const gridStart = addDays(first, -first.getDay());
+                    const today = new Date();
+                    for (let i = 0; i < 42; i++) {
+                        const d = addDays(gridStart, i);
+                        const cell = document.createElement('div');
+                        let cls = 'month-cell';
+                        if (d.getMonth() !== m) cls += ' out';
+                        if (sameDate(d, today)) cls += ' today';
+                        if (sameDate(d, state.selectedDate)) cls += ' selected';
+                        cell.className = cls;
+                        const evs = eventsOnDate(d);
+                        const dotTypes = [...new Set(evs.map(e => e.type))].slice(0, 4);
+                        cell.innerHTML = '<span class="mc-num">' + d.getDate() + '</span><span class="mc-dots">' + dotTypes.map(t => '<span style="background:' + TYPE_META[t].color + '"></span>').join('') + '</span>';
+                        cell.addEventListener('click', () => {
+                            state.selectedDate = d; state.scheduleMode = 'day';
+                            document.querySelectorAll('#scheduleSeg button').forEach(x => x.classList.toggle('active', x.dataset.mode === 'day'));
+                            renderSchedule();
+                        });
+                        grid.appendChild(cell);
+                    }
+                    document.getElementById('monthGridHolder').appendChild(grid);
+                    document.getElementById('agendaHolder').innerHTML = '';
+                }
+            }
+
+            function eventsOnDate(d) {
+                const ds = toDateStr(d);
+                return DATA.events.filter(ev => {
+                    const { start, end } = eventRange(ev);
+                    const dayStart = new Date(d); dayStart.setHours(0, 0, 0, 0);
+                    const dayEnd = addDays(dayStart, 1);
+                    return start.getTime() < dayEnd.getTime() && end.getTime() > dayStart.getTime();
+                }).sort((a, b) => a.startTime.localeCompare(b.startTime));
+            }
+
+            function renderAgenda(date) {
+                const holder = document.getElementById('agendaHolder');
+                const evs = eventsOnDate(date);
+                if (evs.length === 0) {
+                    holder.innerHTML = '<div class="agenda-empty"><div class="big">🗓️</div>אין פעילויות ביום הזה<br><button class="btn btn-ghost cta" id="emptyAddBtn" style="width:auto;">הוספת פעילות +</button></div>';
+                    document.getElementById('emptyAddBtn').addEventListener('click', () => openEventModal(null, toDateStr(date)));
+                    return;
+                }
+                holder.innerHTML = '';
+                evs.forEach(ev => {
+                    const meta = TYPE_META[ev.type];
+                    const conflicts = findConflicts(ev, ev.id);
+                    const fatigue = findFatigueIssues(ev, ev.id);
+                    const card = document.createElement('div');
+                    card.className = 'ev-card';
+                    card.style.setProperty('--c', meta.color);
+                    card.style.setProperty('--cbg', meta.bg);
+                    let client = ev.clientId ? DATA.clients.find(c => c.id === ev.clientId) : null;
+                    let metaLine = '';
+                    if (ev.type === 'training' && client) metaLine = client.name;
+                    if (ev.type === 'mda') metaLine = ev.mdaShiftType === 'morning' ? 'משמרת בוקר' : ev.mdaShiftType === 'evening' ? 'משמרת ערב' : 'משמרת לילה';
+                    if (ev.type === 'gym' && ev.commission) metaLine = 'עמלות: ' + money(ev.commission);
+                    let warnHtml = '';
+                    if (conflicts.length) { warnHtml += '<div class="ev-warn">' + ICONS.warn + ' חפיפה עם ' + conflicts.length + ' פעילות/יות</div>'; }
+                    if (fatigue.length) { warnHtml += '<div class="ev-warn">' + ICONS.warn + ' בטווח מנוחה נדרש אחרי משמרת לילה</div>'; }
+                    card.innerHTML = '<div class="ev-time"><div class="t1">' + ev.startTime + '</div><div class="t2">' + ev.endTime + '</div></div>' +
+                        '<div class="ev-body"><div class="ev-title-row"><span class="ev-icon">' + meta.icon + '</span><span class="ev-title">' + escapeHtml(ev.title || meta.label) + '</span></div>' +
+                        (metaLine ? '<div class="ev-meta">' + escapeHtml(metaLine) + '</div>' : '') +
+                        '<span class="ev-tag">' + meta.label + '</span>' + warnHtml + '</div>';
+                    card.addEventListener('click', () => openEventModal(ev.id));
+                    holder.appendChild(card);
+                });
+            }
+
+            function escapeHtml(s) { return (s || '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
+
+            /* ---------------- EVENT MODAL ---------------- */
+            function openEventModal(id, presetDate) {
+                state.editingEventId = id;
+                const ev = id ? DATA.events.find(e => e.id === id) : null;
+                document.getElementById('evModalTitle').textContent = ev ? 'עריכת פעילות' : 'פעילות חדשה';
+                const draft = ev ? Object.assign({}, ev) : {
+                    id: null, type: 'gym', title: '', date: presetDate || toDateStr(state.selectedDate),
+                    startTime: '08:00', endTime: '12:00', useBuffer: true, notes: '',
+                    mdaShiftType: 'morning', clientId: '', commission: 0, price: DATA.settings.trainingPrice
+                };
+                renderEventForm(draft);
+                document.getElementById('modalEvent').classList.add('open');
+            }
+            function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+            document.querySelectorAll('[data-close]').forEach(el => el.addEventListener('click', () => closeModal(el.dataset.close)));
+            document.querySelectorAll('.modal-backdrop').forEach(el => el.addEventListener('click', () => el.parentElement.classList.remove('open')));
+
+            function renderEventForm(draft) {
+                const body = document.getElementById('evModalBody');
+                const trainClients = DATA.clients;
+                body.innerHTML = `
+                <div class="type-picker" id="typePicker">
+                  ${Object.keys(TYPE_META).map(t => `<button class="type-opt ${draft.type === t ? 'selected' : ''}" data-type="${t}" style="--c:${TYPE_META[t].color};--cbg:${TYPE_META[t].bg}">${TYPE_META[t].icon}<span>${TYPE_META[t].label}</span></button>`).join('')}
+                </div>
+                <label>כותרת (אופציונלי)</label>
+                <input id="f_title" value="${escapeHtml(draft.title || '')}" placeholder="${TYPE_META[draft.type].label}">
+                <div class="field-row">
+                  <div><label>תאריך</label><input type="date" id="f_date" value="${draft.date}"></div>
+                  <div></div>
+                </div>
+                <div class="field-row">
+                  <div><label>שעת התחלה</label><input type="time" id="f_start" value="${draft.startTime}"></div>
+                  <div><label>שעת סיום</label><input type="time" id="f_end" value="${draft.endTime}"></div>
+                </div>
+                <div id="typeExtra"></div>
+                <div class="toggle-row">
+                  <div><div class="t-main">חסימת זמן נסיעה/התארגנות</div><div class="t-sub">${DATA.settings.bufferMinutes} דק' לפני ואחרי</div></div>
+                  <div class="switch ${draft.useBuffer !== false ? 'on' : ''}" id="f_buffer"></div>
+                </div>
+                <label>הערות</label>
+                <textarea id="f_notes" rows="2" placeholder="הערות חופשיות...">${escapeHtml(draft.notes || '')}</textarea>
+                <div id="conflictBox"></div>
+                <div class="row-btns">
+                  ${draft.id ? '<button class="btn btn-danger" id="delEvBtn">מחיקה</button>' : ''}
+                  <button class="btn btn-primary" id="saveEvBtn">שמירה</button>
+                </div>
+              `;
+                document.getElementById('f_buffer').addEventListener('click', function () { this.classList.toggle('on'); refreshConflictPreview(draft); });
+
+                document.querySelectorAll('#typePicker .type-opt').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        draft.type = btn.dataset.type;
+                        document.querySelectorAll('#typePicker .type-opt').forEach(b => b.classList.toggle('selected', b === btn));
+                        renderTypeExtra(draft);
+                        refreshConflictPreview(draft);
+                    });
+                });
+                renderTypeExtra(draft);
+
+                ['f_date', 'f_start', 'f_end'].forEach(id => document.getElementById(id).addEventListener('change', () => refreshConflictPreview(draft)));
+
+                function renderTypeExtra(d) {
+                    const box = document.getElementById('typeExtra');
+                    if (d.type === 'mda') {
+                        box.innerHTML = `<label>סוג משמרת</label>
+                  <select id="f_shift">
+                    <option value="morning" ${d.mdaShiftType === 'morning' ? 'selected' : ''}>בוקר</option>
+                    <option value="evening" ${d.mdaShiftType === 'evening' ? 'selected' : ''}>ערב</option>
+                    <option value="night" ${d.mdaShiftType === 'night' ? 'selected' : ''}>לילה</option>
+                  </select>`;
+                        document.getElementById('f_shift').addEventListener('change', e => { d.mdaShiftType = e.target.value; refreshConflictPreview(d); });
+                    } else if (d.type === 'gym') {
+                        box.innerHTML = `<label>עמלות מכירה במשמרת (₪)</label><input type="number" id="f_comm" value="${d.commission || 0}" min="0" step="5">`;
+                    } else if (d.type === 'training') {
+                        box.innerHTML = `<label>מתאמן</label>
+                  <select id="f_client"><option value="">— ללא שיוך —</option>${trainClients.map(c => `<option value="${c.id}" ${d.clientId === c.id ? 'selected' : ''}>${escapeHtml(c.name)}</option>`).join('')}</select>
+                  <label>תעריף לאימון (₪)</label><input type="number" id="f_price" value="${d.price != null ? d.price : DATA.settings.trainingPrice}" min="0" step="5">`;
+                    } else {
+                        box.innerHTML = '';
+                    }
+                }
+
+                function refreshConflictPreview(d) {
+                    const test = {
+                        id: d.id, type: d.type, date: document.getElementById('f_date').value,
+                        startTime: document.getElementById('f_start').value, endTime: document.getElementById('f_end').value,
+                        useBuffer: document.getElementById('f_buffer').classList.contains('on'),
+                        mdaShiftType: d.mdaShiftType
+                    };
+                    const conflicts = findConflicts(test, d.id);
+                    const fatigue = findFatigueIssues(test, d.id);
+                    const box = document.getElementById('conflictBox');
+                    let html = '';
+                    if (conflicts.length) {
+                        html += '<div class="alert">' + ICONS.warn + '<div><b>זוהתה חפיפה</b>חופפת ל' + conflicts.map(c => TYPE_META[c.type].label + ' (' + c.startTime + '–' + c.endTime + ')').join(', ') + (document.getElementById('f_buffer').classList.contains('on') ? ' (כולל זמן חוצץ)' : '') + '</div></div>';
+                    }
+                    fatigue.forEach(f => {
+                        if (f.type === 'blocked-after-shift') {
+                            html += '<div class="alert">' + ICONS.warn + '<div><b>מתחת לזמן מנוחה</b>נדרשת מנוחה עד השעה ' + pad(f.restUntil.getHours()) + ':' + pad(f.restUntil.getMinutes()) + ' לאחר משמרת לילה במד"א</div></div>';
+                        } else {
+                            html += '<div class="alert">' + ICONS.warn + '<div><b>פוגע בזמן מנוחה</b>הפעילות "' + TYPE_META[f.ev.type].label + '" (' + f.ev.startTime + ') נמצאת בטווח מנוחה נדרש עד ' + pad(f.restUntil.getHours()) + ':' + pad(f.restUntil.getMinutes()) + '</div></div>';
+                        }
+                    });
+                    box.innerHTML = html;
+                }
+                refreshConflictPreview(draft);
+
+                document.getElementById('saveEvBtn').addEventListener('click', () => {
+                    draft.title = document.getElementById('f_title').value.trim();
+                    draft.date = document.getElementById('f_date').value;
+                    draft.startTime = document.getElementById('f_start').value;
+                    draft.endTime = document.getElementById('f_end').value;
+                    draft.useBuffer = document.getElementById('f_buffer').classList.contains('on');
+                    draft.notes = document.getElementById('f_notes').value.trim();
+                    if (draft.type === 'mda') { draft.mdaShiftType = document.getElementById('f_shift').value; }
+                    if (draft.type === 'gym') { draft.commission = parseFloat(document.getElementById('f_comm').value) || 0; }
+                    if (draft.type === 'training') {
+                        draft.clientId = document.getElementById('f_client').value || '';
+                        draft.price = parseFloat(document.getElementById('f_price').value) || DATA.settings.trainingPrice;
+                    }
+                    if (!draft.date || !draft.startTime || !draft.endTime) { alert('נא למלא תאריך ושעות'); return; }
+                    if (draft.id) {
+                        const idx = DATA.events.findIndex(e => e.id === draft.id);
+                        DATA.events[idx] = draft;
+                    } else {
+                        draft.id = uid();
+                        draft.status = draft.type === 'training' ? 'scheduled' : undefined;
+                        DATA.events.push(draft);
+                    }
+                    saveData();
+                    closeModal('modalEvent');
+                    renderSchedule();
+                    if (state.view === 'finance') renderFinance();
+                });
+                if (draft.id) {
+                    document.getElementById('delEvBtn').addEventListener('click', () => {
+                        if (confirm('למחוק את הפעילות?')) {
+                            DATA.events = DATA.events.filter(e => e.id !== draft.id);
+                            saveData(); closeModal('modalEvent'); renderSchedule();
+                        }
+                    });
+                }
+            }
+
+            /* ---------------- CLIENTS ---------------- */
+            function renderClients() {
+                const holder = document.getElementById('clientsHolder');
+                if (DATA.clients.length === 0) {
+                    holder.innerHTML = '<div class="agenda-empty">' + ICONS.users.replace('width="24" height="24"', 'width="40" height="40"') + '<div style="margin-top:10px;">אין עדיין מתאמנים רשומים<br>הוספת מתאמן תאפשר מעקב כרטיסיות ונוכחות</div></div>';
+                    return;
+                }
+                holder.innerHTML = '';
+                DATA.clients.forEach(c => {
+                    const remaining = (c.packageTotal || 0) - (c.packageUsed || 0);
+                    const low = remaining <= 2;
+                    const div = document.createElement('div');
+                    div.className = 'client-card';
+                    div.innerHTML = `<div class="client-top">
+                  <div><div class="client-name">${escapeHtml(c.name)}</div>${c.phone ? '<div class="client-phone">' + escapeHtml(c.phone) + '</div>' : ''}</div>
+                  <span class="pkg-pill ${low ? 'low' : ''}">${remaining} נותרו</span>
+                </div>${c.goals ? '<div class="client-goals">🎯 ' + escapeHtml(c.goals) + '</div>' : ''}`;
+                    div.addEventListener('click', () => openClientDetail(c.id));
+                    holder.appendChild(div);
+                });
+            }
+
+            function openClientModal(id) {
+                state.editingClientId = id;
+                const c = id ? DATA.clients.find(x => x.id === id) : null;
+                document.getElementById('clModalTitle').textContent = c ? 'עריכת מתאמן' : 'מתאמן חדש';
+                const draft = c ? Object.assign({}, c) : { id: null, name: '', phone: '', goals: '', medical: '', packageTotal: 10, packageUsed: 0, history: [] };
+                document.getElementById('clModalBody').innerHTML = `
+                <label>שם מלא</label><input id="c_name" value="${escapeHtml(draft.name)}">
+                <label>טלפון</label><input id="c_phone" value="${escapeHtml(draft.phone || '')}" type="tel">
+                <label>מטרות כושר</label><input id="c_goals" value="${escapeHtml(draft.goals || '')}">
+                <label>הערות רפואיות / מגבלות</label><textarea id="c_med" rows="2">${escapeHtml(draft.medical || '')}</textarea>
+                <div class="field-row">
+                  <div><label>סה"כ אימונים בכרטיסייה</label><input id="c_total" type="number" min="0" value="${draft.packageTotal || 0}"></div>
+                  <div><label>נוצלו עד כה</label><input id="c_used" type="number" min="0" value="${draft.packageUsed || 0}"></div>
+                </div>
+                <div class="row-btns">
+                  ${draft.id ? '<button class="btn btn-danger" id="delClBtn">מחיקה</button>' : ''}
+                  <button class="btn btn-primary" id="saveClBtn">שמירה</button>
+                </div>`;
+                document.getElementById('saveClBtn').addEventListener('click', () => {
+                    draft.name = document.getElementById('c_name').value.trim();
+                    if (!draft.name) { alert('נא להזין שם'); return; }
+                    draft.phone = document.getElementById('c_phone').value.trim();
+                    draft.goals = document.getElementById('c_goals').value.trim();
+                    draft.medical = document.getElementById('c_med').value.trim();
+                    draft.packageTotal = parseInt(document.getElementById('c_total').value) || 0;
+                    draft.packageUsed = parseInt(document.getElementById('c_used').value) || 0;
+                    draft.history = draft.history || [];
+                    if (draft.id) { const idx = DATA.clients.findIndex(x => x.id === draft.id); DATA.clients[idx] = draft; }
+                    else { draft.id = uid(); DATA.clients.push(draft); }
+                    saveData(); closeModal('modalClient'); renderClients();
+                });
+                if (draft.id) {
+                    document.getElementById('delClBtn').addEventListener('click', () => {
+                        if (confirm('למחוק את המתאמן? (האימונים המשויכים יישארו ביומן ללא שיוך)')) {
+                            DATA.clients = DATA.clients.filter(x => x.id !== draft.id);
+                            DATA.events.forEach(e => { if (e.clientId === draft.id) e.clientId = ''; });
+                            saveData(); closeModal('modalClient'); renderClients();
+                        }
+                    });
+                }
+                document.getElementById('modalClient').classList.add('open');
+            }
+
+            function openClientDetail(id) {
+                state.detailClientId = id;
+                const c = DATA.clients.find(x => x.id === id);
+                const remaining = (c.packageTotal || 0) - (c.packageUsed || 0);
+                const upcoming = DATA.events.filter(e => e.type === 'training' && e.clientId === id && parseDateStr(e.date) >= new Date(new Date().setHours(0, 0, 0, 0))).sort((a, b) => a.date.localeCompare(b.date));
+                const history = (c.history || []).slice().reverse();
+                document.getElementById('clDetailBody').innerHTML = `
+                <div class="modal-title">${escapeHtml(c.name)}</div>
+                ${c.phone ? '<div class="client-phone" style="margin-bottom:10px;">' + escapeHtml(c.phone) + '</div>' : ''}
+                <div class="stat-grid" style="margin:12px 0;">
+                  <div class="stat"><div class="num">${remaining}</div><div class="lbl">אימונים נותרו</div></div>
+                  <div class="stat"><div class="num">${c.packageUsed || 0}/${c.packageTotal || 0}</div><div class="lbl">נוצלו</div></div>
+                </div>
+                ${c.goals ? '<div class="section-title">מטרות</div><div>' + escapeHtml(c.goals) + '</div>' : ''}
+                ${c.medical ? '<div class="section-title">הערות רפואיות</div><div>' + escapeHtml(c.medical) + '</div>' : ''}
+                <div class="section-title">אימונים קרובים</div>
+                ${upcoming.length ? upcoming.map(e => `<div class="ev-card" style="--c:${TYPE_META.training.color};--cbg:${TYPE_META.training.bg}"><div class="ev-time"><div class="t1">${e.startTime}</div><div class="t2">${e.date.slice(5)}</div></div>
+                  <div class="ev-body"><div class="ev-title">${escapeHtml(e.title || 'אימון אישי')}</div>
+                  <div class="row-btns">
+                    <button class="btn btn-ghost btn-sm" data-checkin="${e.id}">${ICONS.check} הגיע</button>
+                    <button class="btn btn-danger btn-sm" data-cancel="${e.id}">ביטול</button>
+                  </div></div></div>`).join('') : '<div class="empty-note">אין אימונים עתידיים מתוזמנים</div>'}
+                <div class="section-title">היסטוריה</div>
+                ${history.length ? history.slice(0, 10).map(h => `<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:12.5px;">
+                  <span>${h.date}</span><span style="color:${h.status === 'attended' ? 'var(--training)' : 'var(--mda)'}">${h.status === 'attended' ? 'הגיע' : h.status === 'late-cancel' ? 'ביטול מאוחר' : 'ביטול'}</span></div>`).join('') : '<div class="empty-note">אין היסטוריה עדיין</div>'}
+                <div class="row-btns">
+                  <button class="btn btn-ghost" id="editClFromDetail">עריכת פרטים</button>
+                </div>
+              `;
+                document.getElementById('editClFromDetail').addEventListener('click', () => { closeModal('modalClientDetail'); openClientModal(id); });
+                document.querySelectorAll('[data-checkin]').forEach(b => b.addEventListener('click', () => markTraining(b.dataset.checkin, 'attended')));
+                document.querySelectorAll('[data-cancel]').forEach(b => b.addEventListener('click', () => {
+                    const late = confirm('האם זהו ביטול מאוחר (מנוכה מהכרטיסייה)? אישור = כן, ביטול = לא');
+                    markTraining(b.dataset.cancel, late ? 'late-cancel' : 'cancelled');
+                }));
+                document.getElementById('modalClientDetail').classList.add('open');
+            }
+            function markTraining(eventId, status) {
+                const ev = DATA.events.find(e => e.id === eventId);
+                if (!ev) return;
+                ev.status = status;
+                const c = DATA.clients.find(x => x.id === ev.clientId);
+                if (c) {
+                    c.history = c.history || [];
+                    c.history.push({ id: uid(), date: ev.date, status, eventId });
+                    if (status === 'attended' || status === 'late-cancel') { c.packageUsed = (c.packageUsed || 0) + 1; }
+                }
+                saveData();
+                openClientDetail(ev.clientId);
+                renderClients();
+            }
+
+            /* ---------------- FINANCE ---------------- */
+            document.getElementById('finPrev').addEventListener('click', () => { const d = new Date(state.financeMonth); d.setMonth(d.getMonth() - 1); state.financeMonth = d; renderFinance(); });
+            document.getElementById('finNext').addEventListener('click', () => { const d = new Date(state.financeMonth); d.setMonth(d.getMonth() + 1); state.financeMonth = d; renderFinance(); });
+
+            function renderFinance() {
+                const y = state.financeMonth.getFullYear(), m = state.financeMonth.getMonth();
+                document.getElementById('finLabel').textContent = MONTHS[m] + ' ' + y;
+                const inMonth = DATA.events.filter(e => { const d = parseDateStr(e.date); return d.getFullYear() === y && d.getMonth() === m; });
+
+                let gymHours = 0, gymCommission = 0, mdaHours = 0, trainingCount = 0, trainingIncome = 0, trainingScheduled = 0;
+                inMonth.forEach(ev => {
+                    const { start, end } = eventRange(ev);
+                    const hrs = (end - start) / 3600000;
+                    if (ev.type === 'gym') { gymHours += hrs; gymCommission += (ev.commission || 0); }
+                    if (ev.type === 'mda') { mdaHours += hrs; }
+                    if (ev.type === 'training') {
+                        trainingScheduled++;
+                        if (ev.status === 'attended' || ev.status === 'late-cancel') { trainingCount++; trainingIncome += (ev.price != null ? ev.price : DATA.settings.trainingPrice); }
+                    }
+                });
+                const gymIncome = gymHours * DATA.settings.gymHourlyRate + gymCommission;
+                const totalIncome = gymIncome + trainingIncome;
+                const totalWorkHours = gymHours + (trainingCount * 1); // approx 1hr per training session for hours summary
+
+                const holder = document.getElementById('financeHolder');
+                holder.innerHTML = `
+                <div class="card">
+                  <div class="section-title" style="margin-top:0;">סה"כ הכנסה חודשית</div>
+                  <div style="font-size:32px;font-weight:800;font-variant-numeric:tabular-nums;">${money(totalIncome)}</div>
+                </div>
+                <div class="stat-grid">
+                  <div class="stat"><div class="num">${money(gymIncome)}</div><div class="lbl">הכנסה מניהול</div></div>
+                  <div class="stat"><div class="num">${money(trainingIncome)}</div><div class="lbl">הכנסה מאימונים</div></div>
+                  <div class="stat"><div class="num">${gymHours.toFixed(1)}</div><div class="lbl">שעות ניהול</div></div>
+                  <div class="stat"><div class="num">${trainingCount}/${trainingScheduled}</div><div class="lbl">אימונים שבוצעו</div></div>
+                  <div class="stat"><div class="num">${mdaHours.toFixed(1)}</div><div class="lbl">שעות התנדבות מד"א</div></div>
+                  <div class="stat"><div class="num">${money(gymCommission)}</div><div class="lbl">עמלות מכירה</div></div>
+                </div>
+                <div class="section-title">פילוח הכנסה</div>
+                <div class="card">
+                  ${financeBar('ניהול', gymIncome, totalIncome || 1, 'var(--gym)')}
+                  ${financeBar('אימונים', trainingIncome, totalIncome || 1, 'var(--training)')}
+                </div>
+                <div class="section-title">חלוקת שעות</div>
+                <div class="card">
+                  ${financeBar('ניהול', gymHours, (gymHours + mdaHours) || 1, 'var(--gym)')}
+                  ${financeBar('מד"א (התנדבות)', mdaHours, (gymHours + mdaHours) || 1, 'var(--mda)')}
+                </div>
+              `;
+            }
+            function financeBar(label, val, total, color) {
+                const pct = Math.max(2, Math.min(100, (val / total) * 100));
+                return `<div class="bar-row"><span class="lbl">${label}</span><div class="bar-track"><div class="bar-fill" style="width:${pct}%;background:${color}"></div></div><span class="val">${typeof val === 'number' && val < 50 && val % 1 !== 0 ? val.toFixed(1) : money(val)}</span></div>`;
+            }
+
+            /* ---------------- התראות מקומיות (תזכורות + סיכום בוקר) ---------------- */
+            // הערה חשובה: זהו מנגנון תזכורות מקומי (Local Notifications).
+            // הוא פועל כל עוד הדפדפן/האפליקציה המותקנת רצים (ברקע אם התקנת אותה למסך הבית).
+            // התראות Push אמיתיות שמגיעות גם כשהאפליקציה סגורה לחלוטין דורשות שרת דחיפה (Firebase Cloud Messaging + פונקציה בענן)
+            // שלא ניתן להוסיף בקובץ סטטי בלבד - זה שיפור עתידי אפשרי אם תרצה.
+            let deferredInstallPrompt = null;
+            window.addEventListener('beforeinstallprompt', (e) => {
+                e.preventDefault();
+                deferredInstallPrompt = e;
+                const btn = document.getElementById('installAppBtn');
+                if (btn) btn.style.display = 'block';
+            });
+
+            function showAppNotification(title, body, tag) {
+                const opts = { body: body, icon: './icon-192.png', badge: './icon-192.png', tag: tag, dir: 'rtl', lang: 'he' };
+                if (navigator.serviceWorker && navigator.serviceWorker.ready) {
+                    navigator.serviceWorker.ready.then(function (reg) {
+                        reg.showNotification(title, opts);
+                    }).catch(function () {
+                        try { new Notification(title, opts); } catch (e) { /* ignore */ }
+                    });
+                } else {
+                    try { new Notification(title, opts); } catch (e) { /* ignore */ }
+                }
+            }
+
+            function getNotifiedSet() {
+                try { return new Set(JSON.parse(localStorage.getItem('lev_notified_events') || '[]')); }
+                catch (e) { return new Set(); }
+            }
+            function saveNotifiedSet(set) {
+                try { localStorage.setItem('lev_notified_events', JSON.stringify(Array.from(set).slice(-500))); }
+                catch (e) { /* ignore */ }
+            }
+
+            function checkReminders() {
+                if (!storageReady) return;
+                if (!('Notification' in window) || Notification.permission !== 'granted') return;
+                const now = new Date();
+
+                if (DATA.settings.notificationsEnabled) {
+                    const reminderMs = (DATA.settings.reminderMinutes || 60) * 60000;
+                    const notified = getNotifiedSet();
+                    DATA.events.forEach(function (ev) {
+                        const key = 'ev_' + ev.id;
+                        if (notified.has(key)) return;
+                        const range = eventRange(ev);
+                        const diff = range.start.getTime() - now.getTime();
+                        if (diff > 0 && diff <= reminderMs) {
+                            const meta = TYPE_META[ev.type];
+                            let body = ev.title || meta.label;
+                            if (ev.type === 'training' && ev.clientId) {
+                                const c = DATA.clients.find(function (x) { return x.id === ev.clientId; });
+                                if (c) body = 'אימון עם ' + c.name;
+                            }
+                            showAppNotification('עוד ' + Math.round(diff / 60000) + ' דק\' - ' + meta.label, body + ' בשעה ' + ev.startTime, key);
+                            notified.add(key);
+                            saveNotifiedSet(notified);
+                        }
+                    });
+                }
+
+                if (DATA.settings.morningSummaryEnabled) {
+                    const todayStr = toDateStr(now);
+                    const lastSummary = localStorage.getItem('lev_last_summary_date');
+                    const parts = (DATA.settings.morningSummaryTime || '07:00').split(':').map(Number);
+                    const summaryTime = new Date(now); summaryTime.setHours(parts[0] || 7, parts[1] || 0, 0, 0);
+                    if (lastSummary !== todayStr && now.getTime() >= summaryTime.getTime()) {
+                        const todays = eventsOnDate(now);
+                        let body;
+                        if (todays.length === 0) body = 'אין פעילויות מתוכננות להיום';
+                        else body = todays.map(function (e) { return e.startTime + ' - ' + (e.title || TYPE_META[e.type].label); }).join(' | ');
+                        showAppNotification('סיכום היום שלך', body, 'morning-summary');
+                        try { localStorage.setItem('lev_last_summary_date', todayStr); } catch (e) { /* ignore */ }
+                    }
+                }
+            }
+            setInterval(checkReminders, 30000);
+
+            /* ---------------- SETTINGS ---------------- */
+            function renderSettings() {
+                const s = DATA.settings;
+                const holder = document.getElementById('settingsHolder');
+                const notifSupported = ('Notification' in window);
+                const permStatus = notifSupported ? Notification.permission : 'unsupported';
+                let permNote = '';
+                if (!notifSupported) permNote = 'הדפדפן הזה לא תומך בהתראות.';
+                else if (permStatus === 'granted') permNote = 'הרשאת התראות ניתנה ✓';
+                else if (permStatus === 'denied') permNote = 'ההתראות חסומות ברמת הדפדפן/המכשיר. יש לאפשר זאת ידנית בהגדרות המכשיר כדי שהתזכורות יעבדו.';
+                else permNote = 'יש להפעיל את המתג כדי לאשר קבלת התראות מהדפדפן.';
+
+                holder.innerHTML = `
+                <div class="section-title" style="margin-top:0;">תעריפים</div>
+                <div class="card">
+                  <label>תעריף שעתי – ניהול (₪)</label><input type="number" id="s_rate" value="${s.gymHourlyRate}" step="0.1">
+                  <label>מחיר אימון אישי (₪)</label><input type="number" id="s_price" value="${s.trainingPrice}" step="5">
+                </div>
+                <div class="section-title">חסימות ומרווחים</div>
+                <div class="card">
+                  <label>זמן נסיעה/התארגנות בין פעילויות (דקות)</label><input type="number" id="s_buffer" value="${s.bufferMinutes}" step="5">
+                  <label>שעות מנוחה נדרשות אחרי משמרת לילה במד"א</label><input type="number" id="s_rest" value="${s.mdaRestHours}" step="0.5">
+                </div>
+                <div class="section-title">התראות ותזכורות</div>
+                <div class="card">
+                  <div class="toggle-row">
+                    <div><div class="t-main">תזכורות לפני פעילות</div><div class="t-sub">התראה בדפדפן/באפליקציה המותקנת לפני כל פעילות</div></div>
+                    <div class="switch ${s.notificationsEnabled ? 'on' : ''}" id="s_notif"></div>
+                  </div>
+                  <label>כמה דקות לפני להתריע</label><input type="number" id="s_remind_min" value="${s.reminderMinutes || 60}" min="5" step="5">
+                  <div class="toggle-row">
+                    <div><div class="t-main">סיכום בוקר יומי</div><div class="t-sub">התראה יומית עם רשימת הפעילויות של היום</div></div>
+                    <div class="switch ${s.morningSummaryEnabled ? 'on' : ''}" id="s_morning"></div>
+                  </div>
+                  <label>שעת סיכום בוקר</label><input type="time" id="s_morning_time" value="${s.morningSummaryTime || '07:00'}">
+                  <div class="alert soft">${ICONS.bell}<div><b>סטטוס הרשאה</b>${permNote}</div></div>
+                  <div class="alert soft">${ICONS.warn}<div><b>לתשומת לבך</b>התראות אלו פועלות כל עוד הדפדפן פתוח, או ברקע אם התקנת את האפליקציה למסך הבית. התראות שמגיעות גם כשהאפליקציה סגורה לחלוטין דורשות שרת דחיפה ייעודי ואינן זמינות בגרסה הזו.</div></div>
+                </div>
+                <div class="section-title">כללי</div>
+                <div class="card">
+                  <div class="toggle-row"><div><div class="t-main">מצב כהה</div><div class="t-sub">עיצוב נוח לעיניים בשעות החושך (ברירת מחדל, ניתן לשינוי)</div></div>
+                    <div class="switch ${s.theme === 'dark' ? 'on' : ''}" id="s_theme"></div></div>
+                </div>
+                <div class="section-title">התקנה ומצב לא-מקוון</div>
+                <div class="card">
+                  <div class="empty-note" style="padding:6px 0 12px;text-align:right;">התקנת האפליקציה למסך הבית מאפשרת פתיחה מהירה כמו אפליקציה רגילה, ועובדת גם עם קליטה חלשה - הנתונים יסתנכרנו אוטומטית ברגע שהאינטרנט יחזור.</div>
+                  <button class="btn btn-ghost" id="installAppBtn" style="display:${deferredInstallPrompt ? 'flex' : 'none'};margin-bottom:8px;">${ICONS.download} התקנת האפליקציה על המכשיר</button>
+                </div>
+                <div class="section-title">סנכרון יומן</div>
+                <div class="card">
+                  <div class="empty-note" style="padding:6px 0 12px;text-align:right;">סנכרון דו-כיווני מלא עם Google Calendar / Apple Calendar דורש חיבור לשרת חיצוני (למשל Supabase) שאינו זמין בתצוגה העצמאית הזו. אפשר לייצא את הלו"ז כקובץ ICS ולייבא אותו ידנית ליומן.</div>
+                  <button class="btn btn-ghost" id="exportIcsBtn">ייצוא ICS</button>
+                </div>
+                <div class="section-title">נתונים</div>
+                <div class="card">
+                  <button class="btn btn-danger" id="resetBtn">${ICONS.trash} איפוס כל הנתונים</button>
+                </div>
+                <div class="empty-note">הנתונים נשמרים באופן פרטי בחשבון שלך בלבד.</div>
+              `;
+                document.getElementById('s_theme').addEventListener('click', function () {
+                    this.classList.toggle('on');
+                    s.theme = this.classList.contains('on') ? 'dark' : 'light';
+                    applyTheme(); saveData();
+                });
+                ['s_rate', 's_price', 's_buffer', 's_rest'].forEach(id => {
+                    document.getElementById(id).addEventListener('change', e => {
+                        const map = { s_rate: 'gymHourlyRate', s_price: 'trainingPrice', s_buffer: 'bufferMinutes', s_rest: 'mdaRestHours' };
+                        s[map[id]] = parseFloat(e.target.value) || 0;
+                        saveData();
+                    });
+                });
+
+                document.getElementById('s_notif').addEventListener('click', function () {
+                    const sw = this;
+                    if (!sw.classList.contains('on')) {
+                        if (!notifSupported) { alert('הדפדפן הזה לא תומך בהתראות'); return; }
+                        Notification.requestPermission().then(function (perm) {
+                            if (perm === 'granted') {
+                                sw.classList.add('on');
+                                s.notificationsEnabled = true;
+                            } else {
+                                s.notificationsEnabled = false;
+                                alert('לא ניתנה הרשאה להתראות. יש לאפשר זאת בהגדרות הדפדפן/המכשיר.');
+                            }
+                            saveData(); renderSettings();
+                        });
+                    } else {
+                        sw.classList.remove('on');
+                        s.notificationsEnabled = false;
+                        saveData();
+                    }
+                });
+                document.getElementById('s_remind_min').addEventListener('change', e => { s.reminderMinutes = parseInt(e.target.value) || 60; saveData(); });
+
+                document.getElementById('s_morning').addEventListener('click', function () {
+                    const sw = this;
+                    if (!sw.classList.contains('on')) {
+                        if (!notifSupported) { alert('הדפדפן הזה לא תומך בהתראות'); return; }
+                        Notification.requestPermission().then(function (perm) {
+                            if (perm === 'granted') {
+                                sw.classList.add('on');
+                                s.morningSummaryEnabled = true;
+                            } else {
+                                s.morningSummaryEnabled = false;
+                                alert('לא ניתנה הרשאה להתראות. יש לאפשר זאת בהגדרות הדפדפן/המכשיר.');
+                            }
+                            saveData(); renderSettings();
+                        });
+                    } else {
+                        sw.classList.remove('on');
+                        s.morningSummaryEnabled = false;
+                        saveData();
+                    }
+                });
+                document.getElementById('s_morning_time').addEventListener('change', e => { s.morningSummaryTime = e.target.value || '07:00'; saveData(); });
+
+                const installBtn = document.getElementById('installAppBtn');
+                if (installBtn) {
+                    installBtn.addEventListener('click', function () {
+                        if (!deferredInstallPrompt) return;
+                        deferredInstallPrompt.prompt();
+                        deferredInstallPrompt.userChoice.then(function () {
+                            deferredInstallPrompt = null;
+                            installBtn.style.display = 'none';
+                        });
+                    });
+                }
+
+                document.getElementById('resetBtn').addEventListener('click', () => {
+                    if (confirm('פעולה זו תמחק את כל האירועים, המתאמנים וההגדרות. להמשיך?')) {
+                        DATA = JSON.parse(JSON.stringify(DEFAULT_DATA));
+                        saveData(); applyTheme(); renderAll();
+                    }
+                });
+                document.getElementById('exportIcsBtn').addEventListener('click', exportIcs);
+            }
+
+            function exportIcs() {
+                let ics = 'BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//לוז אישי//HE\r\n';
+                DATA.events.forEach(ev => {
+                    const { start, end } = eventRange(ev);
+                    const fmt = d => d.getFullYear() + pad(d.getMonth() + 1) + pad(d.getDate()) + 'T' + pad(d.getHours()) + pad(d.getMinutes()) + '00';
+                    ics += 'BEGIN:VEVENT\r\nUID:' + ev.id + '@personal-schedule\r\nDTSTART:' + fmt(start) + '\r\nDTEND:' + fmt(end) + '\r\nSUMMARY:' + (ev.title || TYPE_META[ev.type].label) + '\r\nEND:VEVENT\r\n';
+                });
+                ics += 'END:VCALENDAR';
+                const blob = new Blob([ics], { type: 'text/calendar' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url; a.download = 'schedule.ics';
+                document.body.appendChild(a); a.click(); document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            }
+
+            /* ---------------- INIT ---------------- */
+            function renderAll() {
+                updateGreeting();
+                setActiveView(state.view); // מציג מיד את התצוגה הנוכחית (בד"כ לו"ז) בלי לחכות למעבר ידני בין טאבים
+                renderSchedule();
+                renderClients();
+                renderFinance();
+                renderSettings();
+                checkReminders();
+            }
+        })();
+    </script>
+</body>
+</html>
