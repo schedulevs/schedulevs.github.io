@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="he" dir="rtl" data-theme="dark">
 <head>
@@ -33,6 +34,12 @@
             --training-bg: rgba(52,195,143,.14);
             --personal: #8890a0;
             --personal-bg: rgba(136,144,160,.14);
+            --holiday-chag: #a78bfa;
+            --holiday-chag-bg: rgba(167,139,250,.16);
+            --holiday-fast: #c2695f;
+            --holiday-fast-bg: rgba(194,105,95,.16);
+            --holiday-memorial: #6b93c9;
+            --holiday-memorial-bg: rgba(107,147,201,.16);
             --danger: #e5484d;
             --ok: #34c38f;
             --radius-lg: 18px;
@@ -61,6 +68,12 @@
             --training-bg: rgba(31,158,115,.09);
             --personal: #6b7080;
             --personal-bg: rgba(107,112,128,.09);
+            --holiday-chag: #7c5cd9;
+            --holiday-chag-bg: rgba(124,92,217,.10);
+            --holiday-fast: #a8453b;
+            --holiday-fast-bg: rgba(168,69,59,.10);
+            --holiday-memorial: #3f6cad;
+            --holiday-memorial-bg: rgba(63,108,173,.10);
             --shadow: 0 8px 24px rgba(20,20,30,.08);
         }
 
@@ -279,6 +292,47 @@
             gap: 6px;
             margin-bottom: 16px;
         }
+
+        .chip-holiday {
+            font-size: 8px;
+            font-weight: 700;
+            line-height: 1.1;
+            max-width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            margin-top: 1px;
+        }
+
+        .mc-holiday {
+            font-size: 6.5px;
+            font-weight: 700;
+            line-height: 1;
+            max-width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .holiday-banner {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--cbg);
+            border: 1px solid var(--c);
+            color: var(--c);
+            border-radius: var(--radius-md);
+            padding: 10px 14px;
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 14px;
+        }
+
+            .holiday-banner svg {
+                width: 16px;
+                height: 16px;
+                flex: none;
+            }
 
         .daychip {
             flex: 1;
@@ -1028,7 +1082,7 @@
                     <div class="label" id="dateLabel">—</div>
                     <button class="today-chip" id="navToday">היום</button>
                 </div>
-
+                <div id="holidayHolder"></div>
                 <div id="weekStripHolder"></div>
                 <div id="monthGridHolder"></div>
                 <div id="agendaHolder"></div>
@@ -1131,6 +1185,7 @@
                 trash: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M9 7V5a1.5 1.5 0 0 1 1.5-1.5h3A1.5 1.5 0 0 1 15 5v2M6 7l1 13a2 2 0 0 0 2 1.8h6a2 2 0 0 0 2-1.8l1-13"/></svg>',
                 check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg>',
                 bell: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>',
+                star: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5l2.9 6.4 6.9.7-5.2 4.7 1.6 6.9L12 17.8 5.8 21.2l1.6-6.9L2.2 9.6l6.9-.7z"/></svg>',
                 download: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0-4.5-4.5M12 15l4.5-4.5"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>'
             };
             const TYPE_META = {
@@ -1139,6 +1194,107 @@
                 training: { label: 'אימון אישי', color: 'var(--training)', bg: 'var(--training-bg)', icon: ICONS.dumb },
                 personal: { label: 'זמן פרטי', color: 'var(--personal)', bg: 'var(--personal-bg)', icon: ICONS.moon }
             };
+            const HOLIDAY_TYPE_META = {
+                chag: { color: 'var(--holiday-chag)', bg: 'var(--holiday-chag-bg)', label: 'חג' },
+                minor: { color: 'var(--holiday-chag)', bg: 'var(--holiday-chag-bg)', label: 'מועד' },
+                cholhamoed: { color: 'var(--holiday-chag)', bg: 'var(--holiday-chag-bg)', label: 'חול המועד' },
+                fast: { color: 'var(--holiday-fast)', bg: 'var(--holiday-fast-bg)', label: 'יום צום' },
+                memorial: { color: 'var(--holiday-memorial)', bg: 'var(--holiday-memorial-bg)', label: 'יום זיכרון' }
+            };
+
+            // טבלת חגים/מועדים/צומות - לוח שנה עברי, לפי המנהג בישראל.
+            // כדי להוסיף שנים נוספות, פשוט תוסיף עוד רשומות באותו פורמט {start,end,name,type}.
+            const HOLIDAY_RANGES = [
+                // תשפ"ו (2025-2026)
+                { start: '2026-02-02', end: '2026-02-02', name: 'ט"ו בשבט', type: 'minor' },
+                { start: '2026-03-02', end: '2026-03-02', name: 'תענית אסתר', type: 'fast' },
+                { start: '2026-03-03', end: '2026-03-03', name: 'פורים', type: 'chag' },
+                { start: '2026-03-04', end: '2026-03-04', name: 'שושן פורים', type: 'minor' },
+                { start: '2026-04-02', end: '2026-04-02', name: 'פסח', type: 'chag' },
+                { start: '2026-04-03', end: '2026-04-07', name: 'חול המועד פסח', type: 'cholhamoed' },
+                { start: '2026-04-08', end: '2026-04-08', name: 'שביעי של פסח', type: 'chag' },
+                { start: '2026-04-14', end: '2026-04-14', name: 'יום השואה', type: 'memorial' },
+                { start: '2026-04-21', end: '2026-04-21', name: 'יום הזיכרון', type: 'memorial' },
+                { start: '2026-04-22', end: '2026-04-22', name: 'יום העצמאות', type: 'chag' },
+                { start: '2026-05-05', end: '2026-05-05', name: 'ל"ג בעומר', type: 'minor' },
+                { start: '2026-05-15', end: '2026-05-15', name: 'יום ירושלים', type: 'minor' },
+                { start: '2026-05-22', end: '2026-05-22', name: 'שבועות', type: 'chag' },
+                { start: '2026-07-02', end: '2026-07-02', name: 'צום י"ז בתמוז', type: 'fast' },
+                { start: '2026-07-23', end: '2026-07-23', name: 'תשעה באב', type: 'fast' },
+                { start: '2026-07-29', end: '2026-07-29', name: 'ט"ו באב', type: 'minor' },
+                { start: '2026-09-12', end: '2026-09-13', name: 'ראש השנה', type: 'chag' },
+                { start: '2026-09-14', end: '2026-09-14', name: 'צום גדליה', type: 'fast' },
+                { start: '2026-09-20', end: '2026-09-20', name: 'ערב יום כיפור', type: 'fast' },
+                { start: '2026-09-21', end: '2026-09-21', name: 'יום כיפור', type: 'fast' },
+                { start: '2026-09-26', end: '2026-09-26', name: 'סוכות', type: 'chag' },
+                { start: '2026-09-27', end: '2026-10-01', name: 'חול המועד סוכות', type: 'cholhamoed' },
+                { start: '2026-10-02', end: '2026-10-02', name: 'הושענא רבה', type: 'cholhamoed' },
+                { start: '2026-10-03', end: '2026-10-03', name: 'שמיני עצרת / שמחת תורה', type: 'chag' },
+                { start: '2026-12-04', end: '2026-12-11', name: 'חנוכה', type: 'minor' },
+                { start: '2026-12-20', end: '2026-12-20', name: 'עשרה בטבת', type: 'fast' },
+                // תשפ"ז (2027)
+                { start: '2027-01-23', end: '2027-01-23', name: 'ט"ו בשבט', type: 'minor' },
+                { start: '2027-03-22', end: '2027-03-22', name: 'תענית אסתר', type: 'fast' },
+                { start: '2027-03-23', end: '2027-03-23', name: 'פורים', type: 'chag' },
+                { start: '2027-03-24', end: '2027-03-24', name: 'שושן פורים', type: 'minor' },
+                { start: '2027-04-22', end: '2027-04-22', name: 'פסח', type: 'chag' },
+                { start: '2027-04-23', end: '2027-04-27', name: 'חול המועד פסח', type: 'cholhamoed' },
+                { start: '2027-04-28', end: '2027-04-28', name: 'שביעי של פסח', type: 'chag' },
+                { start: '2027-05-04', end: '2027-05-04', name: 'יום השואה', type: 'memorial' },
+                { start: '2027-05-11', end: '2027-05-11', name: 'יום הזיכרון', type: 'memorial' },
+                { start: '2027-05-12', end: '2027-05-12', name: 'יום העצמאות', type: 'chag' },
+                { start: '2027-05-25', end: '2027-05-25', name: 'ל"ג בעומר', type: 'minor' },
+                { start: '2027-06-11', end: '2027-06-11', name: 'שבועות', type: 'chag' },
+                { start: '2027-07-22', end: '2027-07-22', name: 'צום י"ז בתמוז', type: 'fast' },
+                { start: '2027-08-12', end: '2027-08-12', name: 'תשעה באב', type: 'fast' },
+                { start: '2027-10-02', end: '2027-10-03', name: 'ראש השנה', type: 'chag' },
+                { start: '2027-10-04', end: '2027-10-04', name: 'צום גדליה', type: 'fast' },
+                { start: '2027-10-11', end: '2027-10-11', name: 'יום כיפור', type: 'fast' },
+                { start: '2027-10-16', end: '2027-10-16', name: 'סוכות', type: 'chag' },
+                { start: '2027-10-17', end: '2027-10-21', name: 'חול המועד סוכות', type: 'cholhamoed' },
+                { start: '2027-10-22', end: '2027-10-22', name: 'הושענא רבה', type: 'cholhamoed' },
+                { start: '2027-10-23', end: '2027-10-23', name: 'שמיני עצרת / שמחת תורה', type: 'chag' },
+                // תשפ"ח (חלקי, 2028)
+                { start: '2028-09-21', end: '2028-09-22', name: 'ראש השנה', type: 'chag' },
+                { start: '2028-09-30', end: '2028-09-30', name: 'יום כיפור', type: 'fast' }
+            ];
+
+            function buildHolidayMap() {
+                const map = {};
+                HOLIDAY_RANGES.forEach(h => {
+                    const end = parseDateStr(h.end);
+                    const totalDays = Math.round((end - parseDateStr(h.start)) / 86400000) + 1;
+                    let d = parseDateStr(h.start), dayIdx = 1;
+                    while (d.getTime() <= end.getTime()) {
+                        const key = toDateStr(d);
+                        (map[key] = map[key] || []).push(Object.assign({}, h, { dayIndex: dayIdx, totalDays: totalDays }));
+                        d = addDays(d, 1); dayIdx++;
+                    }
+                });
+                return map;
+            }
+            const HOLIDAY_MAP = buildHolidayMap();
+            function getHolidays(dateStr) { return HOLIDAY_MAP[dateStr] || []; }
+            function getPrimaryHoliday(dateStr) {
+                const hs = getHolidays(dateStr);
+                if (!hs.length) return null;
+                const order = ['fast', 'chag', 'memorial', 'cholhamoed', 'minor'];
+                hs.sort((a, b) => order.indexOf(a.type) - order.indexOf(b.type));
+                return hs[0];
+            }
+            const HOLIDAY_SHORT = {
+                'ראש השנה': 'ר"ה', 'יום כיפור': 'יוה"כ', 'סוכות': 'סוכות', 'חול המועד סוכות': 'חוה"מ סוכות',
+                'הושענא רבה': 'הושענא רבה', 'שמיני עצרת / שמחת תורה': 'שמח"ת', 'פסח': 'פסח', 'חול המועד פסח': 'חוה"מ פסח',
+                'שביעי של פסח': 'שביעי פסח', 'שבועות': 'שבועות', 'חנוכה': 'חנוכה', 'פורים': 'פורים', 'שושן פורים': 'שושן פורים',
+                'תענית אסתר': 'תענית אסתר', 'צום גדליה': 'צום גדליה', 'עשרה בטבת': 'י\' בטבת', 'צום י"ז בתמוז': 'י"ז בתמוז',
+                'תשעה באב': 'ט\' באב', 'ט"ו בשבט': 'ט"ו בשבט', 'ט"ו באב': 'ט"ו באב', 'ל"ג בעומר': 'ל"ג בעומר',
+                'יום ירושלים': 'יום ירושלים', 'יום השואה': 'יום השואה', 'יום הזיכרון': 'יום הזיכרון', 'יום העצמאות': 'עצמאות'
+            };
+            function holidayLabel(h, short) {
+                let base = short ? (HOLIDAY_SHORT[h.name] || h.name) : h.name;
+                if (h.name === 'חנוכה') base += ' (נר ' + h.dayIndex + ')';
+                return base;
+            }
             /* ---------------- FIREBASE & STORAGE ---------------- */
             const DEFAULT_DATA = {
                 events: [],
@@ -1453,6 +1609,7 @@
 
                 if (mode === 'day') {
                     label.textContent = DOW[state.selectedDate.getDay()] + "' " + state.selectedDate.getDate() + ' ב' + MONTHS[state.selectedDate.getMonth()];
+                    renderHolidayBanner(toDateStr(state.selectedDate));   // ← חדש
                     renderAgenda(state.selectedDate);
                 } else if (mode === 'week') {
                     const wStart = startOfWeek(state.selectedDate);
@@ -1464,12 +1621,22 @@
                         const chip = document.createElement('button');
                         chip.className = 'daychip' + (sameDate(d, state.selectedDate) ? ' selected' : '');
                         const evs = eventsOnDate(d);
+                        const holStr = toDateStr(d);
+                        const holiday = getPrimaryHoliday(holStr);
                         const dotTypes = [...new Set(evs.map(e => e.type))];
-                        chip.innerHTML = '<span class="dow">' + DOW[d.getDay()] + '</span><span class="num">' + d.getDate() + '</span><span class="dots">' + dotTypes.map(t => '<span style="background:' + TYPE_META[t].color + '"></span>').join('') + '</span>';
+                        chip.innerHTML = '<span class="dow">' + DOW[d.getDay()] + '</span><span class="num">' + d.getDate() + '</span>' +
+                            (holiday
+                                ? '<span class="chip-holiday" style="color:' + HOLIDAY_TYPE_META[holiday.type].color + '">' + escapeHtml(holidayLabel(holiday, true)) + '</span>'
+                                : '<span class="dots">' + dotTypes.map(t => '<span style="background:' + TYPE_META[t].color + '"></span>').join('') + '</span>');
+                        if (holiday && !sameDate(d, state.selectedDate)) {
+                            chip.style.background = HOLIDAY_TYPE_META[holiday.type].bg;
+                            chip.style.borderColor = HOLIDAY_TYPE_META[holiday.type].color;
+                        }
                         chip.addEventListener('click', () => { state.selectedDate = d; renderSchedule(); });
                         strip.appendChild(chip);
                     }
                     document.getElementById('weekStripHolder').appendChild(strip);
+                    renderHolidayBanner(toDateStr(state.selectedDate));   // ← חדש, בסוף הענף הזה, לפני renderAgenda
                     renderAgenda(state.selectedDate);
                 } else {
                     const y = state.selectedDate.getFullYear(), m = state.selectedDate.getMonth();
@@ -1489,7 +1656,15 @@
                         cell.className = cls;
                         const evs = eventsOnDate(d);
                         const dotTypes = [...new Set(evs.map(e => e.type))].slice(0, 4);
-                        cell.innerHTML = '<span class="mc-num">' + d.getDate() + '</span><span class="mc-dots">' + dotTypes.map(t => '<span style="background:' + TYPE_META[t].color + '"></span>').join('') + '</span>';
+                        const holiday = getPrimaryHoliday(toDateStr(d));
+                        cell.innerHTML = '<span class="mc-num">' + d.getDate() + '</span>' +
+                            (holiday
+                                ? '<span class="mc-holiday" style="color:' + HOLIDAY_TYPE_META[holiday.type].color + '">' + escapeHtml(holidayLabel(holiday, true)) + '</span>'
+                                : '<span class="mc-dots">' + dotTypes.map(t => '<span style="background:' + TYPE_META[t].color + '"></span>').join('') + '</span>');
+                        if (holiday && !sameDate(d, state.selectedDate)) {
+                            cell.style.background = HOLIDAY_TYPE_META[holiday.type].bg;
+                            cell.style.borderColor = HOLIDAY_TYPE_META[holiday.type].color;
+                        }
                         cell.addEventListener('click', () => {
                             state.selectedDate = d; state.scheduleMode = 'day';
                             document.querySelectorAll('#scheduleSeg button').forEach(x => x.classList.toggle('active', x.dataset.mode === 'day'));
@@ -1498,8 +1673,8 @@
                         grid.appendChild(cell);
                     }
                     document.getElementById('monthGridHolder').appendChild(grid);
-                    document.getElementById('agendaHolder').innerHTML = '';
-                }
+                    document.getElementById('holidayHolder').innerHTML = ''; // ← חדש
+                    document.getElementById('agendaHolder').innerHTML = '';                }
             }
 
             function eventsOnDate(d) {
@@ -1545,7 +1720,14 @@
                     holder.appendChild(card);
                 });
             }
-
+            function renderHolidayBanner(dateStr) {
+                const holder = document.getElementById('holidayHolder');
+                const hol = getPrimaryHoliday(dateStr);
+                if (!hol) { holder.innerHTML = ''; return; }
+                const meta = HOLIDAY_TYPE_META[hol.type];
+                holder.innerHTML = '<div class="holiday-banner" style="--c:' + meta.color + ';--cbg:' + meta.bg + '">' +
+                    ICONS.star + '<span>' + escapeHtml(holidayLabel(hol, false)) + ' &nbsp;•&nbsp; ' + meta.label + '</span></div>';
+            }
             function escapeHtml(s) { return (s || '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
 
             /* ---------------- EVENT MODAL ---------------- */
