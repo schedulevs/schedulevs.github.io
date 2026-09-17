@@ -2000,12 +2000,14 @@
                 document.getElementById('finLabel').textContent = MONTHS[m] + ' ' + y;
                 const inMonth = DATA.events.filter(e => { const d = parseDateStr(e.date); return d.getFullYear() === y && d.getMonth() === m; });
 
+                const now = new Date();
                 let gymHours = 0, gymCommission = 0, mdaHours = 0, trainingCount = 0, trainingIncome = 0, trainingScheduled = 0;
                 inMonth.forEach(ev => {
                     const { start, end } = eventRange(ev);
                     const hrs = (end - start) / 3600000;
-                    if (ev.type === 'gym') { gymHours += hrs; gymCommission += (ev.commission || 0); }
-                    if (ev.type === 'mda') { mdaHours += hrs; }
+                    const isDone = end.getTime() <= now.getTime(); // הפעילות כבר הסתיימה בפועל
+                    if (ev.type === 'gym' && isDone) { gymHours += hrs; gymCommission += (ev.commission || 0); }
+                    if (ev.type === 'mda' && isDone) { mdaHours += hrs; }
                     if (ev.type === 'training') {
                         trainingScheduled++;
                         if (ev.status === 'attended' || ev.status === 'late-cancel') { trainingCount++; trainingIncome += (ev.price != null ? ev.price : DATA.settings.trainingPrice); }
@@ -2130,6 +2132,7 @@
                 }
             }
             setInterval(checkReminders, 30000);
+            setInterval(function () { if (state.view === 'finance') renderFinance(); }, 60000);
 
             /* ---------------- SETTINGS ---------------- */
             function renderSettings() {
