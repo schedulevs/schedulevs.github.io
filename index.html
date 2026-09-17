@@ -1943,7 +1943,7 @@
                 state.detailClientId = id;
                 const c = DATA.clients.find(x => x.id === id);
                 const remaining = (c.packageTotal || 0) - (c.packageUsed || 0);
-                const upcoming = DATA.events.filter(e => e.type === 'training' && e.clientId === id && parseDateStr(e.date) >= new Date(new Date().setHours(0, 0, 0, 0))).sort((a, b) => a.date.localeCompare(b.date));
+                const upcoming = DATA.events.filter(e => e.type === 'training' && e.clientId === id && e.status === 'scheduled' && parseDateStr(e.date) >= new Date(new Date().setHours(0, 0, 0, 0))).sort((a, b) => a.date.localeCompare(b.date));
                 const history = (c.history || []).slice().reverse();
                 document.getElementById('clDetailBody').innerHTML = `
                     <div class="modal-title">${escapeHtml(c.name)}</div>
@@ -1989,6 +1989,32 @@
                 saveData();
                 openClientDetail(ev.clientId);
                 renderClients();
+            }
+            function autoFinalizeTrainings() {
+                if (!storageReady) return;
+                const now = new Date();
+                let changed = false;
+                DATA.events.forEach(ev => {
+                    if (ev.type === 'training' && ev.status === 'scheduled') {
+                        const { end } = eventRange(ev);
+                        if (end.getTime() <= now.getTime()) {
+                            ev.status = 'attended';
+                            const c = DATA.clients.find(x => x.id === ev.clientId);
+                            if (c) {
+                                c.history = c.history || [];
+                                c.history.push({ id: uid(), date: ev.date, status: 'attended', eventId: ev.id });
+                                c.packageUsed = (c.packageUsed || 0) + 1;
+                            }
+                            changed = true;
+                        }
+                    }
+                });
+                if (changed) {
+                    saveData();
+                    renderSchedule();
+                    renderClients();
+                    if (state.view === 'finance') renderFinance();
+                }
             }
 
             /* ---------------- FINANCE ---------------- */
@@ -2132,8 +2158,10 @@
                 }
             }
             setInterval(checkReminders, 30000);
-            setInterval(function () { if (state.view === 'finance') renderFinance(); }, 60000);
-
+            setInterval(function () {
+                autoFinalizeTrainings(); // ← חדש
+                if (state.view === 'finance') renderFinance();
+            }, 60000);
             /* ---------------- SETTINGS ---------------- */
             function renderSettings() {
                 const s = DATA.settings;
@@ -2293,8 +2321,9 @@
 
             /* ---------------- INIT ---------------- */
             function renderAll() {
+                autoFinalizeTrainings(); // ← חדש
                 updateGreeting();
-                setActiveView(state.view); // מציג מיד את התצוגה הנוכחית (בד"כ לו"ז) בלי לחכות למעבר ידני בין טאבים
+                setActiveView(state.view);
                 renderSchedule();
                 renderClients();
                 renderFinance();
