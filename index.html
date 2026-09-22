@@ -1055,10 +1055,9 @@
 </head>
 <body>
     <!-- מסך התחברות -->
-    <div id="loginOverlay" style="position: fixed; inset: 0; background: var(--bg); z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px;">
-        <img src="./icon-512.png" alt="" style="width:72px;height:72px;border-radius:18px;margin-bottom:18px;">
-        <div id="loginSpinner" style="width:28px;height:28px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;"></div>
-        <div id="loginContent" style="display:none;">
+    <div id="loginOverlay" style="position: fixed; inset: 0; background: var(--bg); z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px; transition: opacity .35s ease;">
+        <img src="./icon-512.png" alt="" style="width:96px;height:96px;border-radius:22px;">
+        <div id="loginContent" style="display:none;margin-top:22px;">
             <h1 style="margin-bottom: 10px;">לו"ז אישי</h1>
             <p style="color: var(--text-muted); margin-bottom: 20px;">נדרשת התחברות מאובטחת כדי לצפות בנתונים ולסנכרן אותם.</p>
             <button class="btn btn-primary" id="loginBtn" style="width: auto; padding: 12px 24px; font-size: 16px;">התחברות עם Google</button>
@@ -1376,25 +1375,24 @@
             }
 
             // האזנה למצב ההתחברות של המשתמש
+            function hideSplash() {
+                const el = document.getElementById('loginOverlay');
+                el.style.opacity = '0';
+                setTimeout(() => { el.style.display = 'none'; }, 350);
+            }
+
             auth.onAuthStateChanged(user => {
                 if (user) {
                     isGuest = (user.email !== 'levloovmordehai@gmail.com');
-                    if (isGuest) {
-                        document.body.classList.add('guest-mode');
-                    } else {
-                        document.body.classList.remove('guest-mode');
-                    }
-                    document.getElementById('loginOverlay').style.display = 'none';
+                    document.body.classList.toggle('guest-mode', isGuest);
                     document.getElementById('app').style.display = 'flex';
+                    hideSplash();
                     startRealtimeSync(user.uid);
                 } else {
-                    document.getElementById('loginOverlay').style.display = 'flex';
-                    document.getElementById('loginSpinner').style.display = 'none';
                     document.getElementById('loginContent').style.display = 'block';
                     document.getElementById('app').style.display = 'none';
-                    if (dbUnsubscribe) {
-                        dbUnsubscribe();
-                    }
+                    // ה-splash לא נסגר כאן - הוא "נפתח" לתוך מסך ההתחברות
+                    if (dbUnsubscribe) dbUnsubscribe();
                 }
             });
 
