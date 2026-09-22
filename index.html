@@ -1042,6 +1042,11 @@
         .guest-mode .type-opt {
             pointer-events: none;
         }
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
     </style>
     <!-- Firebase SDKs -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
@@ -1051,9 +1056,13 @@
 <body>
     <!-- מסך התחברות -->
     <div id="loginOverlay" style="position: fixed; inset: 0; background: var(--bg); z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px;">
-        <h1 style="margin-bottom: 10px;">לו"ז אישי</h1>
-        <p style="color: var(--text-muted); margin-bottom: 20px;">נדרשת התחברות מאובטחת כדי לצפות בנתונים ולסנכרן אותם.</p>
-        <button class="btn btn-primary" id="loginBtn" style="width: auto; padding: 12px 24px; font-size: 16px;">התחברות עם Google</button>
+        <img src="./icon-512.png" alt="" style="width:72px;height:72px;border-radius:18px;margin-bottom:18px;">
+        <div id="loginSpinner" style="width:28px;height:28px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;"></div>
+        <div id="loginContent" style="display:none;">
+            <h1 style="margin-bottom: 10px;">לו"ז אישי</h1>
+            <p style="color: var(--text-muted); margin-bottom: 20px;">נדרשת התחברות מאובטחת כדי לצפות בנתונים ולסנכרן אותם.</p>
+            <button class="btn btn-primary" id="loginBtn" style="width: auto; padding: 12px 24px; font-size: 16px;">התחברות עם Google</button>
+        </div>
         <div id="loginError" style="color: var(--mda); margin-top: 15px; font-weight: bold;"></div>
     </div>
     <div class="app" id="app">
@@ -1369,25 +1378,22 @@
             // האזנה למצב ההתחברות של המשתמש
             auth.onAuthStateChanged(user => {
                 if (user) {
-                    // בדיקה האם המשתמש המחובר הוא אתה או אורח
                     isGuest = (user.email !== 'levloovmordehai@gmail.com');
-
-                    // אם זה אורח, נוסיף מחלקה שתחסום את אפשרויות העריכה
                     if (isGuest) {
                         document.body.classList.add('guest-mode');
                     } else {
                         document.body.classList.remove('guest-mode');
                     }
-
                     document.getElementById('loginOverlay').style.display = 'none';
                     document.getElementById('app').style.display = 'flex';
                     startRealtimeSync(user.uid);
                 } else {
-                    // המשתמש מנותק
                     document.getElementById('loginOverlay').style.display = 'flex';
+                    document.getElementById('loginSpinner').style.display = 'none';
+                    document.getElementById('loginContent').style.display = 'block';
                     document.getElementById('app').style.display = 'none';
                     if (dbUnsubscribe) {
-                        dbUnsubscribe(); // עצירת סנכרון
+                        dbUnsubscribe();
                     }
                 }
             });
