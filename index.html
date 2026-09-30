@@ -1067,6 +1067,9 @@
                 border-color: var(--gym);
                 background: var(--gym-bg)
             }
+        #greetText {
+            cursor: pointer;
+        }
     </style>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
@@ -1389,6 +1392,7 @@
                 var h = new Date().getHours(), g = 'ערב טוב';
                 if (h < 5) g = 'לילה טוב'; else if (h < 12) g = 'בוקר טוב'; else if (h < 17) g = 'צהריים טובים'; else if (h < 20) g = 'אחר הצהריים טובים';
                 var el = document.getElementById('greetText');
+
                 if (el) el.textContent = g + ', ' + (isGuest ? 'אורח' : 'לב');
             }
 
@@ -2011,7 +2015,9 @@
                 document.body.appendChild(a); a.click(); document.body.removeChild(a);
                 URL.revokeObjectURL(url);
             }
-
+            document.getElementById('greetText').addEventListener('click', function () {
+                window.location.href = 'https://scheduliti.github.io';
+            });
             /* ---------- init ---------- */
             function renderAll() {
                 autoFinalizeTrainings();
