@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 <html lang="he" dir="rtl" data-theme="dark">
 <head>
@@ -7,103 +6,105 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>לו"ז אישי של לב</title>
     <link rel="icon" type="image/x-icon" href="./lev.ico">
-    <!-- PWA: מניפסט, צבע נושא ותמיכה במסך בית ב-iOS/Android -->
     <link rel="manifest" href="./manifest.json">
-    <meta name="theme-color" content="#12141a">
+    <meta name="theme-color" content="#172120">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="לו״ז לב">
     <link rel="apple-touch-icon" href="./icon-192.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #12141a;
-            --surface: #1b1e26;
-            --surface-2: #232733;
-            --surface-3: #2a2f3c;
-            --border: #2c303c;
-            --text: #edeff3;
-            --text-muted: #9096a5;
-            --text-dim: #5b6072;
-            --accent: #f2a93b;
-            --accent-ink: #1a1206;
-            --mda: #e5484d;
-            --mda-bg: rgba(229,72,77,.14);
-            --gym: #4c8dff;
-            --gym-bg: rgba(76,141,255,.14);
-            --training: #34c38f;
-            --training-bg: rgba(52,195,143,.14);
-            --personal: #8890a0;
-            --personal-bg: rgba(136,144,160,.14);
-            --holiday-chag: #a78bfa;
-            --holiday-chag-bg: rgba(167,139,250,.16);
-            --holiday-fast: #c2695f;
-            --holiday-fast-bg: rgba(194,105,95,.16);
-            --holiday-memorial: #6b93c9;
-            --holiday-memorial-bg: rgba(107,147,201,.16);
-            --danger: #e5484d;
-            --ok: #34c38f;
-            --radius-lg: 18px;
-            --radius-md: 12px;
-            --radius-sm: 8px;
-            --shadow: 0 8px 24px rgba(0,0,0,.35);
-            --safe-b: env(safe-area-inset-bottom, 0px);
+            --bg: #172120;
+            --surface: #1f2b29;
+            --surface-2: #283735;
+            --surface-3: #334442;
+            --border: #31433f;
+            --text: #e5eeec;
+            --text-muted: #9bb0ab;
+            --text-dim: #667f7a;
+            --accent: #86c2b8;
+            --accent-2: #a9d6cd;
+            --accent-ink: #102120;
+            --mda: #eb9aa8;
+            --mda-bg: rgba(235,154,168,.15);
+            --gym: #e6c078;
+            --gym-bg: rgba(230,192,120,.15);
+            --training: #82cdb3;
+            --training-bg: rgba(130,205,179,.15);
+            --personal: #a9b6c2;
+            --personal-bg: rgba(169,182,194,.15);
+            --holiday-chag: #b9a8e2;
+            --holiday-chag-bg: rgba(185,168,226,.16);
+            --holiday-fast: #e2a898;
+            --holiday-fast-bg: rgba(226,168,152,.16);
+            --holiday-memorial: #8fb1dd;
+            --holiday-memorial-bg: rgba(143,177,221,.16);
+            --radius-lg: 20px;
+            --radius-md: 14px;
+            --radius-sm: 10px;
+            --shadow: 0 10px 28px rgba(0,0,0,.35);
+            --safe-b: env(safe-area-inset-bottom,0px)
         }
 
         html[data-theme="light"] {
-            --bg: #f4f5f7;
-            --surface: #ffffff;
-            --surface-2: #f0f1f4;
-            --surface-3: #e7e9ee;
-            --border: #e1e3e9;
-            --text: #1a1c22;
-            --text-muted: #63687a;
-            --text-dim: #a2a6b3;
-            --accent: #c9791f;
-            --accent-ink: #fff7ec;
-            --mda: #d33338;
-            --mda-bg: rgba(211,51,56,.09);
-            --gym: #2f6fe0;
-            --gym-bg: rgba(47,111,224,.09);
-            --training: #1f9e73;
-            --training-bg: rgba(31,158,115,.09);
-            --personal: #6b7080;
-            --personal-bg: rgba(107,112,128,.09);
-            --holiday-chag: #7c5cd9;
-            --holiday-chag-bg: rgba(124,92,217,.10);
-            --holiday-fast: #a8453b;
-            --holiday-fast-bg: rgba(168,69,59,.10);
-            --holiday-memorial: #3f6cad;
-            --holiday-memorial-bg: rgba(63,108,173,.10);
-            --shadow: 0 8px 24px rgba(20,20,30,.08);
+            --bg: #f3f6f4;
+            --surface: #fcfdfc;
+            --surface-2: #eaf0ed;
+            --surface-3: #dbe5e1;
+            --border: #d8e3de;
+            --text: #263635;
+            --text-muted: #647b78;
+            --text-dim: #9fb2ae;
+            --accent: #4f9088;
+            --accent-2: #7fb8ae;
+            --accent-ink: #fff;
+            --mda: #d4677f;
+            --mda-bg: rgba(212,103,127,.11);
+            --gym: #b98a2e;
+            --gym-bg: rgba(185,138,46,.12);
+            --training: #3f9d80;
+            --training-bg: rgba(63,157,128,.11);
+            --personal: #7b8a99;
+            --personal-bg: rgba(123,138,153,.12);
+            --holiday-chag: #7b62c2;
+            --holiday-chag-bg: rgba(123,98,194,.1);
+            --holiday-fast: #bd6a58;
+            --holiday-fast-bg: rgba(189,106,88,.1);
+            --holiday-memorial: #4f7bb5;
+            --holiday-memorial-bg: rgba(79,123,181,.1);
+            --shadow: 0 10px 28px rgba(50,80,75,.1)
         }
 
         * {
             box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
+            -webkit-tap-highlight-color: transparent
         }
 
         html, body {
-            height: 100%;
+            height: 100%
         }
 
         body {
             margin: 0;
             background: var(--bg);
             color: var(--text);
-            font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,Helvetica,sans-serif;
+            font-family: "Heebo",-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
             font-size: 14px;
             line-height: 1.45;
-            overscroll-behavior-y: none;
+            overscroll-behavior-y: none
         }
 
         button, input, select, textarea {
             font-family: inherit;
-            color: inherit;
+            color: inherit
         }
 
         button {
-            cursor: pointer;
+            cursor: pointer
         }
 
         input, select, textarea {
@@ -113,28 +114,28 @@
             border-radius: var(--radius-sm);
             padding: 10px 12px;
             font-size: 14px;
-            width: 100%;
+            width: 100%
         }
 
             input:focus, select:focus, textarea:focus {
                 outline: 2px solid var(--accent);
-                outline-offset: 1px;
+                outline-offset: 1px
             }
 
         label {
             display: block;
             font-size: 12.5px;
             color: var(--text-muted);
-            margin: 14px 0 6px;
+            margin: 14px 0 6px
         }
 
             label:first-child {
-                margin-top: 0;
+                margin-top: 0
             }
 
         h1, h2, h3 {
             margin: 0;
-            font-weight: 700;
+            font-weight: 700
         }
 
         .app {
@@ -143,66 +144,58 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            position: relative;
+            position: relative
         }
 
-        /* header */
         .topbar {
             position: sticky;
             top: 0;
             z-index: 20;
             background: var(--bg);
-            padding: 16px 16px 10px;
+            padding: 16px 16px 10px
         }
 
         .topbar-row {
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: space-between
         }
 
         .greet {
-            font-size: 20px;
-            font-weight: 700;
-            letter-spacing: -.2px;
+            font-size: 21px;
+            font-weight: 800;
+            letter-spacing: -.2px
         }
-
-            .greet .sub {
-                display: block;
-                font-size: 12.5px;
-                font-weight: 400;
-                color: var(--text-muted);
-                margin-top: 2px;
-            }
 
         .icon-btn {
             background: var(--surface);
             border: 1px solid var(--border);
             width: 38px;
             height: 38px;
-            border-radius: 11px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
+            color: var(--accent)
         }
 
             .icon-btn svg {
                 width: 18px;
-                height: 18px;
+                height: 18px
             }
 
         main {
             flex: 1;
-            padding: 0 16px 100px;
+            padding: 0 16px 100px
         }
 
         .view {
             display: none;
-            animation: fade .18s ease;
+            animation: fade .18s ease
         }
 
             .view.active {
-                display: block;
+                display: block
             }
 
         @keyframes fade {
@@ -213,18 +206,17 @@
 
             to {
                 opacity: 1;
-                transform: translateY(0)
+                transform: none
             }
         }
 
-        /* segmented control */
         .segmented {
             display: flex;
             background: var(--surface);
             border: 1px solid var(--border);
             border-radius: var(--radius-md);
             padding: 3px;
-            margin-bottom: 14px;
+            margin-bottom: 14px
         }
 
             .segmented button {
@@ -232,33 +224,32 @@
                 background: transparent;
                 border: 0;
                 padding: 8px 4px;
-                border-radius: 9px;
+                border-radius: 11px;
                 font-size: 13px;
                 color: var(--text-muted);
-                font-weight: 600;
+                font-weight: 600
             }
 
                 .segmented button.active {
-                    background: var(--surface-3);
-                    color: var(--text);
+                    background: var(--accent);
+                    color: var(--accent-ink)
                 }
 
-        /* date nav */
         .datenav {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 14px;
+            margin-bottom: 14px
         }
 
             .datenav .label {
                 font-size: 15px;
-                font-weight: 700;
+                font-weight: 700
             }
 
             .datenav .arrows {
                 display: flex;
-                gap: 6px;
+                gap: 6px
             }
 
             .datenav button {
@@ -266,16 +257,30 @@
                 border: 1px solid var(--border);
                 width: 32px;
                 height: 32px;
-                border-radius: 9px;
+                border-radius: 10px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
+                color: var(--accent)
             }
 
                 .datenav button svg {
                     width: 15px;
-                    height: 15px;
+                    height: 15px
                 }
+
+                .datenav button.btn {
+                    width: auto;
+                    height: auto;
+                    background: var(--accent);
+                    color: var(--accent-ink);
+                    border: 0
+                }
+
+            .datenav .today-chip {
+                width: auto;
+                height: auto
+            }
 
         .today-chip {
             background: var(--surface);
@@ -284,14 +289,13 @@
             font-size: 12px;
             padding: 6px 10px;
             border-radius: 20px;
-            font-weight: 600;
+            font-weight: 600
         }
 
-        /* week strip */
         .weekstrip {
             display: flex;
             gap: 6px;
-            margin-bottom: 16px;
+            margin-bottom: 16px
         }
 
         .chip-holiday {
@@ -302,7 +306,7 @@
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
-            margin-top: 1px;
+            margin-top: 1px
         }
 
         .mc-holiday {
@@ -312,7 +316,7 @@
             max-width: 100%;
             overflow: hidden;
             text-overflow: ellipsis;
-            white-space: nowrap;
+            white-space: nowrap
         }
 
         .holiday-banner {
@@ -326,76 +330,75 @@
             padding: 10px 14px;
             font-size: 13px;
             font-weight: 700;
-            margin-bottom: 14px;
+            margin-bottom: 14px
         }
 
             .holiday-banner svg {
                 width: 16px;
                 height: 16px;
-                flex: none;
+                flex: none
             }
 
         .daychip {
             flex: 1;
             background: var(--surface);
             border: 1px solid var(--border);
-            border-radius: 12px;
+            border-radius: 14px;
             padding: 8px 2px;
             text-align: center;
             display: flex;
             flex-direction: column;
             gap: 2px;
-            align-items: center;
+            align-items: center
         }
 
             .daychip .dow {
                 font-size: 10.5px;
-                color: var(--text-muted);
+                color: var(--text-muted)
             }
 
             .daychip .num {
                 font-size: 15px;
-                font-weight: 700;
+                font-weight: 700
             }
 
             .daychip.selected {
                 background: var(--accent);
                 border-color: var(--accent);
-                color: var(--accent-ink);
+                color: var(--accent-ink)
             }
 
                 .daychip.selected .dow {
                     color: var(--accent-ink);
-                    opacity: .75;
+                    opacity: .75
                 }
 
             .daychip .dots {
                 display: flex;
                 gap: 2px;
-                height: 5px;
+                height: 5px
             }
 
                 .daychip .dots span {
                     width: 4px;
                     height: 4px;
-                    border-radius: 50%;
+                    border-radius: 50%
                 }
 
-        /* agenda list */
         .agenda-empty {
             text-align: center;
             padding: 56px 20px;
-            color: var(--text-muted);
+            color: var(--text-muted)
         }
 
             .agenda-empty .big {
                 font-size: 34px;
-                margin-bottom: 10px;
+                margin-bottom: 10px
             }
 
             .agenda-empty .cta {
                 display: inline-block;
-                margin-top: 14px;
+                margin-top: 14px
             }
 
         .ev-card {
@@ -407,7 +410,7 @@
             padding: 12px 14px;
             margin-bottom: 10px;
             position: relative;
-            overflow: hidden;
+            overflow: hidden
         }
 
             .ev-card::before {
@@ -417,40 +420,40 @@
                 top: 0;
                 bottom: 0;
                 width: 4px;
-                background: var(--c);
+                background: var(--c)
             }
 
         .ev-time {
             min-width: 52px;
-            text-align: center;
+            text-align: center
         }
 
             .ev-time .t1 {
                 font-weight: 700;
-                font-size: 14px;
+                font-size: 14px
             }
 
             .ev-time .t2 {
                 font-size: 11.5px;
-                color: var(--text-muted);
+                color: var(--text-muted)
             }
 
         .ev-body {
             flex: 1;
-            min-width: 0;
+            min-width: 0
         }
 
         .ev-title-row {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 6px
         }
 
         .ev-icon {
             width: 16px;
             height: 16px;
             color: var(--c);
-            flex: none;
+            flex: none
         }
 
         .ev-title {
@@ -458,13 +461,13 @@
             font-size: 14px;
             overflow: hidden;
             text-overflow: ellipsis;
-            white-space: nowrap;
+            white-space: nowrap
         }
 
         .ev-meta {
             font-size: 12px;
             color: var(--text-muted);
-            margin-top: 2px;
+            margin-top: 2px
         }
 
         .ev-tag {
@@ -475,8 +478,13 @@
             border-radius: 20px;
             margin-top: 6px;
             background: var(--cbg);
-            color: var(--c);
+            color: var(--c)
         }
+
+            .ev-tag.muted {
+                background: var(--surface-2);
+                color: var(--text-muted)
+            }
 
         .ev-warn {
             margin-top: 6px;
@@ -484,14 +492,18 @@
             color: var(--mda);
             display: flex;
             align-items: center;
-            gap: 4px;
+            gap: 4px
         }
 
-        /* month grid */
+            .ev-warn svg {
+                width: 13px;
+                height: 13px
+            }
+
         .month-grid {
             display: grid;
             grid-template-columns: repeat(7,1fr);
-            gap: 5px;
+            gap: 5px
         }
 
         .month-dow {
@@ -499,111 +511,127 @@
             font-size: 11px;
             color: var(--text-dim);
             padding-bottom: 6px;
-            font-weight: 600;
+            font-weight: 600
         }
 
         .month-cell {
             aspect-ratio: 1;
             background: var(--surface);
             border: 1px solid var(--border);
-            border-radius: 10px;
+            border-radius: 11px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             gap: 3px;
-            position: relative;
+            position: relative
         }
 
             .month-cell.out {
-                opacity: .32;
+                opacity: .32
             }
 
             .month-cell.today {
-                border-color: var(--accent);
+                border-color: var(--accent)
             }
 
             .month-cell.selected {
-                background: var(--accent);
+                background: var(--accent)
             }
 
                 .month-cell.selected .mc-num {
-                    color: var(--accent-ink);
+                    color: var(--accent-ink)
                 }
 
         .mc-num {
             font-size: 13px;
-            font-weight: 700;
+            font-weight: 700
         }
 
         .mc-dots {
             display: flex;
-            gap: 2px;
+            gap: 2px
         }
 
             .mc-dots span {
                 width: 4px;
                 height: 4px;
-                border-radius: 50%;
+                border-radius: 50%
             }
 
-        /* cards / sections */
         .card {
             background: var(--surface);
             border: 1px solid var(--border);
             border-radius: var(--radius-lg);
             padding: 16px;
-            margin-bottom: 14px;
+            margin-bottom: 14px
         }
+
+            .card.hero {
+                background: linear-gradient(135deg,var(--accent),var(--accent-2));
+                border: 0;
+                color: var(--accent-ink);
+                box-shadow: var(--shadow)
+            }
+
+                .card.hero .section-title {
+                    color: var(--accent-ink);
+                    opacity: .8
+                }
 
         .section-title {
             font-size: 13px;
             font-weight: 700;
             color: var(--text-muted);
-            margin: 20px 0 10px;
+            margin: 20px 0 10px
         }
 
             .section-title:first-child {
-                margin-top: 0;
+                margin-top: 0
             }
 
         .stat-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 10px;
+            gap: 10px
         }
 
         .stat {
             background: var(--surface);
             border: 1px solid var(--border);
             border-radius: var(--radius-md);
-            padding: 14px;
+            padding: 14px
         }
+
+            .stat.tap {
+                cursor: pointer;
+                border-color: var(--surface-3)
+            }
 
             .stat .num {
                 font-size: 22px;
                 font-weight: 800;
-                font-variant-numeric: tabular-nums;
+                font-variant-numeric: tabular-nums
             }
 
             .stat .lbl {
                 font-size: 11.5px;
                 color: var(--text-muted);
-                margin-top: 2px;
+                margin-top: 2px
             }
 
         .bar-row {
             display: flex;
             align-items: center;
             gap: 10px;
-            margin-bottom: 10px;
+            margin-bottom: 10px
         }
 
             .bar-row .lbl {
                 width: 78px;
                 font-size: 12px;
                 color: var(--text-muted);
-                flex: none;
+                flex: none
             }
 
         .bar-track {
@@ -611,12 +639,12 @@
             height: 10px;
             background: var(--surface-2);
             border-radius: 6px;
-            overflow: hidden;
+            overflow: hidden
         }
 
         .bar-fill {
             height: 100%;
-            border-radius: 6px;
+            border-radius: 6px
         }
 
         .bar-row .val {
@@ -625,34 +653,33 @@
             font-size: 12.5px;
             font-weight: 700;
             font-variant-numeric: tabular-nums;
-            flex: none;
+            flex: none
         }
 
-        /* client card */
         .client-card {
             background: var(--surface);
             border: 1px solid var(--border);
             border-radius: var(--radius-lg);
             padding: 14px 16px;
-            margin-bottom: 10px;
+            margin-bottom: 10px
         }
 
         .client-top {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            gap: 8px;
+            gap: 8px
         }
 
         .client-name {
             font-weight: 700;
-            font-size: 15px;
+            font-size: 15px
         }
 
         .client-phone {
             font-size: 12px;
             color: var(--text-muted);
-            margin-top: 1px;
+            margin-top: 1px
         }
 
         .pkg-pill {
@@ -662,21 +689,20 @@
             border-radius: 20px;
             background: var(--training-bg);
             color: var(--training);
-            white-space: nowrap;
+            white-space: nowrap
         }
 
             .pkg-pill.low {
                 background: var(--mda-bg);
-                color: var(--mda);
+                color: var(--mda)
             }
 
         .client-goals {
             font-size: 12.5px;
             color: var(--text-muted);
-            margin-top: 8px;
+            margin-top: 8px
         }
 
-        /* buttons */
         .btn {
             display: inline-flex;
             align-items: center;
@@ -687,105 +713,110 @@
             padding: 11px 16px;
             font-weight: 700;
             font-size: 13.5px;
-            width: 100%;
+            width: 100%
         }
+
+            .btn svg {
+                width: 16px;
+                height: 16px
+            }
 
         .btn-primary {
             background: var(--accent);
-            color: var(--accent-ink);
+            color: var(--accent-ink)
         }
 
         .btn-ghost {
             background: var(--surface-2);
             color: var(--text);
-            border: 1px solid var(--border);
+            border: 1px solid var(--border)
         }
 
         .btn-danger {
             background: var(--mda-bg);
-            color: var(--mda);
+            color: var(--mda)
         }
 
         .btn-sm {
             width: auto;
             padding: 8px 12px;
-            font-size: 12.5px;
+            font-size: 12.5px
         }
 
         .row-btns {
             display: flex;
             gap: 8px;
-            margin-top: 10px;
+            margin-top: 10px
         }
 
             .row-btns .btn {
-                flex: 1;
+                flex: 1
             }
 
-        /* type picker */
         .type-picker {
             display: grid;
             grid-template-columns: repeat(4,1fr);
-            gap: 8px;
+            gap: 8px
         }
 
         .type-opt {
             background: var(--surface-2);
             border: 1.5px solid var(--border);
-            border-radius: 12px;
+            border-radius: 14px;
             padding: 10px 4px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 5px;
+            gap: 5px
         }
 
             .type-opt svg {
                 width: 18px;
                 height: 18px;
-                color: var(--c);
+                color: var(--c)
             }
 
             .type-opt span {
                 font-size: 11px;
-                font-weight: 700;
+                font-weight: 700
             }
 
             .type-opt.selected {
                 border-color: var(--c);
-                background: var(--cbg);
+                background: var(--cbg)
             }
 
         .field-row {
             display: flex;
-            gap: 10px;
+            gap: 10px
         }
 
             .field-row > div {
-                flex: 1;
+                flex: 1
             }
 
         .toggle-row {
             display: flex;
             align-items: center;
             justify-content: space-between;
+            gap: 12px;
             padding: 12px 2px;
-            border-bottom: 1px solid var(--border);
+            border-bottom: 1px solid var(--border)
         }
 
             .toggle-row:last-child {
-                border-bottom: 0;
+                border-bottom: 0
             }
 
             .toggle-row .t-main {
                 font-size: 13.5px;
-                font-weight: 600;
+                font-weight: 600
             }
 
             .toggle-row .t-sub {
                 font-size: 11.5px;
                 color: var(--text-muted);
-                margin-top: 1px;
+                margin-top: 1px
             }
 
         .switch {
@@ -795,12 +826,12 @@
             background: var(--surface-3);
             border-radius: 20px;
             flex: none;
-            border: 1px solid var(--border);
+            border: 1px solid var(--border)
         }
 
             .switch.on {
                 background: var(--accent);
-                border-color: var(--accent);
+                border-color: var(--accent)
             }
 
             .switch::after {
@@ -812,59 +843,50 @@
                 height: 18px;
                 background: #fff;
                 border-radius: 50%;
-                transition: transform .15s;
+                transition: transform .15s
             }
 
-            .switch.on::after {
-                transform: translateX(-18px);
-            }
-
-        html[data-theme="light"] .switch.on::after {
-            transform: translateX(18px);
-        }
-
-        html[data-theme="dark"] .switch.on::after {
-            transform: translateX(-18px);
+        html[dir="rtl"] .switch.on::after {
+            transform: translateX(-18px)
         }
 
         .alert {
             display: flex;
             gap: 10px;
             background: var(--mda-bg);
-            border: 1px solid rgba(229,72,77,.3);
+            border: 1px solid rgba(212,103,127,.3);
             color: var(--mda);
             border-radius: var(--radius-md);
             padding: 12px 14px;
             font-size: 12.5px;
-            margin-top: 12px;
+            margin-top: 12px
         }
 
             .alert svg {
                 width: 16px;
                 height: 16px;
                 flex: none;
-                margin-top: 1px;
+                margin-top: 1px
             }
 
             .alert b {
                 display: block;
                 margin-bottom: 2px;
-                font-size: 13px;
+                font-size: 13px
             }
 
             .alert.soft {
                 background: var(--surface-2);
                 border-color: var(--border);
-                color: var(--text-muted);
+                color: var(--text-muted)
             }
 
-        /* nav */
         .bottomnav {
             position: fixed;
             bottom: 0;
             left: 0;
             right: 0;
-            z-index: 30;
+            z-index: 30
         }
 
         .bottomnav-inner {
@@ -873,8 +895,7 @@
             background: var(--surface);
             border-top: 1px solid var(--border);
             display: flex;
-            padding: 6px 6px calc(6px + var(--safe-b));
-            backdrop-filter: blur(10px);
+            padding: 6px 6px calc(6px + var(--safe-b))
         }
 
         .nav-btn {
@@ -887,21 +908,21 @@
             gap: 3px;
             padding: 7px 2px;
             color: var(--text-dim);
-            border-radius: 10px;
+            border-radius: 12px
         }
 
             .nav-btn svg {
                 width: 20px;
-                height: 20px;
+                height: 20px
             }
 
             .nav-btn span {
                 font-size: 10.5px;
-                font-weight: 600;
+                font-weight: 600
             }
 
             .nav-btn.active {
-                color: var(--accent);
+                color: var(--accent)
             }
 
         .fab {
@@ -919,30 +940,29 @@
             box-shadow: var(--shadow);
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: center
         }
 
             .fab svg {
                 width: 24px;
-                height: 24px;
+                height: 24px
             }
 
-        /* modal */
         .modal-wrap {
             position: fixed;
             inset: 0;
             z-index: 50;
-            display: none;
+            display: none
         }
 
             .modal-wrap.open {
-                display: block;
+                display: block
             }
 
         .modal-backdrop {
             position: absolute;
             inset: 0;
-            background: rgba(0,0,0,.55);
+            background: rgba(3,6,16,.6)
         }
 
         .modal {
@@ -953,12 +973,12 @@
             max-width: 520px;
             margin: 0 auto;
             background: var(--bg);
-            border-radius: 20px 20px 0 0;
+            border-radius: 22px 22px 0 0;
             max-height: 90vh;
             overflow-y: auto;
             padding: 14px 18px calc(24px + var(--safe-b));
             border: 1px solid var(--border);
-            border-bottom: 0;
+            border-bottom: 0
         }
 
         .modal-handle {
@@ -966,13 +986,13 @@
             height: 4px;
             background: var(--border);
             border-radius: 3px;
-            margin: 0 auto 12px;
+            margin: 0 auto 12px
         }
 
         .modal-title {
             font-size: 17px;
             font-weight: 800;
-            margin-bottom: 4px;
+            margin-bottom: 4px
         }
 
         .modal-close {
@@ -983,151 +1003,104 @@
             border: 1px solid var(--border);
             width: 30px;
             height: 30px;
-            border-radius: 9px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
+            color: var(--text-muted)
         }
 
             .modal-close svg {
                 width: 14px;
-                height: 14px;
+                height: 14px
             }
 
         .empty-note {
             text-align: center;
             color: var(--text-muted);
             font-size: 12.5px;
-            padding: 30px 10px;
-        }
-
-        .divider {
-            height: 1px;
-            background: var(--border);
-            margin: 16px 0;
-        }
-
-        a.plain {
-            color: var(--gym);
-            text-decoration: none;
-            font-weight: 600;
+            padding: 30px 10px
         }
 
         ::selection {
             background: var(--accent);
-            color: var(--accent-ink);
-        }
-        /* הגבלות למצב אורח */
-        .guest-mode #fabAdd,
-        .guest-mode #addClientBtn,
-        .guest-mode #emptyAddBtn,
-        .guest-mode #saveEvBtn,
-        .guest-mode #delEvBtn,
-        .guest-mode #saveClBtn,
-        .guest-mode #delClBtn,
-        .guest-mode #resetBtn,
-        .guest-mode #editClFromDetail,
-        .guest-mode .row-btns .btn-danger,
-        .guest-mode .row-btns button[data-cancel] {
-            display: none !important;
+            color: var(--accent-ink)
         }
 
-        .guest-mode input,
-        .guest-mode textarea,
-        .guest-mode select {
+        .guest-mode #fabAdd, .guest-mode #addClientBtn, .guest-mode #emptyAddBtn, .guest-mode #saveEvBtn, .guest-mode #delEvBtn, .guest-mode #saveClBtn, .guest-mode #delClBtn, .guest-mode #resetBtn, .guest-mode #editClFromDetail, .guest-mode .row-btns .btn-danger, .guest-mode .row-btns button[data-cancel] {
+            display: none !important
+        }
+
+        .guest-mode input, .guest-mode textarea, .guest-mode select {
             pointer-events: none;
-            opacity: 0.7;
+            opacity: .7
         }
 
-        .guest-mode .switch,
-        .guest-mode .type-opt {
-            pointer-events: none;
+        .guest-mode .switch, .guest-mode .type-opt {
+            pointer-events: none
         }
 
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
+        .preset-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px
+        }
+
+        .preset {
+            background: var(--surface-2);
+            border: 1.5px solid var(--border);
+            border-radius: 14px;
+            padding: 10px 6px;
+            font-size: 12.5px;
+            font-weight: 700;
+            line-height: 1.3
+        }
+
+            .preset small {
+                display: block;
+                font-weight: 500;
+                color: var(--text-muted);
+                font-size: 11px
             }
-        }
+
+            .preset.selected {
+                border-color: var(--gym);
+                background: var(--gym-bg)
+            }
     </style>
-    <!-- Firebase SDKs -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 </head>
 <body>
-    <!-- מסך התחברות -->
-    <div id="loginOverlay" style="position: fixed; inset: 0; background: var(--bg); z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px; transition: opacity .35s ease;">
-        <img src="./icon-512.png" alt="" style="width:96px;height:96px;border-radius:22px;">
-        <div id="loginContent" style="display:none;margin-top:22px;">
-            <h1 style="margin-bottom: 10px;">לו"ז אישי</h1>
-            <p style="color: var(--text-muted); margin-bottom: 20px;">נדרשת התחברות מאובטחת כדי לצפות בנתונים ולסנכרן אותם.</p>
-            <button class="btn btn-primary" id="loginBtn" style="width: auto; padding: 12px 24px; font-size: 16px;">התחברות עם Google</button>
+    <div id="loginOverlay" style="position:fixed;inset:0;background:var(--bg);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px;transition:opacity .35s ease">
+        <img src="./icon-512.png" alt="" style="width:96px;height:96px;border-radius:22px">
+        <div id="loginContent" style="display:none;margin-top:22px">
+            <h1 style="margin-bottom:10px">לו"ז אישי</h1>
+            <p style="color:var(--text-muted);margin-bottom:20px">נדרשת התחברות מאובטחת כדי לצפות בנתונים ולסנכרן אותם.</p>
+            <button class="btn btn-primary" id="loginBtn" style="width:auto;padding:12px 24px;font-size:16px">התחברות עם Google</button>
         </div>
-        <div id="loginError" style="color: var(--mda); margin-top: 15px; font-weight: bold;"></div>
+        <div id="loginError" style="color:var(--mda);margin-top:15px;font-weight:bold"></div>
     </div>
     <div class="app" id="app">
-
-        <div class="topbar">
-            <div class="topbar-row">
-                <div class="greet" id="greetText">שלום</div>
-                <button class="icon-btn" id="themeToggle" aria-label="מצב תצוגה"></button>
-            </div>
-        </div>
-
+        <div class="topbar"><div class="topbar-row"><div class="greet" id="greetText">שלום</div><button class="icon-btn" id="themeToggle" aria-label="מצב תצוגה"></button></div></div>
         <main>
-            <!-- לו"ז -->
             <section class="view active" id="view-schedule">
-                <div class="segmented" id="scheduleSeg">
-                    <button data-mode="day" class="active">יום</button>
-                    <button data-mode="week">שבוע</button>
-                    <button data-mode="month">חודש</button>
-                </div>
-
-                <div class="datenav">
-                    <div class="arrows">
-                        <button id="navPrev"></button>
-                        <button id="navNext"></button>
-                    </div>
-                    <div class="label" id="dateLabel">—</div>
-                    <button class="today-chip" id="navToday">היום</button>
-                </div>
-                <div id="holidayHolder"></div>
-                <div id="weekStripHolder"></div>
-                <div id="monthGridHolder"></div>
-                <div id="agendaHolder"></div>
+                <div class="segmented" id="scheduleSeg"><button data-mode="day" class="active">יום</button><button data-mode="week">שבוע</button><button data-mode="month">חודש</button></div>
+                <div class="datenav"><div class="arrows"><button id="navPrev"></button><button id="navNext"></button></div><div class="label" id="dateLabel">—</div><button class="today-chip" id="navToday">היום</button></div>
+                <div id="holidayHolder"></div><div id="weekStripHolder"></div><div id="monthGridHolder"></div><div id="agendaHolder"></div>
             </section>
-
-            <!-- מתאמנים -->
             <section class="view" id="view-clients">
-                <div class="datenav" style="margin-bottom:10px;">
-                    <div class="label">מתאמנים</div>
-                    <button class="btn btn-primary btn-sm" id="addClientBtn">מתאמן חדש +</button>
-                </div>
+                <div class="datenav" style="margin-bottom:10px"><div class="label">מתאמנים</div><button class="btn btn-primary btn-sm" id="addClientBtn">מתאמן חדש +</button></div>
                 <div id="clientsHolder"></div>
             </section>
-
-            <!-- כספים -->
             <section class="view" id="view-finance">
-                <div class="datenav">
-                    <div class="arrows">
-                        <button id="finPrev"></button>
-                        <button id="finNext"></button>
-                    </div>
-                    <div class="label" id="finLabel">—</div>
-                    <span></span>
-                </div>
+                <div class="datenav"><div class="arrows"><button id="finPrev"></button><button id="finNext"></button></div><div class="label" id="finLabel">—</div><span></span></div>
                 <div id="financeHolder"></div>
             </section>
-
-            <!-- הגדרות -->
-            <section class="view" id="view-settings">
-                <div id="settingsHolder"></div>
-            </section>
+            <section class="view" id="view-settings"><div id="settingsHolder"></div></section>
         </main>
-
         <button class="fab" id="fabAdd" aria-label="הוספת אירוע"></button>
-
         <nav class="bottomnav">
             <div class="bottomnav-inner">
                 <button class="nav-btn active" data-view="schedule"><span class="ic"></span><span>לו"ז</span></button>
@@ -1136,199 +1109,124 @@
                 <button class="nav-btn" data-view="settings"><span class="ic"></span><span>הגדרות</span></button>
             </div>
         </nav>
-
-        <!-- Modal: Add/Edit Event -->
-        <div class="modal-wrap" id="modalEvent">
-            <div class="modal-backdrop" data-close="modalEvent"></div>
-            <div class="modal">
-                <button class="modal-close" data-close="modalEvent"></button>
-                <div class="modal-handle"></div>
-                <div class="modal-title" id="evModalTitle">אירוע חדש</div>
-                <div id="evModalBody"></div>
-            </div>
-        </div>
-
-        <!-- Modal: Add/Edit Client -->
-        <div class="modal-wrap" id="modalClient">
-            <div class="modal-backdrop" data-close="modalClient"></div>
-            <div class="modal">
-                <button class="modal-close" data-close="modalClient"></button>
-                <div class="modal-handle"></div>
-                <div class="modal-title" id="clModalTitle">מתאמן חדש</div>
-                <div id="clModalBody"></div>
-            </div>
-        </div>
-
-        <!-- Modal: Client detail -->
-        <div class="modal-wrap" id="modalClientDetail">
-            <div class="modal-backdrop" data-close="modalClientDetail"></div>
-            <div class="modal">
-                <button class="modal-close" data-close="modalClientDetail"></button>
-                <div class="modal-handle"></div>
-                <div id="clDetailBody"></div>
-            </div>
-        </div>
-
+        <div class="modal-wrap" id="modalEvent"><div class="modal-backdrop" data-close="modalEvent"></div><div class="modal"><button class="modal-close" data-close="modalEvent"></button><div class="modal-handle"></div><div class="modal-title" id="evModalTitle">אירוע חדש</div><div id="evModalBody"></div></div></div>
+        <div class="modal-wrap" id="modalClient"><div class="modal-backdrop" data-close="modalClient"></div><div class="modal"><button class="modal-close" data-close="modalClient"></button><div class="modal-handle"></div><div class="modal-title" id="clModalTitle">מתאמן חדש</div><div id="clModalBody"></div></div></div>
+        <div class="modal-wrap" id="modalClientDetail"><div class="modal-backdrop" data-close="modalClientDetail"></div><div class="modal"><button class="modal-close" data-close="modalClientDetail"></button><div class="modal-handle"></div><div id="clDetailBody"></div></div></div>
+        <div class="modal-wrap" id="modalFinanceDetail"><div class="modal-backdrop" data-close="modalFinanceDetail"></div><div class="modal"><button class="modal-close" data-close="modalFinanceDetail"></button><div class="modal-handle"></div><div id="finDetailBody"></div></div></div>
+        <div class="modal-wrap" id="modalRecurring"><div class="modal-backdrop" data-close="modalRecurring"></div><div class="modal"><button class="modal-close" data-close="modalRecurring"></button><div class="modal-handle"></div><div class="modal-title">אירועים חוזרים</div><div id="recurringBody"></div></div></div>
     </div>
 
     <script>
         (function () {
             "use strict";
-
-            /* ---------------- ICONS ---------------- */
-            const ICONS = {
-                calendar: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18"/></svg>',
-                users: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6"/><circle cx="17.5" cy="9" r="2.6"/><path d="M15.5 14.2c2.8.4 5 2.6 5 5.8"/></svg>',
-                wallet: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="3"/><path d="M3 10h18"/><circle cx="16.5" cy="14.5" r="1.2" fill="currentColor" stroke="none"/></svg>',
-                settings: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 13.5a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.6v.2a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.6-1H2.5a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.6-1.1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3H8.7a1.7 1.7 0 0 0 1-1.6V2.5a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.6 1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9v.1a1.7 1.7 0 0 0 1.6 1h.2a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.6 1z"/></svg>',
-                plus: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>',
-                chevL: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>',
-                chevR: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>',
-                x: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>',
-                sun: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.2M12 19.8V22M4.9 4.9l1.5 1.5M17.6 17.6l1.5 1.5M2 12h2.2M19.8 12H22M4.9 19.1l1.5-1.5M17.6 6.4l1.5-1.5"/></svg>',
-                moon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a6.8 6.8 0 0 0 10.5 10.5z"/></svg>',
-                pulse: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 8.6a5.5 5.5 0 0 0-9.3-4A5.5 5.5 0 0 0 3 8.6c0 6 8.5 11.4 8.5 11.4s8.5-5.4 8.5-11.4z"/><path d="M6 12h2.5l1.5-3 2 6 1.5-3H16"/></svg>',
-                brief: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="7" width="19" height="13" rx="2.5"/><path d="M8 7V5.2A1.7 1.7 0 0 1 9.7 3.5h4.6A1.7 1.7 0 0 1 16 5.2V7M2.5 12.5h19"/></svg>',
-                dumb: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 8v8M4 9.5v5M17.5 8v8M20 9.5v5M6.5 12h11"/></svg>',
-                clock: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.3 2"/></svg>',
-                warn: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5 22 20.5H2z"/><path d="M12 9.5v5M12 18h.01"/></svg>',
-                trash: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M9 7V5a1.5 1.5 0 0 1 1.5-1.5h3A1.5 1.5 0 0 1 15 5v2M6 7l1 13a2 2 0 0 0 2 1.8h6a2 2 0 0 0 2-1.8l1-13"/></svg>',
-                check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg>',
-                bell: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>',
-                star: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5l2.9 6.4 6.9.7-5.2 4.7 1.6 6.9L12 17.8 5.8 21.2l1.6-6.9L2.2 9.6l6.9-.7z"/></svg>',
-                download: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0-4.5-4.5M12 15l4.5-4.5"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>'
+            var S = function (d) { return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + d + '</svg>'; };
+            var ICONS = {
+                calendar: S('<rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18"/>'),
+                users: S('<circle cx="9" cy="8" r="3.2"/><path d="M2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6"/><circle cx="17.5" cy="9" r="2.6"/><path d="M15.5 14.2c2.8.4 5 2.6 5 5.8"/>'),
+                wallet: S('<rect x="3" y="6" width="18" height="13" rx="3"/><path d="M3 10h18"/><circle cx="16.5" cy="14.5" r="1.2" fill="currentColor" stroke="none"/>'),
+                settings: S('<circle cx="12" cy="12" r="3"/><path d="M19.4 13.5a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.6v.2a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.6-1H2.5a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.6-1.1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3H8.7a1.7 1.7 0 0 0 1-1.6V2.5a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.6 1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9v.1a1.7 1.7 0 0 0 1.6 1h.2a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.6 1z"/>'),
+                plus: S('<path d="M12 5v14M5 12h14"/>'),
+                chevL: S('<path d="M15 18l-6-6 6-6"/>'),
+                chevR: S('<path d="M9 18l6-6-6-6"/>'),
+                x: S('<path d="M6 6l12 12M18 6L6 18"/>'),
+                sun: S('<circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.2M12 19.8V22M4.9 4.9l1.5 1.5M17.6 17.6l1.5 1.5M2 12h2.2M19.8 12H22M4.9 19.1l1.5-1.5M17.6 6.4l1.5-1.5"/>'),
+                moon: S('<path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a6.8 6.8 0 0 0 10.5 10.5z"/>'),
+                pulse: S('<path d="M20.8 8.6a5.5 5.5 0 0 0-9.3-4A5.5 5.5 0 0 0 3 8.6c0 6 8.5 11.4 8.5 11.4s8.5-5.4 8.5-11.4z"/><path d="M6 12h2.5l1.5-3 2 6 1.5-3H16"/>'),
+                brief: S('<rect x="2.5" y="7" width="19" height="13" rx="2.5"/><path d="M8 7V5.2A1.7 1.7 0 0 1 9.7 3.5h4.6A1.7 1.7 0 0 1 16 5.2V7M2.5 12.5h19"/>'),
+                dumb: S('<path d="M6.5 8v8M4 9.5v5M17.5 8v8M20 9.5v5M6.5 12h11"/>'),
+                warn: S('<path d="M12 3.5 22 20.5H2z"/><path d="M12 9.5v5M12 18h.01"/>'),
+                trash: S('<path d="M4 7h16M9 7V5a1.5 1.5 0 0 1 1.5-1.5h3A1.5 1.5 0 0 1 15 5v2M6 7l1 13a2 2 0 0 0 2 1.8h6a2 2 0 0 0 2-1.8l1-13"/>'),
+                check: S('<path d="M5 12.5l4.5 4.5L19 7"/>'),
+                bell: S('<path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/>'),
+                star: S('<path d="M12 2.5l2.9 6.4 6.9.7-5.2 4.7 1.6 6.9L12 17.8 5.8 21.2l1.6-6.9L2.2 9.6l6.9-.7z"/>'),
+                download: S('<path d="M12 3v12m0 0-4.5-4.5M12 15l4.5-4.5"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/>'),
+                repeat: S('<path d="M17 2.1l4 4-4 4"/><path d="M3 12.6v-1.5A4 4 0 0 1 7 7h14"/><path d="M7 21.9l-4-4 4-4"/><path d="M21 11.4v1.5A4 4 0 0 1 17 17H3"/>')
             };
-            const TYPE_META = {
+            var TYPE_META = {
                 mda: { label: 'מד"א', color: 'var(--mda)', bg: 'var(--mda-bg)', icon: ICONS.pulse },
                 gym: { label: 'משמרת ניהול', color: 'var(--gym)', bg: 'var(--gym-bg)', icon: ICONS.brief },
                 training: { label: 'אימון אישי', color: 'var(--training)', bg: 'var(--training-bg)', icon: ICONS.dumb },
                 personal: { label: 'זמן פרטי', color: 'var(--personal)', bg: 'var(--personal-bg)', icon: ICONS.moon }
             };
-            const HOLIDAY_TYPE_META = {
+            var HTM = {
                 chag: { color: 'var(--holiday-chag)', bg: 'var(--holiday-chag-bg)', label: 'חג' },
                 minor: { color: 'var(--holiday-chag)', bg: 'var(--holiday-chag-bg)', label: 'מועד' },
                 cholhamoed: { color: 'var(--holiday-chag)', bg: 'var(--holiday-chag-bg)', label: 'חול המועד' },
                 fast: { color: 'var(--holiday-fast)', bg: 'var(--holiday-fast-bg)', label: 'יום צום' },
                 memorial: { color: 'var(--holiday-memorial)', bg: 'var(--holiday-memorial-bg)', label: 'יום זיכרון' }
             };
-
-            // טבלת חגים/מועדים/צומות - לוח שנה עברי, לפי המנהג בישראל.
-            // כדי להוסיף שנים נוספות, פשוט תוסיף עוד רשומות באותו פורמט {start,end,name,type}.
-            const HOLIDAY_RANGES = [
-                // תשפ"ו (2025-2026)
-                { start: '2026-02-02', end: '2026-02-02', name: 'ט"ו בשבט', type: 'minor' },
-                { start: '2026-03-02', end: '2026-03-02', name: 'תענית אסתר', type: 'fast' },
-                { start: '2026-03-03', end: '2026-03-03', name: 'פורים', type: 'chag' },
-                { start: '2026-03-04', end: '2026-03-04', name: 'שושן פורים', type: 'minor' },
-                { start: '2026-04-02', end: '2026-04-02', name: 'פסח', type: 'chag' },
-                { start: '2026-04-03', end: '2026-04-07', name: 'חול המועד פסח', type: 'cholhamoed' },
-                { start: '2026-04-08', end: '2026-04-08', name: 'שביעי של פסח', type: 'chag' },
-                { start: '2026-04-14', end: '2026-04-14', name: 'יום השואה', type: 'memorial' },
-                { start: '2026-04-21', end: '2026-04-21', name: 'יום הזיכרון', type: 'memorial' },
-                { start: '2026-04-22', end: '2026-04-22', name: 'יום העצמאות', type: 'chag' },
-                { start: '2026-05-05', end: '2026-05-05', name: 'ל"ג בעומר', type: 'minor' },
-                { start: '2026-05-15', end: '2026-05-15', name: 'יום ירושלים', type: 'minor' },
-                { start: '2026-05-22', end: '2026-05-22', name: 'שבועות', type: 'chag' },
-                { start: '2026-07-02', end: '2026-07-02', name: 'צום י"ז בתמוז', type: 'fast' },
-                { start: '2026-07-23', end: '2026-07-23', name: 'תשעה באב', type: 'fast' },
-                { start: '2026-07-29', end: '2026-07-29', name: 'ט"ו באב', type: 'minor' },
-                { start: '2026-09-12', end: '2026-09-13', name: 'ראש השנה', type: 'chag' },
-                { start: '2026-09-14', end: '2026-09-14', name: 'צום גדליה', type: 'fast' },
-                { start: '2026-09-20', end: '2026-09-20', name: 'ערב יום כיפור', type: 'fast' },
-                { start: '2026-09-21', end: '2026-09-21', name: 'יום כיפור', type: 'fast' },
-                { start: '2026-09-26', end: '2026-09-26', name: 'סוכות', type: 'chag' },
-                { start: '2026-09-27', end: '2026-10-01', name: 'חול המועד סוכות', type: 'cholhamoed' },
-                { start: '2026-10-02', end: '2026-10-02', name: 'הושענא רבה', type: 'cholhamoed' },
-                { start: '2026-10-03', end: '2026-10-03', name: 'שמיני עצרת / שמחת תורה', type: 'chag' },
-                { start: '2026-12-04', end: '2026-12-11', name: 'חנוכה', type: 'minor' },
-                { start: '2026-12-20', end: '2026-12-20', name: 'עשרה בטבת', type: 'fast' },
-                // תשפ"ז (2027)
-                { start: '2027-01-23', end: '2027-01-23', name: 'ט"ו בשבט', type: 'minor' },
-                { start: '2027-03-22', end: '2027-03-22', name: 'תענית אסתר', type: 'fast' },
-                { start: '2027-03-23', end: '2027-03-23', name: 'פורים', type: 'chag' },
-                { start: '2027-03-24', end: '2027-03-24', name: 'שושן פורים', type: 'minor' },
-                { start: '2027-04-22', end: '2027-04-22', name: 'פסח', type: 'chag' },
-                { start: '2027-04-23', end: '2027-04-27', name: 'חול המועד פסח', type: 'cholhamoed' },
-                { start: '2027-04-28', end: '2027-04-28', name: 'שביעי של פסח', type: 'chag' },
-                { start: '2027-05-04', end: '2027-05-04', name: 'יום השואה', type: 'memorial' },
-                { start: '2027-05-11', end: '2027-05-11', name: 'יום הזיכרון', type: 'memorial' },
-                { start: '2027-05-12', end: '2027-05-12', name: 'יום העצמאות', type: 'chag' },
-                { start: '2027-05-25', end: '2027-05-25', name: 'ל"ג בעומר', type: 'minor' },
-                { start: '2027-06-11', end: '2027-06-11', name: 'שבועות', type: 'chag' },
-                { start: '2027-07-22', end: '2027-07-22', name: 'צום י"ז בתמוז', type: 'fast' },
-                { start: '2027-08-12', end: '2027-08-12', name: 'תשעה באב', type: 'fast' },
-                { start: '2027-10-02', end: '2027-10-03', name: 'ראש השנה', type: 'chag' },
-                { start: '2027-10-04', end: '2027-10-04', name: 'צום גדליה', type: 'fast' },
-                { start: '2027-10-11', end: '2027-10-11', name: 'יום כיפור', type: 'fast' },
-                { start: '2027-10-16', end: '2027-10-16', name: 'סוכות', type: 'chag' },
-                { start: '2027-10-17', end: '2027-10-21', name: 'חול המועד סוכות', type: 'cholhamoed' },
-                { start: '2027-10-22', end: '2027-10-22', name: 'הושענא רבה', type: 'cholhamoed' },
-                { start: '2027-10-23', end: '2027-10-23', name: 'שמיני עצרת / שמחת תורה', type: 'chag' },
-                // תשפ"ח (חלקי, 2028)
-                { start: '2028-09-21', end: '2028-09-22', name: 'ראש השנה', type: 'chag' },
-                { start: '2028-09-30', end: '2028-09-30', name: 'יום כיפור', type: 'fast' }
+            var TC = { c: 'chag', m: 'minor', h: 'cholhamoed', f: 'fast', r: 'memorial' };
+            // start|end|name|type  (c=חג, m=מועד, h=חול המועד, f=צום, r=יום זיכרון)
+            var HOLIDAY_RAW = [
+                '2026-02-02|2026-02-02|ט"ו בשבט|m', '2026-03-02|2026-03-02|תענית אסתר|f', '2026-03-03|2026-03-03|פורים|c', '2026-03-04|2026-03-04|שושן פורים|m',
+                '2026-04-02|2026-04-02|פסח|c', '2026-04-03|2026-04-07|חול המועד פסח|h', '2026-04-08|2026-04-08|שביעי של פסח|c', '2026-04-14|2026-04-14|יום השואה|r',
+                '2026-04-21|2026-04-21|יום הזיכרון|r', '2026-04-22|2026-04-22|יום העצמאות|c', '2026-05-05|2026-05-05|ל"ג בעומר|m', '2026-05-15|2026-05-15|יום ירושלים|m',
+                '2026-05-22|2026-05-22|שבועות|c', '2026-07-02|2026-07-02|צום י"ז בתמוז|f', '2026-07-23|2026-07-23|תשעה באב|f', '2026-07-29|2026-07-29|ט"ו באב|m',
+                '2026-09-12|2026-09-13|ראש השנה|c', '2026-09-14|2026-09-14|צום גדליה|f', '2026-09-20|2026-09-20|ערב יום כיפור|f', '2026-09-21|2026-09-21|יום כיפור|f',
+                '2026-09-26|2026-09-26|סוכות|c', '2026-09-27|2026-10-01|חול המועד סוכות|h', '2026-10-02|2026-10-02|הושענא רבה|h', '2026-10-03|2026-10-03|שמיני עצרת / שמחת תורה|c',
+                '2026-12-04|2026-12-11|חנוכה|m', '2026-12-20|2026-12-20|עשרה בטבת|f',
+                '2027-01-23|2027-01-23|ט"ו בשבט|m', '2027-03-22|2027-03-22|תענית אסתר|f', '2027-03-23|2027-03-23|פורים|c', '2027-03-24|2027-03-24|שושן פורים|m',
+                '2027-04-22|2027-04-22|פסח|c', '2027-04-23|2027-04-27|חול המועד פסח|h', '2027-04-28|2027-04-28|שביעי של פסח|c', '2027-05-04|2027-05-04|יום השואה|r',
+                '2027-05-11|2027-05-11|יום הזיכרון|r', '2027-05-12|2027-05-12|יום העצמאות|c', '2027-05-25|2027-05-25|ל"ג בעומר|m', '2027-06-11|2027-06-11|שבועות|c',
+                '2027-07-22|2027-07-22|צום י"ז בתמוז|f', '2027-08-12|2027-08-12|תשעה באב|f', '2027-10-02|2027-10-03|ראש השנה|c', '2027-10-04|2027-10-04|צום גדליה|f',
+                '2027-10-11|2027-10-11|יום כיפור|f', '2027-10-16|2027-10-16|סוכות|c', '2027-10-17|2027-10-21|חול המועד סוכות|h', '2027-10-22|2027-10-22|הושענא רבה|h',
+                '2027-10-23|2027-10-23|שמיני עצרת / שמחת תורה|c', '2028-09-21|2028-09-22|ראש השנה|c', '2028-09-30|2028-09-30|יום כיפור|f'
             ];
-
-            function buildHolidayMap() {
-                const map = {};
-                HOLIDAY_RANGES.forEach(h => {
-                    const end = parseDateStr(h.end);
-                    const totalDays = Math.round((end - parseDateStr(h.start)) / 86400000) + 1;
-                    let d = parseDateStr(h.start), dayIdx = 1;
-                    while (d.getTime() <= end.getTime()) {
-                        const key = toDateStr(d);
-                        (map[key] = map[key] || []).push(Object.assign({}, h, { dayIndex: dayIdx, totalDays: totalDays }));
-                        d = addDays(d, 1); dayIdx++;
-                    }
-                });
-                return map;
-            }
-            const HOLIDAY_MAP = buildHolidayMap();
-            function getHolidays(dateStr) { return HOLIDAY_MAP[dateStr] || []; }
-            function getPrimaryHoliday(dateStr) {
-                const hs = getHolidays(dateStr);
-                if (!hs.length) return null;
-                const order = ['fast', 'chag', 'memorial', 'cholhamoed', 'minor'];
-                hs.sort((a, b) => order.indexOf(a.type) - order.indexOf(b.type));
-                return hs[0];
-            }
-            const HOLIDAY_SHORT = {
-                'ראש השנה': 'ר"ה', 'יום כיפור': 'יוה"כ', 'סוכות': 'סוכות', 'חול המועד סוכות': 'חוה"מ סוכות',
-                'הושענא רבה': 'הושענא רבה', 'שמיני עצרת / שמחת תורה': 'שמח"ת', 'פסח': 'פסח', 'חול המועד פסח': 'חוה"מ פסח',
-                'שביעי של פסח': 'שביעי פסח', 'שבועות': 'שבועות', 'חנוכה': 'חנוכה', 'פורים': 'פורים', 'שושן פורים': 'שושן פורים',
-                'תענית אסתר': 'תענית אסתר', 'צום גדליה': 'צום גדליה', 'עשרה בטבת': 'י\' בטבת', 'צום י"ז בתמוז': 'י"ז בתמוז',
-                'תשעה באב': 'ט\' באב', 'ט"ו בשבט': 'ט"ו בשבט', 'ט"ו באב': 'ט"ו באב', 'ל"ג בעומר': 'ל"ג בעומר',
-                'יום ירושלים': 'יום ירושלים', 'יום השואה': 'יום השואה', 'יום הזיכרון': 'יום הזיכרון', 'יום העצמאות': 'עצמאות'
+            var HOLIDAY_SHORT = {
+                'ראש השנה': 'ר"ה', 'יום כיפור': 'יוה"כ', 'חול המועד סוכות': 'חוה"מ סוכות', 'שמיני עצרת / שמחת תורה': 'שמח"ת', 'חול המועד פסח': 'חוה"מ פסח',
+                'שביעי של פסח': 'שביעי פסח', 'עשרה בטבת': "י' בטבת", 'תשעה באב': "ט' באב", 'יום העצמאות': 'עצמאות'
             };
+
+            /* ---------- date helpers ---------- */
+            var DOW = ['א', 'ב', 'ג', 'ד', 'ה', 'ו', 'ש'];
+            var MONTHS = ['ינואר', 'פברואר', 'מרץ', 'אפריל', 'מאי', 'יוני', 'יולי', 'אוגוסט', 'ספטמבר', 'אוקטובר', 'נובמבר', 'דצמבר'];
+            function pad(n) { return String(n).padStart(2, '0'); }
+            function toDateStr(d) { return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); }
+            function shortDate(s) { var p = s.split('-'); return (+p[2]) + '.' + (+p[1]); }
+            function parseDateStr(s) { var a = s.split('-').map(Number); return new Date(a[0], a[1] - 1, a[2]); }
+            function addDays(d, n) { var r = new Date(d); r.setDate(r.getDate() + n); return r; }
+            function startOfWeek(d) { return addDays(d, -d.getDay()); }
+            function sameDate(a, b) { return toDateStr(a) === toDateStr(b); }
+            function combineDateTime(ds, ts) { var a = (ts || '00:00').split(':').map(Number); var d = parseDateStr(ds); d.setHours(a[0], a[1], 0, 0); return d; }
+            function eventRange(ev) {
+                var start = combineDateTime(ev.date, ev.startTime), end = combineDateTime(ev.date, ev.endTime);
+                if (end.getTime() <= start.getTime()) end = addDays(end, 1);
+                return { start: start, end: end };
+            }
+            function money(n) { return '₪' + (Math.round(n * 100) / 100).toLocaleString('he-IL', { minimumFractionDigits: 0, maximumFractionDigits: 2 }); }
+            function escapeHtml(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+            function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2, 7); }
+
+            /* ---------- holidays ---------- */
+            var HOLIDAY_MAP = {};
+            HOLIDAY_RAW.forEach(function (r) {
+                var p = r.split('|'), h = { start: p[0], end: p[1], name: p[2], type: TC[p[3]] };
+                var end = parseDateStr(h.end), d = parseDateStr(h.start), idx = 1;
+                while (d.getTime() <= end.getTime()) {
+                    var k = toDateStr(d);
+                    (HOLIDAY_MAP[k] = HOLIDAY_MAP[k] || []).push(Object.assign({}, h, { dayIndex: idx }));
+                    d = addDays(d, 1); idx++;
+                }
+            });
+            function getPrimaryHoliday(ds) {
+                var hs = HOLIDAY_MAP[ds]; if (!hs || !hs.length) return null;
+                var order = ['fast', 'chag', 'memorial', 'cholhamoed', 'minor'];
+                return hs.slice().sort(function (a, b) { return order.indexOf(a.type) - order.indexOf(b.type); })[0];
+            }
             function holidayLabel(h, short) {
-                let base = short ? (HOLIDAY_SHORT[h.name] || h.name) : h.name;
+                var base = short ? (HOLIDAY_SHORT[h.name] || h.name) : h.name;
                 if (h.name === 'חנוכה') base += ' (נר ' + h.dayIndex + ')';
                 return base;
             }
-            /* ---------------- FIREBASE & STORAGE ---------------- */
-            const DEFAULT_DATA = {
-                events: [],
-                clients: [],
-                settings: {
-                    theme: 'dark',
-                    gymHourlyRate: 35.40,
-                    trainingPrice: 80,
-                    bufferMinutes: 45,
-                    mdaRestHours: 8,
-                    lateCancelHours: 12,
-                    notificationsEnabled: false,
-                    reminderMinutes: 60,
-                    morningSummaryEnabled: false,
-                    morningSummaryTime: '07:00'
-                }
+
+            /* ---------- data & firebase ---------- */
+            var DEFAULT_DATA = {
+                events: [], clients: [],
+                settings: { theme: 'dark', gymHourlyRate: 35.40, trainingPrice: 80, bufferMinutes: 45, mdaRestHours: 8, lateCancelHours: 12, notificationsEnabled: false, reminderMinutes: 60, morningSummaryEnabled: false, morningSummaryTime: '07:00' }
             };
-            let DATA = JSON.parse(JSON.stringify(DEFAULT_DATA));
-            let storageReady = false;
-            let saveTimer = null;
-            let dbUnsubscribe = null;
-            let isGuest = false;
-            // === החלף בפרטים שלך מ-Firebase Console ===
-            const firebaseConfig = {
+            var DATA = JSON.parse(JSON.stringify(DEFAULT_DATA));
+            var storageReady = false, saveTimer = null, dbUnsubscribe = null, isGuest = false, localPending = false;
+            var firebaseConfig = {
                 apiKey: "AIzaSyBpry7D_rk6D2DGrd-ViaM8fKHV3jvoLr8",
                 authDomain: "scheduleapp-230f2.firebaseapp.com",
                 projectId: "scheduleapp-230f2",
@@ -1337,42 +1235,23 @@
                 appId: "1:369647521158:web:cc0be71365abc1dac3b007",
                 measurementId: "G-9VKY09H392"
             };
+            if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+            var auth = firebase.auth(), db = firebase.firestore();
+            try { db.enablePersistence({ synchronizeTabs: true }).catch(function (e) { console.warn('persistence:', e.code); }); } catch (e) { console.warn(e); }
 
-            // אתחול Firebase
-            if (!firebase.apps.length) {
-                firebase.initializeApp(firebaseConfig);
-            }
-            const auth = firebase.auth();
-            const db = firebase.firestore();
-
-            db.settings({ experimentalForceLongPolling: true, merge: true });
-            // רישום Service Worker - מאפשר פתיחת האפליקציה גם ללא אינטרנט (PWA)
             if ('serviceWorker' in navigator) {
                 window.addEventListener('load', function () {
-                    navigator.serviceWorker.register('./sw.js').then(function (reg) {
-                        reg.update(); // בדוק גרסה חדשה בכל טעינה
-                    }).catch(function (err) {
-                        console.warn('רישום Service Worker נכשל', err);
-                    });
-
-                    // כשגרסה חדשה תופסת שליטה - רענן פעם אחת אוטומטית כדי שהיא תיכנס לתוקף
-                    let refreshed = false;
-                    navigator.serviceWorker.addEventListener('controllerchange', function () {
-                        if (refreshed) return;
-                        refreshed = true;
-                        window.location.reload();
-                    });
+                    navigator.serviceWorker.register('./sw.js').then(function (reg) { reg.update(); }).catch(function (e) { console.warn('SW', e); });
+                    var refreshed = false;
+                    navigator.serviceWorker.addEventListener('controllerchange', function () { if (refreshed) return; refreshed = true; location.reload(); });
                 });
             }
-
-            // האזנה למצב ההתחברות של המשתמש
             function hideSplash() {
-                const el = document.getElementById('loginOverlay');
+                var el = document.getElementById('loginOverlay');
                 el.style.opacity = '0';
-                setTimeout(() => { el.style.display = 'none'; }, 350);
+                setTimeout(function () { el.style.display = 'none'; }, 350);
             }
-
-            auth.onAuthStateChanged(user => {
+            auth.onAuthStateChanged(function (user) {
                 if (user) {
                     isGuest = (user.email !== 'levloovmordehai@gmail.com');
                     document.body.classList.toggle('guest-mode', isGuest);
@@ -1382,31 +1261,22 @@
                 } else {
                     document.getElementById('loginContent').style.display = 'block';
                     document.getElementById('app').style.display = 'none';
-                    // ה-splash לא נסגר כאן - הוא "נפתח" לתוך מסך ההתחברות
                     if (dbUnsubscribe) dbUnsubscribe();
                 }
             });
-
-            // התחברות עם כפתור
-            document.getElementById('loginBtn').addEventListener('click', () => {
-                const provider = new firebase.auth.GoogleAuthProvider();
-                auth.signInWithPopup(provider).catch(err => {
+            document.getElementById('loginBtn').addEventListener('click', function () {
+                auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).catch(function (err) {
                     console.error(err);
                     document.getElementById('loginError').textContent = "שגיאה בהתחברות. נסה שוב.";
                 });
             });
-
-            // פונקציה שמקשיבה לשינויים בענן (עובד דינמית על המחשב והטלפון)
             function startRealtimeSync(uid) {
-                const docRef = db.collection('users').doc(uid);
+                var docRef = db.collection('users').doc(uid);
                 if (dbUnsubscribe) dbUnsubscribe();
-
-                dbUnsubscribe = docRef.onSnapshot(doc => {
-                    // דלג רק אם יש שינוי מקומי שעוד לא נשלח (חלון של 300ms)
+                dbUnsubscribe = docRef.onSnapshot(function (doc) {
                     if (storageReady && localPending) return;
-
                     if (doc.exists) {
-                        const parsed = doc.data();
+                        var parsed = doc.data();
                         DATA = Object.assign({}, DEFAULT_DATA, parsed);
                         DATA.settings = Object.assign({}, DEFAULT_DATA.settings, parsed.settings || {});
                     } else if (!doc.metadata.fromCache) {
@@ -1415,534 +1285,400 @@
                     storageReady = true;
                     applyTheme();
                     renderAll();
-
-                    // ⏳ = ממתין לשרת, ✓ = נשמר
-                    const g = document.getElementById('greetText');
-                    if (g) g.textContent += doc.metadata.hasPendingWrites ? ' ⏳' : ' ✓';
-                }, error => {
+                }, function (error) {
                     console.error("שגיאה בהבאת נתונים:", error);
                     if (error.code === 'permission-denied') {
                         auth.signOut();
-                        document.getElementById('loginError').textContent = "גישה נדחתה ע\"י השרת: אימייל זה אינו מורשה.";
+                        document.getElementById('loginError').textContent = 'גישה נדחתה ע"י השרת: אימייל זה אינו מורשה.';
                         document.getElementById('loginOverlay').style.display = 'flex';
                         document.getElementById('app').style.display = 'none';
-                    } else {
-                        alert('שגיאת סנכרון: ' + (error.code || error.message));
-                    }
+                    } else alert('שגיאת סנכרון: ' + (error.code || error.message));
                 });
             }
-
-            let localPending = false;
-
             function saveData() {
                 localPending = true;
                 if (saveTimer) clearTimeout(saveTimer);
-                saveTimer = setTimeout(() => { saveTimer = null; saveDataToFirebase(); }, 300);
+                saveTimer = setTimeout(function () { saveTimer = null; saveDataToFirebase(); }, 300);
             }
-
             function saveDataToFirebase() {
                 if (isGuest) return;
-                const user = auth.currentUser;
+                var user = auth.currentUser;
                 if (!user) { alert('אין משתמש מחובר - לא נשמר'); return; }
                 localPending = false;
-
-                const warn = setTimeout(() => {
-                    alert('השמירה לא אושרה ע"י Firebase תוך 8 שניות. בדוק חיבור ו-Firestore Rules.');
-                }, 8000);
-
-                db.collection('users').doc(user.uid)
-                    .set(JSON.parse(JSON.stringify(DATA)))
-                    .then(() => { clearTimeout(warn); console.log('נשמר בשרת ✓'); })
-                    .catch(e => {
-                        clearTimeout(warn);
-                        console.error('שגיאת שמירה', e);
-                        alert('השמירה נכשלה: ' + (e.code || e.message));
-                    });
+                var warn = setTimeout(function () { alert('השמירה לא אושרה ע"י Firebase תוך 8 שניות. בדוק חיבור ו-Firestore Rules.'); }, 8000);
+                db.collection('users').doc(user.uid).set(JSON.parse(JSON.stringify(DATA)))
+                    .then(function () { clearTimeout(warn); })
+                    .catch(function (e) { clearTimeout(warn); console.error(e); alert('השמירה נכשלה: ' + (e.code || e.message)); });
             }
-
             function flushSave() {
-                if (localPending) {
-                    if (saveTimer) { clearTimeout(saveTimer); saveTimer = null; }
-                    saveDataToFirebase();
-                }
+                if (localPending) { if (saveTimer) { clearTimeout(saveTimer); saveTimer = null; } saveDataToFirebase(); }
             }
-
-            document.addEventListener('visibilitychange', () => {
-                if (document.visibilityState === 'hidden') flushSave();
-            });
+            document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'hidden') flushSave(); });
             window.addEventListener('pagehide', flushSave);
 
-            function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2, 7); }
+            /* ---------- state ---------- */
+            var state = { view: 'schedule', scheduleMode: 'day', selectedDate: new Date(), financeMonth: new Date(), editingEventId: null, editingClientId: null, detailClientId: null };
 
-            /* ---------------- DATE HELPERS ---------------- */
-            const DOW = ['א', 'ב', 'ג', 'ד', 'ה', 'ו', 'ש'];
-            const MONTHS = ['ינואר', 'פברואר', 'מרץ', 'אפריל', 'מאי', 'יוני', 'יולי', 'אוגוסט', 'ספטמבר', 'אוקטובר', 'נובמבר', 'דצמבר'];
-            function pad(n) { return String(n).padStart(2, '0'); }
-            function toDateStr(d) { return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); }
-            function parseDateStr(s) { const [y, m, d] = s.split('-').map(Number); return new Date(y, m - 1, d); }
-            function addDays(d, n) { const r = new Date(d); r.setDate(r.getDate() + n); return r; }
-            function startOfWeek(d) { const r = new Date(d); const day = r.getDay(); return addDays(r, -day); }
-            function sameDate(a, b) { return toDateStr(a) === toDateStr(b); }
-            function combineDateTime(dateStr, timeStr) {
-                const [h, m] = (timeStr || '00:00').split(':').map(Number);
-                const d = parseDateStr(dateStr); d.setHours(h, m, 0, 0); return d;
-            }
-            function eventRange(ev) {
-                const start = combineDateTime(ev.date, ev.startTime);
-                let end = combineDateTime(ev.date, ev.endTime);
-                if (end.getTime() <= start.getTime()) end = addDays(end, 1);
-                return { start, end };
-            }
-            function fmtHM(mins) {
-                const h = Math.floor(mins / 60), m = Math.round(mins % 60);
-                if (h <= 0) return m + ' דק\'';
-                if (m === 0) return h + ' שע\'';
-                return h + ' שע\' ' + m + ' דק\'';
-            }
-            function money(n) { return '₪' + (Math.round(n * 100) / 100).toLocaleString('he-IL', { minimumFractionDigits: 0, maximumFractionDigits: 2 }); }
-
-            /* ---------------- STATE ---------------- */
-            let state = {
-                view: 'schedule',
-                scheduleMode: 'day',
-                selectedDate: new Date(),
-                financeMonth: new Date(),
-                editingEventId: null,
-                editingClientId: null,
-                detailClientId: null
-            };
-
-            /* ---------------- CONFLICT / FATIGUE LOGIC ---------------- */
-            function findConflicts(draftEv, excludeId) {
-                const { start: ns, end: ne } = eventRange(draftEv);
-                const buf = (draftEv.type !== 'personal' && draftEv.useBuffer !== false) ? DATA.settings.bufferMinutes * 60000 : 0;
-                const ps = new Date(ns.getTime() - buf), pe = new Date(ne.getTime() + buf);
-                return DATA.events.filter(ev => {
+            /* ---------- conflicts ---------- */
+            function bufMs(ev) { return (ev.type !== 'personal' && ev.useBuffer !== false) ? DATA.settings.bufferMinutes * 60000 : 0; }
+            function findConflicts(draft, excludeId) {
+                var r = eventRange(draft), b = bufMs(draft);
+                var ps = r.start.getTime() - b, pe = r.end.getTime() + b;
+                return DATA.events.filter(function (ev) {
                     if (ev.id === excludeId) return false;
-                    const { start: os, end: oe } = eventRange(ev);
-                    const obuf = (ev.type !== 'personal' && ev.useBuffer !== false) ? DATA.settings.bufferMinutes * 60000 : 0;
-                    const ops = new Date(os.getTime() - obuf), ope = new Date(oe.getTime() + obuf);
-                    return ps.getTime() < ope.getTime() && ops.getTime() < pe.getTime();
+                    var o = eventRange(ev), ob = bufMs(ev);
+                    return ps < o.end.getTime() + ob && o.start.getTime() - ob < pe;
                 });
             }
-            function findFatigueIssues(draftEv, excludeId) {
-                const issues = [];
-                const restMs = DATA.settings.mdaRestHours * 3600000;
-                const { start: ns, end: ne } = eventRange(draftEv);
-                if (draftEv.type !== 'mda' && draftEv.mdaShiftType !== 'night') {
-                    DATA.events.filter(ev => ev.type === 'mda' && ev.mdaShiftType === 'night' && ev.id !== excludeId).forEach(mda => {
-                        const { end: mdaEnd } = eventRange(mda);
-                        const restUntil = new Date(mdaEnd.getTime() + restMs);
-                        if (ns.getTime() < restUntil.getTime() && ne.getTime() > mdaEnd.getTime()) {
-                            issues.push({ type: 'blocked-after-shift', restUntil, mda });
-                        }
+            function findFatigueIssues(draft, excludeId) {
+                var issues = [], restMs = DATA.settings.mdaRestHours * 3600000, r = eventRange(draft);
+                if (draft.type !== 'mda' && draft.mdaShiftType !== 'night') {
+                    DATA.events.filter(function (e) { return e.type === 'mda' && e.mdaShiftType === 'night' && e.id !== excludeId; }).forEach(function (mda) {
+                        var mEnd = eventRange(mda).end, until = new Date(mEnd.getTime() + restMs);
+                        if (r.start.getTime() < until.getTime() && r.end.getTime() > mEnd.getTime()) issues.push({ type: 'blocked-after-shift', restUntil: until, mda: mda });
                     });
                 }
-                if (draftEv.type === 'mda' && draftEv.mdaShiftType === 'night') {
-                    const restUntil = new Date(ne.getTime() + restMs);
-                    DATA.events.filter(ev => (ev.type === 'gym' || ev.type === 'training') && ev.id !== excludeId).forEach(ev => {
-                        const { start: os, end: oe } = eventRange(ev);
-                        if (os.getTime() < restUntil.getTime() && oe.getTime() > ne.getTime()) {
-                            issues.push({ type: 'conflicts-with-rest', restUntil, ev });
-                        }
+                if (draft.type === 'mda' && draft.mdaShiftType === 'night') {
+                    var until2 = new Date(r.end.getTime() + restMs);
+                    DATA.events.filter(function (e) { return (e.type === 'gym' || e.type === 'training') && e.id !== excludeId; }).forEach(function (ev) {
+                        var o = eventRange(ev);
+                        if (o.start.getTime() < until2.getTime() && o.end.getTime() > r.end.getTime()) issues.push({ type: 'conflicts-with-rest', restUntil: until2, ev: ev });
                     });
                 }
                 return issues;
             }
 
-            /* ---------------- RENDER: NAV / THEME ---------------- */
+            /* ---------- nav / theme ---------- */
             function applyTheme() {
                 document.documentElement.setAttribute('data-theme', DATA.settings.theme);
                 document.getElementById('themeToggle').innerHTML = DATA.settings.theme === 'dark' ? ICONS.sun : ICONS.moon;
+                var m = document.querySelector('meta[name="theme-color"]');
+                if (m) m.setAttribute('content', DATA.settings.theme === 'dark' ? '#172120' : '#f3f6f4');
             }
-            document.getElementById('themeToggle').addEventListener('click', () => {
+            document.getElementById('themeToggle').addEventListener('click', function () {
                 DATA.settings.theme = DATA.settings.theme === 'dark' ? 'light' : 'dark';
                 applyTheme(); saveData(); renderSettings();
             });
-
-            const navIcons = { schedule: ICONS.calendar, clients: ICONS.users, finance: ICONS.wallet, settings: ICONS.settings };
-            document.querySelectorAll('.nav-btn').forEach(btn => {
+            var navIcons = { schedule: ICONS.calendar, clients: ICONS.users, finance: ICONS.wallet, settings: ICONS.settings };
+            document.querySelectorAll('.nav-btn').forEach(function (btn) {
                 btn.querySelector('.ic').innerHTML = navIcons[btn.dataset.view];
-                btn.addEventListener('click', () => switchView(btn.dataset.view));
+                btn.addEventListener('click', function () { switchView(btn.dataset.view); });
             });
             document.getElementById('fabAdd').innerHTML = ICONS.plus;
-            document.getElementById('fabAdd').addEventListener('click', () => openEventModal(null));
+            document.getElementById('fabAdd').addEventListener('click', function () { openEventModal(null); });
             document.getElementById('navPrev').innerHTML = ICONS.chevR;
             document.getElementById('navNext').innerHTML = ICONS.chevL;
             document.getElementById('finPrev').innerHTML = ICONS.chevR;
             document.getElementById('finNext').innerHTML = ICONS.chevL;
-            document.querySelectorAll('.modal-close').forEach(b => b.innerHTML = ICONS.x);
-            document.getElementById('addClientBtn').addEventListener('click', () => openClientModal(null));
+            document.querySelectorAll('.modal-close').forEach(function (b) { b.innerHTML = ICONS.x; });
+            document.getElementById('addClientBtn').addEventListener('click', function () { openClientModal(null); });
 
-            // מיישם רק את מצב התצוגה הפעיל (כרטיסיה/עיצוב), בלי לשנות את ה-view הנוכחי.
-            // חשוב: זו הפונקציה שמופעלת גם באתחול/רענון נתונים כדי שהמסך הראשון אכן יוצג מיד.
             function setActiveView(v) {
-                document.querySelectorAll('.view').forEach(el => el.classList.remove('active'));
-                const target = document.getElementById('view-' + v);
-                if (target) target.classList.add('active');
-                document.querySelectorAll('.nav-btn').forEach(b => b.classList.toggle('active', b.dataset.view === v));
+                document.querySelectorAll('.view').forEach(function (el) { el.classList.remove('active'); });
+                var t = document.getElementById('view-' + v); if (t) t.classList.add('active');
+                document.querySelectorAll('.nav-btn').forEach(function (b) { b.classList.toggle('active', b.dataset.view === v); });
                 document.getElementById('fabAdd').style.display = (v === 'schedule') ? 'flex' : 'none';
             }
-
             function switchView(v) {
-                state.view = v;
-                setActiveView(v);
+                state.view = v; setActiveView(v);
                 if (v === 'clients') renderClients();
                 if (v === 'finance') renderFinance();
                 if (v === 'settings') renderSettings();
             }
-
             function updateGreeting() {
-                const h = new Date().getHours();
-                let timeGreeting = 'ערב טוב';
-                if (h < 5) timeGreeting = 'לילה טוב';
-                else if (h < 12) timeGreeting = 'בוקר טוב';
-                else if (h < 17) timeGreeting = 'צהריים טובים';
-                else if (h < 20) timeGreeting = 'אחר הצהריים טובים';
-
-                const displayName = isGuest ? 'אורח' : 'לב';
-
-                const greetingEl = document.getElementById('greetText');
-                if (greetingEl) {
-                    greetingEl.textContent = timeGreeting + ', ' + displayName;
-                }
+                var h = new Date().getHours(), g = 'ערב טוב';
+                if (h < 5) g = 'לילה טוב'; else if (h < 12) g = 'בוקר טוב'; else if (h < 17) g = 'צהריים טובים'; else if (h < 20) g = 'אחר הצהריים טובים';
+                var el = document.getElementById('greetText');
+                if (el) el.textContent = g + ', ' + (isGuest ? 'אורח' : 'לב');
             }
 
-            /* ---------------- SCHEDULE VIEW ---------------- */
-            document.querySelectorAll('#scheduleSeg button').forEach(b => {
-                b.addEventListener('click', () => {
+            /* ---------- schedule ---------- */
+            document.querySelectorAll('#scheduleSeg button').forEach(function (b) {
+                b.addEventListener('click', function () {
                     state.scheduleMode = b.dataset.mode;
-                    document.querySelectorAll('#scheduleSeg button').forEach(x => x.classList.toggle('active', x === b));
+                    document.querySelectorAll('#scheduleSeg button').forEach(function (x) { x.classList.toggle('active', x === b); });
                     renderSchedule();
                 });
             });
-            document.getElementById('navPrev').addEventListener('click', () => shiftSchedule(1));
-            document.getElementById('navNext').addEventListener('click', () => shiftSchedule(-1));
-            document.getElementById('navToday').addEventListener('click', () => { state.selectedDate = new Date(); renderSchedule(); });
+            document.getElementById('navPrev').addEventListener('click', function () { shiftSchedule(1); });
+            document.getElementById('navNext').addEventListener('click', function () { shiftSchedule(-1); });
+            document.getElementById('navToday').addEventListener('click', function () { state.selectedDate = new Date(); renderSchedule(); });
             function shiftSchedule(dir) {
-                // dir: 1 = backward in time (prev, since RTL chevR means "next" visually but we map by function not arrow direction)
-                const m = state.scheduleMode;
-                if (m === 'day') state.selectedDate = addDays(state.selectedDate, dir * -1);
-                else if (m === 'week') state.selectedDate = addDays(state.selectedDate, dir * -7);
-                else { const d = new Date(state.selectedDate); d.setMonth(d.getMonth() + (dir * -1)); state.selectedDate = d; }
+                var m = state.scheduleMode;
+                if (m === 'day') state.selectedDate = addDays(state.selectedDate, -dir);
+                else if (m === 'week') state.selectedDate = addDays(state.selectedDate, -7 * dir);
+                else { var d = new Date(state.selectedDate); d.setMonth(d.getMonth() - dir); state.selectedDate = d; }
                 renderSchedule();
             }
-
             function renderSchedule() {
-                const mode = state.scheduleMode;
+                var mode = state.scheduleMode, sel = state.selectedDate;
                 document.getElementById('weekStripHolder').innerHTML = '';
                 document.getElementById('monthGridHolder').innerHTML = '';
-                const label = document.getElementById('dateLabel');
-
+                var label = document.getElementById('dateLabel');
                 if (mode === 'day') {
-                    label.textContent = DOW[state.selectedDate.getDay()] + "' " + state.selectedDate.getDate() + ' ב' + MONTHS[state.selectedDate.getMonth()];
-                    renderHolidayBanner(toDateStr(state.selectedDate));   // ← חדש
-                    renderAgenda(state.selectedDate);
+                    label.textContent = DOW[sel.getDay()] + "' " + sel.getDate() + ' ב' + MONTHS[sel.getMonth()];
+                    renderHolidayBanner(toDateStr(sel)); renderAgenda(sel);
                 } else if (mode === 'week') {
-                    const wStart = startOfWeek(state.selectedDate);
-                    const wEnd = addDays(wStart, 6);
-                    label.textContent = wStart.getDate() + '–' + wEnd.getDate() + ' ב' + MONTHS[wEnd.getMonth()];
-                    const strip = document.createElement('div'); strip.className = 'weekstrip';
-                    for (let i = 0; i < 7; i++) {
-                        const d = addDays(wStart, i);
-                        const chip = document.createElement('button');
-                        chip.className = 'daychip' + (sameDate(d, state.selectedDate) ? ' selected' : '');
-                        const evs = eventsOnDate(d);
-                        const holStr = toDateStr(d);
-                        const holiday = getPrimaryHoliday(holStr);
-                        const dotTypes = [...new Set(evs.map(e => e.type))];
+                    var ws = startOfWeek(sel), we = addDays(ws, 6);
+                    label.textContent = ws.getDate() + '–' + we.getDate() + ' ב' + MONTHS[we.getMonth()];
+                    var strip = document.createElement('div'); strip.className = 'weekstrip';
+                    for (var i = 0; i < 7; i++) (function (d) {
+                        var chip = document.createElement('button');
+                        chip.className = 'daychip' + (sameDate(d, sel) ? ' selected' : '');
+                        var types = Array.from(new Set(eventsOnDate(d).map(function (e) { return e.type; })));
+                        var hol = getPrimaryHoliday(toDateStr(d));
                         chip.innerHTML = '<span class="dow">' + DOW[d.getDay()] + '</span><span class="num">' + d.getDate() + '</span>' +
-                            (holiday
-                                ? '<span class="chip-holiday" style="color:' + HOLIDAY_TYPE_META[holiday.type].color + '">' + escapeHtml(holidayLabel(holiday, true)) + '</span>'
-                                : '<span class="dots">' + dotTypes.map(t => '<span style="background:' + TYPE_META[t].color + '"></span>').join('') + '</span>');
-                        if (holiday && !sameDate(d, state.selectedDate)) {
-                            chip.style.background = HOLIDAY_TYPE_META[holiday.type].bg;
-                            chip.style.borderColor = HOLIDAY_TYPE_META[holiday.type].color;
-                        }
-                        chip.addEventListener('click', () => { state.selectedDate = d; renderSchedule(); });
+                            (hol ? '<span class="chip-holiday" style="color:' + HTM[hol.type].color + '">' + escapeHtml(holidayLabel(hol, true)) + '</span>'
+                                : '<span class="dots">' + types.map(function (t) { return '<span style="background:' + TYPE_META[t].color + '"></span>'; }).join('') + '</span>');
+                        if (hol && !sameDate(d, sel)) { chip.style.background = HTM[hol.type].bg; chip.style.borderColor = HTM[hol.type].color; }
+                        chip.addEventListener('click', function () { state.selectedDate = d; renderSchedule(); });
                         strip.appendChild(chip);
-                    }
+                    })(addDays(ws, i));
                     document.getElementById('weekStripHolder').appendChild(strip);
-                    renderHolidayBanner(toDateStr(state.selectedDate));   // ← חדש, בסוף הענף הזה, לפני renderAgenda
-                    renderAgenda(state.selectedDate);
+                    renderHolidayBanner(toDateStr(sel)); renderAgenda(sel);
                 } else {
-                    const y = state.selectedDate.getFullYear(), m = state.selectedDate.getMonth();
+                    var y = sel.getFullYear(), m = sel.getMonth();
                     label.textContent = MONTHS[m] + ' ' + y;
-                    const grid = document.createElement('div'); grid.className = 'month-grid';
-                    DOW.forEach(d => { const c = document.createElement('div'); c.className = 'month-dow'; c.textContent = d; grid.appendChild(c); });
-                    const first = new Date(y, m, 1);
-                    const gridStart = addDays(first, -first.getDay());
-                    const today = new Date();
-                    for (let i = 0; i < 42; i++) {
-                        const d = addDays(gridStart, i);
-                        const cell = document.createElement('div');
-                        let cls = 'month-cell';
+                    var grid = document.createElement('div'); grid.className = 'month-grid';
+                    DOW.forEach(function (d) { var c = document.createElement('div'); c.className = 'month-dow'; c.textContent = d; grid.appendChild(c); });
+                    var first = new Date(y, m, 1), gs = addDays(first, -first.getDay()), today = new Date();
+                    for (var j = 0; j < 42; j++) (function (d) {
+                        var cell = document.createElement('div'), cls = 'month-cell';
                         if (d.getMonth() !== m) cls += ' out';
                         if (sameDate(d, today)) cls += ' today';
-                        if (sameDate(d, state.selectedDate)) cls += ' selected';
+                        if (sameDate(d, sel)) cls += ' selected';
                         cell.className = cls;
-                        const evs = eventsOnDate(d);
-                        const dotTypes = [...new Set(evs.map(e => e.type))].slice(0, 4);
-                        const holiday = getPrimaryHoliday(toDateStr(d));
+                        var types = Array.from(new Set(eventsOnDate(d).map(function (e) { return e.type; }))).slice(0, 4);
+                        var hol = getPrimaryHoliday(toDateStr(d));
                         cell.innerHTML = '<span class="mc-num">' + d.getDate() + '</span>' +
-                            (holiday
-                                ? '<span class="mc-holiday" style="color:' + HOLIDAY_TYPE_META[holiday.type].color + '">' + escapeHtml(holidayLabel(holiday, true)) + '</span>'
-                                : '<span class="mc-dots">' + dotTypes.map(t => '<span style="background:' + TYPE_META[t].color + '"></span>').join('') + '</span>');
-                        if (holiday && !sameDate(d, state.selectedDate)) {
-                            cell.style.background = HOLIDAY_TYPE_META[holiday.type].bg;
-                            cell.style.borderColor = HOLIDAY_TYPE_META[holiday.type].color;
-                        }
-                        cell.addEventListener('click', () => {
+                            (hol ? '<span class="mc-holiday" style="color:' + HTM[hol.type].color + '">' + escapeHtml(holidayLabel(hol, true)) + '</span>'
+                                : '<span class="mc-dots">' + types.map(function (t) { return '<span style="background:' + TYPE_META[t].color + '"></span>'; }).join('') + '</span>');
+                        if (hol && !sameDate(d, sel)) { cell.style.background = HTM[hol.type].bg; cell.style.borderColor = HTM[hol.type].color; }
+                        cell.addEventListener('click', function () {
                             state.selectedDate = d; state.scheduleMode = 'day';
-                            document.querySelectorAll('#scheduleSeg button').forEach(x => x.classList.toggle('active', x.dataset.mode === 'day'));
+                            document.querySelectorAll('#scheduleSeg button').forEach(function (x) { x.classList.toggle('active', x.dataset.mode === 'day'); });
                             renderSchedule();
                         });
                         grid.appendChild(cell);
-                    }
+                    })(addDays(gs, j));
                     document.getElementById('monthGridHolder').appendChild(grid);
-                    document.getElementById('holidayHolder').innerHTML = ''; // ← חדש
+                    document.getElementById('holidayHolder').innerHTML = '';
                     document.getElementById('agendaHolder').innerHTML = '';
                 }
             }
-
             function eventsOnDate(d) {
-                const ds = toDateStr(d);
-                return DATA.events.filter(ev => {
-                    const { start, end } = eventRange(ev);
-                    const dayStart = new Date(d); dayStart.setHours(0, 0, 0, 0);
-                    const dayEnd = addDays(dayStart, 1);
-                    return start.getTime() < dayEnd.getTime() && end.getTime() > dayStart.getTime();
-                }).sort((a, b) => a.startTime.localeCompare(b.startTime));
+                var ds = new Date(d); ds.setHours(0, 0, 0, 0);
+                var de = addDays(ds, 1);
+                return DATA.events.filter(function (ev) {
+                    var r = eventRange(ev);
+                    return r.start.getTime() < de.getTime() && r.end.getTime() > ds.getTime();
+                }).sort(function (a, b) { return a.startTime.localeCompare(b.startTime); });
             }
-
             function renderAgenda(date) {
-                const holder = document.getElementById('agendaHolder');
-                const evs = eventsOnDate(date);
-                if (evs.length === 0) {
-                    holder.innerHTML = '<div class="agenda-empty"><div class="big">🗓️</div>אין פעילויות ביום הזה<br><button class="btn btn-ghost cta" id="emptyAddBtn" style="width:auto;">הוספת פעילות +</button></div>';
-                    document.getElementById('emptyAddBtn').addEventListener('click', () => openEventModal(null, toDateStr(date)));
+                var holder = document.getElementById('agendaHolder'), evs = eventsOnDate(date);
+                if (!evs.length) {
+                    holder.innerHTML = '<div class="agenda-empty"><div class="big">🗓️</div>אין פעילויות ביום הזה<br><button class="btn btn-ghost cta" id="emptyAddBtn" style="width:auto">הוספת פעילות +</button></div>';
+                    document.getElementById('emptyAddBtn').addEventListener('click', function () { openEventModal(null, toDateStr(date)); });
                     return;
                 }
                 holder.innerHTML = '';
-                evs.forEach(ev => {
-                    const meta = TYPE_META[ev.type];
-                    const conflicts = findConflicts(ev, ev.id);
-                    const fatigue = findFatigueIssues(ev, ev.id);
-                    const card = document.createElement('div');
+                evs.forEach(function (ev) {
+                    var meta = TYPE_META[ev.type] || TYPE_META.personal;
+                    var conflicts = findConflicts(ev, ev.id), fatigue = findFatigueIssues(ev, ev.id);
+                    var card = document.createElement('div');
                     card.className = 'ev-card';
-                    card.style.setProperty('--c', meta.color);
-                    card.style.setProperty('--cbg', meta.bg);
-                    let client = ev.clientId ? DATA.clients.find(c => c.id === ev.clientId) : null;
-                    let metaLine = '';
-                    if (ev.type === 'training' && client) metaLine = client.name;
-                    if (ev.type === 'mda') metaLine = ev.mdaShiftType === 'morning' ? 'משמרת בוקר' : ev.mdaShiftType === 'evening' ? 'משמרת ערב' : 'משמרת לילה';
-                    if (ev.type === 'gym' && ev.commission) metaLine = 'עמלות: ' + money(ev.commission);
-                    let warnHtml = '';
-                    if (conflicts.length) { warnHtml += '<div class="ev-warn">' + ICONS.warn + ' חפיפה עם ' + conflicts.length + ' פעילות/יות</div>'; }
-                    if (fatigue.length) { warnHtml += '<div class="ev-warn">' + ICONS.warn + ' בטווח מנוחה נדרש אחרי משמרת לילה</div>'; }
+                    card.style.setProperty('--c', meta.color); card.style.setProperty('--cbg', meta.bg);
+                    var cl = ev.clientId ? DATA.clients.find(function (c) { return c.id === ev.clientId; }) : null;
+                    var ml = '';
+                    if (ev.type === 'training' && cl) ml = cl.name;
+                    if (ev.type === 'mda') ml = ev.mdaShiftType === 'morning' ? 'משמרת בוקר' : ev.mdaShiftType === 'evening' ? 'משמרת ערב' : 'משמרת לילה';
+                    if (ev.type === 'gym' && ev.commission) ml = 'עמלות: ' + money(ev.commission);
+                    var warn = '';
+                    if (conflicts.length) warn += '<div class="ev-warn">' + ICONS.warn + ' חפיפה עם ' + conflicts.length + ' פעילות/יות</div>';
+                    if (fatigue.length) warn += '<div class="ev-warn">' + ICONS.warn + ' בטווח מנוחה נדרש אחרי משמרת לילה</div>';
                     card.innerHTML = '<div class="ev-time"><div class="t1">' + ev.startTime + '</div><div class="t2">' + ev.endTime + '</div></div>' +
                         '<div class="ev-body"><div class="ev-title-row"><span class="ev-icon">' + meta.icon + '</span><span class="ev-title">' + escapeHtml(ev.title || meta.label) + '</span></div>' +
-                        (metaLine ? '<div class="ev-meta">' + escapeHtml(metaLine) + '</div>' : '') +
-                        '<span class="ev-tag">' + meta.label + '</span>' + warnHtml + '</div>';
-                    card.addEventListener('click', () => openEventModal(ev.id));
+                        (ml ? '<div class="ev-meta">' + escapeHtml(ml) + '</div>' : '') +
+                        '<span class="ev-tag">' + meta.label + '</span>' + (ev.recurringId ? ' <span class="ev-tag muted">🔁 חוזר</span>' : '') + warn + '</div>';
+                    card.addEventListener('click', function () { openEventModal(ev.id); });
                     holder.appendChild(card);
                 });
             }
-            function renderHolidayBanner(dateStr) {
-                const holder = document.getElementById('holidayHolder');
-                const hol = getPrimaryHoliday(dateStr);
-                if (!hol) { holder.innerHTML = ''; return; }
-                const meta = HOLIDAY_TYPE_META[hol.type];
-                holder.innerHTML = '<div class="holiday-banner" style="--c:' + meta.color + ';--cbg:' + meta.bg + '">' +
-                    ICONS.star + '<span>' + escapeHtml(holidayLabel(hol, false)) + ' &nbsp;•&nbsp; ' + meta.label + '</span></div>';
+            function renderHolidayBanner(ds) {
+                var holder = document.getElementById('holidayHolder'), h = getPrimaryHoliday(ds);
+                if (!h) { holder.innerHTML = ''; return; }
+                var m = HTM[h.type];
+                holder.innerHTML = '<div class="holiday-banner" style="--c:' + m.color + ';--cbg:' + m.bg + '">' + ICONS.star + '<span>' + escapeHtml(holidayLabel(h, false)) + ' &nbsp;•&nbsp; ' + m.label + '</span></div>';
             }
-            function escapeHtml(s) { return (s || '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
 
-            /* ---------------- EVENT MODAL ---------------- */
+            /* ---------- event modal ---------- */
             function openEventModal(id, presetDate) {
                 state.editingEventId = id;
-                const ev = id ? DATA.events.find(e => e.id === id) : null;
+                var ev = id ? DATA.events.find(function (e) { return e.id === id; }) : null;
                 document.getElementById('evModalTitle').textContent = ev ? 'עריכת פעילות' : 'פעילות חדשה';
-                const draft = ev ? Object.assign({}, ev) : {
-                    id: null, type: 'gym', title: '', date: presetDate || toDateStr(state.selectedDate),
-                    startTime: '08:00', endTime: '12:00', useBuffer: true, notes: '',
-                    mdaShiftType: 'morning', clientId: '', commission: 0, price: DATA.settings.trainingPrice
-                };
+                var draft = ev ? Object.assign({}, ev) : { id: null, type: 'gym', title: '', date: presetDate || toDateStr(state.selectedDate), startTime: '08:00', endTime: '12:00', useBuffer: true, notes: '', mdaShiftType: 'morning', clientId: '', commission: 0, price: DATA.settings.trainingPrice, recurring: false };
                 renderEventForm(draft);
                 document.getElementById('modalEvent').classList.add('open');
             }
             function closeModal(id) { document.getElementById(id).classList.remove('open'); }
-            document.querySelectorAll('[data-close]').forEach(el => el.addEventListener('click', () => closeModal(el.dataset.close)));
-            document.querySelectorAll('.modal-backdrop').forEach(el => el.addEventListener('click', () => el.parentElement.classList.remove('open')));
+            document.querySelectorAll('[data-close]').forEach(function (el) { el.addEventListener('click', function () { closeModal(el.dataset.close); }); });
 
             function renderEventForm(draft) {
-                const body = document.getElementById('evModalBody');
-                const trainClients = DATA.clients;
-                body.innerHTML = `
-                            <div class="type-picker" id="typePicker">
-                              ${Object.keys(TYPE_META).map(t => `<button class="type-opt ${draft.type === t ? 'selected' : ''}" data-type="${t}" style="--c:${TYPE_META[t].color};--cbg:${TYPE_META[t].bg}">${TYPE_META[t].icon}<span>${TYPE_META[t].label}</span></button>`).join('')}
-                            </div>
-                            <label>כותרת (אופציונלי)</label>
-                            <input id="f_title" value="${escapeHtml(draft.title || '')}" placeholder="${TYPE_META[draft.type].label}">
-                            <div class="field-row">
-                              <div><label>תאריך</label><input type="date" id="f_date" value="${draft.date}"></div>
-                              <div></div>
-                            </div>
-                            <div class="field-row">
-                              <div><label>שעת התחלה</label><input type="time" id="f_start" value="${draft.startTime}"></div>
-                              <div><label>שעת סיום</label><input type="time" id="f_end" value="${draft.endTime}"></div>
-                            </div>
-                            <div id="typeExtra"></div>
-                            <div class="toggle-row">
-                              <div><div class="t-main">חסימת זמן נסיעה/התארגנות</div><div class="t-sub">${DATA.settings.bufferMinutes} דק' לפני ואחרי</div></div>
-                              <div class="switch ${draft.useBuffer !== false ? 'on' : ''}" id="f_buffer"></div>
-                            </div>
-                            <label>הערות</label>
-                            <textarea id="f_notes" rows="2" placeholder="הערות חופשיות...">${escapeHtml(draft.notes || '')}</textarea>
-                            <div id="conflictBox"></div>
-                            <div class="row-btns">
-                              ${draft.id ? '<button class="btn btn-danger" id="delEvBtn">מחיקה</button>' : ''}
-                              <button class="btn btn-primary" id="saveEvBtn">שמירה</button>
-                            </div>
-                          `;
-                document.getElementById('f_buffer').addEventListener('click', function () { this.classList.toggle('on'); refreshConflictPreview(draft); });
+                var body = document.getElementById('evModalBody'), clients = DATA.clients;
+                body.innerHTML =
+                    '<div class="type-picker" id="typePicker">' + Object.keys(TYPE_META).map(function (t) {
+                        return '<button class="type-opt ' + (draft.type === t ? 'selected' : '') + '" data-type="' + t + '" style="--c:' + TYPE_META[t].color + ';--cbg:' + TYPE_META[t].bg + '">' + TYPE_META[t].icon + '<span>' + TYPE_META[t].label + '</span></button>';
+                    }).join('') + '</div>' +
+                    '<label>כותרת (אופציונלי)</label><input id="f_title" value="' + escapeHtml(draft.title || '') + '" placeholder="' + TYPE_META[draft.type].label + '">' +
+                    '<div class="field-row"><div><label>תאריך</label><input type="date" id="f_date" value="' + draft.date + '"></div><div></div></div>' +
+                    '<div class="field-row"><div><label>שעת התחלה</label><input type="time" id="f_start" value="' + draft.startTime + '"></div><div><label>שעת סיום</label><input type="time" id="f_end" value="' + draft.endTime + '"></div></div>' +
+                    '<div id="typeExtra"></div>' +
+                    '<div class="toggle-row"><div><div class="t-main">חסימת זמן נסיעה/התארגנות</div><div class="t-sub">' + DATA.settings.bufferMinutes + " דק' לפני ואחרי</div></div><div class=\"switch " + (draft.useBuffer !== false ? 'on' : '') + '" id="f_buffer"></div></div>' +
+                    '<div id="recurringBox"></div>' +
+                    '<label>הערות</label><textarea id="f_notes" rows="2" placeholder="הערות חופשיות...">' + escapeHtml(draft.notes || '') + '</textarea>' +
+                    '<div id="conflictBox"></div>' +
+                    '<div class="row-btns">' + (draft.id ? '<button class="btn btn-danger" id="delEvBtn">מחיקה</button>' : '') + '<button class="btn btn-primary" id="saveEvBtn">שמירה</button></div>';
 
-                document.querySelectorAll('#typePicker .type-opt').forEach(btn => {
-                    btn.addEventListener('click', () => {
+                document.getElementById('f_buffer').addEventListener('click', function () { this.classList.toggle('on'); refreshConflictPreview(draft); });
+                document.querySelectorAll('#typePicker .type-opt').forEach(function (btn) {
+                    btn.addEventListener('click', function () {
                         draft.type = btn.dataset.type;
-                        document.querySelectorAll('#typePicker .type-opt').forEach(b => b.classList.toggle('selected', b === btn));
-                        renderTypeExtra(draft);
-                        refreshConflictPreview(draft);
+                        document.querySelectorAll('#typePicker .type-opt').forEach(function (b) { b.classList.toggle('selected', b === btn); });
+                        document.getElementById('f_title').placeholder = TYPE_META[draft.type].label;
+                        renderTypeExtra(draft); refreshConflictPreview(draft);
                     });
                 });
                 renderTypeExtra(draft);
+                renderRecurringBox(draft);
+                ['f_date', 'f_start', 'f_end'].forEach(function (id) { document.getElementById(id).addEventListener('change', function () { updatePresetSel(); refreshConflictPreview(draft); }); });
 
-                ['f_date', 'f_start', 'f_end'].forEach(id => document.getElementById(id).addEventListener('change', () => refreshConflictPreview(draft)));
-
-                function renderTypeExtra(d) {
-                    const box = document.getElementById('typeExtra');
-                    if (d.type === 'mda') {
-                        box.innerHTML = `<label>סוג משמרת</label>
-                              <select id="f_shift">
-                                <option value="morning" ${d.mdaShiftType === 'morning' ? 'selected' : ''}>בוקר</option>
-                                <option value="evening" ${d.mdaShiftType === 'evening' ? 'selected' : ''}>ערב</option>
-                                <option value="night" ${d.mdaShiftType === 'night' ? 'selected' : ''}>לילה</option>
-                              </select>`;
-                        document.getElementById('f_shift').addEventListener('change', e => { d.mdaShiftType = e.target.value; refreshConflictPreview(d); });
-                    } else if (d.type === 'gym') {
-                        box.innerHTML = `<label>עמלות מכירה במשמרת (₪)</label><input type="number" id="f_comm" value="${d.commission || 0}" min="0" step="5">`;
-                    } else if (d.type === 'training') {
-                        box.innerHTML = `<label>מתאמן</label>
-                              <select id="f_client"><option value="">— ללא שיוך —</option>${trainClients.map(c => `<option value="${c.id}" ${d.clientId === c.id ? 'selected' : ''}>${escapeHtml(c.name)}</option>`).join('')}</select>
-                              <label>תעריף לאימון (₪)</label><input type="number" id="f_price" value="${d.price != null ? d.price : DATA.settings.trainingPrice}" min="0" step="5">`;
-                    } else {
-                        box.innerHTML = '';
-                    }
+                function updatePresetSel() {
+                    var st = document.getElementById('f_start').value, en = document.getElementById('f_end').value;
+                    document.querySelectorAll('#shiftPresets .preset').forEach(function (b) { b.classList.toggle('selected', b.dataset.s === st && b.dataset.e === en); });
                 }
-
+                function renderRecurringBox(d) {
+                    var box = document.getElementById('recurringBox');
+                    if (d.id) { box.innerHTML = ''; return; }
+                    box.innerHTML = '<div class="toggle-row"><div><div class="t-main">אירוע חוזר 🔁</div><div class="t-sub">כל שבוע, באותו יום ואותה שעה, למשך שנה קדימה</div></div><div class="switch ' + (d.recurring ? 'on' : '') + '" id="f_recurring"></div></div>';
+                    document.getElementById('f_recurring').addEventListener('click', function () { this.classList.toggle('on'); d.recurring = this.classList.contains('on'); });
+                }
+                function renderTypeExtra(d) {
+                    var box = document.getElementById('typeExtra');
+                    if (d.type === 'mda') {
+                        box.innerHTML = '<label>סוג משמרת</label><select id="f_shift"><option value="morning"' + (d.mdaShiftType === 'morning' ? ' selected' : '') + '>בוקר</option><option value="evening"' + (d.mdaShiftType === 'evening' ? ' selected' : '') + '>ערב</option><option value="night"' + (d.mdaShiftType === 'night' ? ' selected' : '') + '>לילה</option></select>';
+                        document.getElementById('f_shift').addEventListener('change', function (e) { d.mdaShiftType = e.target.value; refreshConflictPreview(d); });
+                    } else if (d.type === 'gym') {
+                        box.innerHTML = '<label>משמרת מהירה (מעדכן את השעות)</label><div class="preset-row" id="shiftPresets">' +
+                            '<button type="button" class="preset" data-s="06:00" data-e="11:00">🌅 בוקר<small>06:00–11:00</small></button>' +
+                            '<button type="button" class="preset" data-s="11:00" data-e="16:00">☀️ צהריים<small>11:00–16:00</small></button>' +
+                            '<button type="button" class="preset" data-s="16:00" data-e="21:00">🌇 ערב<small>16:00–21:00</small></button>' +
+                            '<button type="button" class="preset" data-s="20:00" data-e="23:00">🌙 לילה<small>20:00–23:00</small></button></div>' +
+                            '<label>עמלות מכירה במשמרת (₪)</label><input type="number" id="f_comm" value="' + (d.commission || 0) + '" min="0" step="5">';
+                        document.querySelectorAll('#shiftPresets .preset').forEach(function (b) {
+                            b.addEventListener('click', function () {
+                                document.getElementById('f_start').value = b.dataset.s;
+                                document.getElementById('f_end').value = b.dataset.e;
+                                updatePresetSel(); refreshConflictPreview(d);
+                            });
+                        });
+                        updatePresetSel();
+                    } else if (d.type === 'training') {
+                        box.innerHTML = '<label>מתאמן</label><select id="f_client"><option value="">— ללא שיוך —</option>' + clients.map(function (c) { return '<option value="' + c.id + '"' + (d.clientId === c.id ? ' selected' : '') + '>' + escapeHtml(c.name) + '</option>'; }).join('') + '</select>' +
+                            '<label>תעריף לאימון (₪)</label><input type="number" id="f_price" value="' + (d.price != null ? d.price : DATA.settings.trainingPrice) + '" min="0" step="5">';
+                    } else box.innerHTML = '';
+                }
                 function refreshConflictPreview(d) {
-                    const test = {
-                        id: d.id, type: d.type, date: document.getElementById('f_date').value,
-                        startTime: document.getElementById('f_start').value, endTime: document.getElementById('f_end').value,
-                        useBuffer: document.getElementById('f_buffer').classList.contains('on'),
-                        mdaShiftType: d.mdaShiftType
-                    };
-                    const conflicts = findConflicts(test, d.id);
-                    const fatigue = findFatigueIssues(test, d.id);
-                    const box = document.getElementById('conflictBox');
-                    let html = '';
-                    if (conflicts.length) {
-                        html += '<div class="alert">' + ICONS.warn + '<div><b>זוהתה חפיפה</b>חופפת ל' + conflicts.map(c => TYPE_META[c.type].label + ' (' + c.startTime + '–' + c.endTime + ')').join(', ') + (document.getElementById('f_buffer').classList.contains('on') ? ' (כולל זמן חוצץ)' : '') + '</div></div>';
-                    }
-                    fatigue.forEach(f => {
-                        if (f.type === 'blocked-after-shift') {
-                            html += '<div class="alert">' + ICONS.warn + '<div><b>מתחת לזמן מנוחה</b>נדרשת מנוחה עד השעה ' + pad(f.restUntil.getHours()) + ':' + pad(f.restUntil.getMinutes()) + ' לאחר משמרת לילה במד"א</div></div>';
-                        } else {
-                            html += '<div class="alert">' + ICONS.warn + '<div><b>פוגע בזמן מנוחה</b>הפעילות "' + TYPE_META[f.ev.type].label + '" (' + f.ev.startTime + ') נמצאת בטווח מנוחה נדרש עד ' + pad(f.restUntil.getHours()) + ':' + pad(f.restUntil.getMinutes()) + '</div></div>';
-                        }
+                    var test = { id: d.id, type: d.type, date: document.getElementById('f_date').value, startTime: document.getElementById('f_start').value, endTime: document.getElementById('f_end').value, useBuffer: document.getElementById('f_buffer').classList.contains('on'), mdaShiftType: d.mdaShiftType };
+                    var box = document.getElementById('conflictBox');
+                    if (!test.date || !test.startTime || !test.endTime) { box.innerHTML = ''; return; }
+                    var conflicts = findConflicts(test, d.id), fatigue = findFatigueIssues(test, d.id), html = '';
+                    if (conflicts.length) html += '<div class="alert">' + ICONS.warn + '<div><b>זוהתה חפיפה</b>חופפת ל' + conflicts.map(function (c) { return TYPE_META[c.type].label + ' (' + c.startTime + '–' + c.endTime + ')'; }).join(', ') + (test.useBuffer ? ' (כולל זמן חוצץ)' : '') + '</div></div>';
+                    fatigue.forEach(function (f) {
+                        var t = pad(f.restUntil.getHours()) + ':' + pad(f.restUntil.getMinutes());
+                        if (f.type === 'blocked-after-shift') html += '<div class="alert">' + ICONS.warn + '<div><b>מתחת לזמן מנוחה</b>נדרשת מנוחה עד השעה ' + t + ' לאחר משמרת לילה במד"א</div></div>';
+                        else html += '<div class="alert">' + ICONS.warn + '<div><b>פוגע בזמן מנוחה</b>הפעילות "' + TYPE_META[f.ev.type].label + '" (' + f.ev.startTime + ') נמצאת בטווח מנוחה נדרש עד ' + t + '</div></div>';
                     });
                     box.innerHTML = html;
                 }
                 refreshConflictPreview(draft);
 
-                document.getElementById('saveEvBtn').addEventListener('click', () => {
+                document.getElementById('saveEvBtn').addEventListener('click', function () {
                     draft.title = document.getElementById('f_title').value.trim();
                     draft.date = document.getElementById('f_date').value;
                     draft.startTime = document.getElementById('f_start').value;
                     draft.endTime = document.getElementById('f_end').value;
                     draft.useBuffer = document.getElementById('f_buffer').classList.contains('on');
                     draft.notes = document.getElementById('f_notes').value.trim();
-                    if (draft.type === 'mda') { draft.mdaShiftType = document.getElementById('f_shift').value; }
-                    if (draft.type === 'gym') { draft.commission = parseFloat(document.getElementById('f_comm').value) || 0; }
+                    if (draft.type === 'mda') draft.mdaShiftType = document.getElementById('f_shift').value;
+                    if (draft.type === 'gym') draft.commission = parseFloat(document.getElementById('f_comm').value) || 0;
                     if (draft.type === 'training') {
                         draft.clientId = document.getElementById('f_client').value || '';
                         draft.price = parseFloat(document.getElementById('f_price').value) || DATA.settings.trainingPrice;
                     }
                     if (!draft.date || !draft.startTime || !draft.endTime) { alert('נא למלא תאריך ושעות'); return; }
                     if (draft.id) {
-                        const idx = DATA.events.findIndex(e => e.id === draft.id);
+                        var idx = DATA.events.findIndex(function (e) { return e.id === draft.id; });
                         DATA.events[idx] = draft;
                     } else {
                         draft.id = uid();
-                        draft.status = draft.type === 'training' ? 'scheduled' : undefined;
+                        if (draft.type === 'training') draft.status = 'scheduled'; else delete draft.status;
+                        if (draft.recurring) {
+                            var rid = uid(), base = parseDateStr(draft.date);
+                            for (var i = 0; i < 52; i++) {
+                                var occ = Object.assign({}, draft, { id: i === 0 ? draft.id : uid(), date: toDateStr(addDays(base, i * 7)), recurringId: rid });
+                                delete occ.recurring;
+                                DATA.events.push(occ);
+                            }
+                            saveData(); closeModal('modalEvent'); renderSchedule();
+                            if (state.view === 'finance') renderFinance();
+                            return;
+                        }
+                        delete draft.recurring;
                         DATA.events.push(draft);
                     }
-                    saveData();
-                    closeModal('modalEvent');
-                    renderSchedule();
+                    saveData(); closeModal('modalEvent'); renderSchedule();
                     if (state.view === 'finance') renderFinance();
                 });
                 if (draft.id) {
-                    document.getElementById('delEvBtn').addEventListener('click', () => {
+                    document.getElementById('delEvBtn').addEventListener('click', function () {
                         if (confirm('למחוק את הפעילות?')) {
-                            DATA.events = DATA.events.filter(e => e.id !== draft.id);
+                            DATA.events = DATA.events.filter(function (e) { return e.id !== draft.id; });
                             saveData(); closeModal('modalEvent'); renderSchedule();
                         }
                     });
                 }
             }
 
-            /* ---------------- CLIENTS ---------------- */
+            /* ---------- clients ---------- */
             function renderClients() {
-                const holder = document.getElementById('clientsHolder');
-                if (DATA.clients.length === 0) {
-                    holder.innerHTML = '<div class="agenda-empty">' + ICONS.users.replace('width="24" height="24"', 'width="40" height="40"') + '<div style="margin-top:10px;">אין עדיין מתאמנים רשומים<br>הוספת מתאמן תאפשר מעקב כרטיסיות ונוכחות</div></div>';
+                var holder = document.getElementById('clientsHolder');
+                if (!DATA.clients.length) {
+                    holder.innerHTML = '<div class="agenda-empty"><div class="big">👥</div><div>אין עדיין מתאמנים רשומים<br>הוספת מתאמן תאפשר מעקב כרטיסיות ונוכחות</div></div>';
                     return;
                 }
                 holder.innerHTML = '';
-                DATA.clients.forEach(c => {
-                    const remaining = (c.packageTotal || 0) - (c.packageUsed || 0);
-                    const low = remaining <= 2;
-                    const div = document.createElement('div');
+                DATA.clients.forEach(function (c) {
+                    var rem = (c.packageTotal || 0) - (c.packageUsed || 0);
+                    var div = document.createElement('div');
                     div.className = 'client-card';
-                    div.innerHTML = `<div class="client-top">
-                              <div><div class="client-name">${escapeHtml(c.name)}</div>${c.phone ? '<div class="client-phone">' + escapeHtml(c.phone) + '</div>' : ''}</div>
-                              <span class="pkg-pill ${low ? 'low' : ''}">${remaining} נותרו</span>
-                            </div>${c.goals ? '<div class="client-goals">🎯 ' + escapeHtml(c.goals) + '</div>' : ''}`;
-                    div.addEventListener('click', () => openClientDetail(c.id));
+                    div.innerHTML = '<div class="client-top"><div><div class="client-name">' + escapeHtml(c.name) + '</div>' + (c.phone ? '<div class="client-phone">' + escapeHtml(c.phone) + '</div>' : '') + '</div><span class="pkg-pill ' + (rem <= 2 ? 'low' : '') + '">' + rem + ' נותרו</span></div>' + (c.goals ? '<div class="client-goals">🎯 ' + escapeHtml(c.goals) + '</div>' : '');
+                    div.addEventListener('click', function () { openClientDetail(c.id); });
                     holder.appendChild(div);
                 });
             }
-
             function openClientModal(id) {
                 state.editingClientId = id;
-                const c = id ? DATA.clients.find(x => x.id === id) : null;
+                var c = id ? DATA.clients.find(function (x) { return x.id === id; }) : null;
                 document.getElementById('clModalTitle').textContent = c ? 'עריכת מתאמן' : 'מתאמן חדש';
-                const draft = c ? Object.assign({}, c) : { id: null, name: '', phone: '', goals: '', medical: '', packageTotal: 10, packageUsed: 0, history: [] };
-                document.getElementById('clModalBody').innerHTML = `
-                            <label>שם מלא</label><input id="c_name" value="${escapeHtml(draft.name)}">
-                            <label>טלפון</label><input id="c_phone" value="${escapeHtml(draft.phone || '')}" type="tel">
-                            <label>מטרות כושר</label><input id="c_goals" value="${escapeHtml(draft.goals || '')}">
-                            <label>הערות רפואיות / מגבלות</label><textarea id="c_med" rows="2">${escapeHtml(draft.medical || '')}</textarea>
-                            <div class="field-row">
-                              <div><label>סה"כ אימונים בכרטיסייה</label><input id="c_total" type="number" min="0" value="${draft.packageTotal || 0}"></div>
-                              <div><label>נוצלו עד כה</label><input id="c_used" type="number" min="0" value="${draft.packageUsed || 0}"></div>
-                            </div>
-                            <div class="row-btns">
-                              ${draft.id ? '<button class="btn btn-danger" id="delClBtn">מחיקה</button>' : ''}
-                              <button class="btn btn-primary" id="saveClBtn">שמירה</button>
-                            </div>`;
-                document.getElementById('saveClBtn').addEventListener('click', () => {
+                var draft = c ? Object.assign({}, c) : { id: null, name: '', phone: '', goals: '', medical: '', packageTotal: 10, packageUsed: 0, history: [] };
+                document.getElementById('clModalBody').innerHTML =
+                    '<label>שם מלא</label><input id="c_name" value="' + escapeHtml(draft.name) + '">' +
+                    '<label>טלפון</label><input id="c_phone" value="' + escapeHtml(draft.phone || '') + '" type="tel">' +
+                    '<label>מטרות כושר</label><input id="c_goals" value="' + escapeHtml(draft.goals || '') + '">' +
+                    '<label>הערות רפואיות / מגבלות</label><textarea id="c_med" rows="2">' + escapeHtml(draft.medical || '') + '</textarea>' +
+                    '<div class="field-row"><div><label>סה"כ אימונים בכרטיסייה</label><input id="c_total" type="number" min="0" value="' + (draft.packageTotal || 0) + '"></div><div><label>נוצלו עד כה</label><input id="c_used" type="number" min="0" value="' + (draft.packageUsed || 0) + '"></div></div>' +
+                    '<div class="row-btns">' + (draft.id ? '<button class="btn btn-danger" id="delClBtn">מחיקה</button>' : '') + '<button class="btn btn-primary" id="saveClBtn">שמירה</button></div>';
+                document.getElementById('saveClBtn').addEventListener('click', function () {
                     draft.name = document.getElementById('c_name').value.trim();
                     if (!draft.name) { alert('נא להזין שם'); return; }
                     draft.phone = document.getElementById('c_phone').value.trim();
@@ -1951,379 +1687,310 @@
                     draft.packageTotal = parseInt(document.getElementById('c_total').value) || 0;
                     draft.packageUsed = parseInt(document.getElementById('c_used').value) || 0;
                     draft.history = draft.history || [];
-                    if (draft.id) { const idx = DATA.clients.findIndex(x => x.id === draft.id); DATA.clients[idx] = draft; }
+                    if (draft.id) { var i = DATA.clients.findIndex(function (x) { return x.id === draft.id; }); DATA.clients[i] = draft; }
                     else { draft.id = uid(); DATA.clients.push(draft); }
                     saveData(); closeModal('modalClient'); renderClients();
                 });
                 if (draft.id) {
-                    document.getElementById('delClBtn').addEventListener('click', () => {
+                    document.getElementById('delClBtn').addEventListener('click', function () {
                         if (confirm('למחוק את המתאמן? (האימונים המשויכים יישארו ביומן ללא שיוך)')) {
-                            DATA.clients = DATA.clients.filter(x => x.id !== draft.id);
-                            DATA.events.forEach(e => { if (e.clientId === draft.id) e.clientId = ''; });
+                            DATA.clients = DATA.clients.filter(function (x) { return x.id !== draft.id; });
+                            DATA.events.forEach(function (e) { if (e.clientId === draft.id) e.clientId = ''; });
                             saveData(); closeModal('modalClient'); renderClients();
                         }
                     });
                 }
                 document.getElementById('modalClient').classList.add('open');
             }
-
             function openClientDetail(id) {
                 state.detailClientId = id;
-                const c = DATA.clients.find(x => x.id === id);
-                const remaining = (c.packageTotal || 0) - (c.packageUsed || 0);
-                const upcoming = DATA.events.filter(e => e.type === 'training' && e.clientId === id && e.status === 'scheduled' && parseDateStr(e.date) >= new Date(new Date().setHours(0, 0, 0, 0))).sort((a, b) => a.date.localeCompare(b.date));
-                const history = (c.history || []).slice().reverse();
-                document.getElementById('clDetailBody').innerHTML = `
-                            <div class="modal-title">${escapeHtml(c.name)}</div>
-                            ${c.phone ? '<div class="client-phone" style="margin-bottom:10px;">' + escapeHtml(c.phone) + '</div>' : ''}
-                            <div class="stat-grid" style="margin:12px 0;">
-                              <div class="stat"><div class="num">${remaining}</div><div class="lbl">אימונים נותרו</div></div>
-                              <div class="stat"><div class="num">${c.packageUsed || 0}/${c.packageTotal || 0}</div><div class="lbl">נוצלו</div></div>
-                            </div>
-                            ${c.goals ? '<div class="section-title">מטרות</div><div>' + escapeHtml(c.goals) + '</div>' : ''}
-                            ${c.medical ? '<div class="section-title">הערות רפואיות</div><div>' + escapeHtml(c.medical) + '</div>' : ''}
-                            <div class="section-title">אימונים קרובים</div>
-                            ${upcoming.length ? upcoming.map(e => `<div class="ev-card" style="--c:${TYPE_META.training.color};--cbg:${TYPE_META.training.bg}"><div class="ev-time"><div class="t1">${e.startTime}</div><div class="t2">${e.date.slice(5)}</div></div>
-                              <div class="ev-body"><div class="ev-title">${escapeHtml(e.title || 'אימון אישי')}</div>
-                              <div class="row-btns">
-                                <button class="btn btn-ghost btn-sm" data-checkin="${e.id}">${ICONS.check} הגיע</button>
-                                <button class="btn btn-danger btn-sm" data-cancel="${e.id}">ביטול</button>
-                              </div></div></div>`).join('') : '<div class="empty-note">אין אימונים עתידיים מתוזמנים</div>'}
-                            <div class="section-title">היסטוריה</div>
-                            ${history.length ? history.slice(0, 10).map(h => `<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:12.5px;">
-                              <span>${h.date}</span><span style="color:${h.status === 'attended' ? 'var(--training)' : 'var(--mda)'}">${h.status === 'attended' ? 'הגיע' : h.status === 'late-cancel' ? 'ביטול מאוחר' : 'ביטול'}</span></div>`).join('') : '<div class="empty-note">אין היסטוריה עדיין</div>'}
-                            <div class="row-btns">
-                              <button class="btn btn-ghost" id="editClFromDetail">עריכת פרטים</button>
-                            </div>
-                          `;
-                document.getElementById('editClFromDetail').addEventListener('click', () => { closeModal('modalClientDetail'); openClientModal(id); });
-                document.querySelectorAll('[data-checkin]').forEach(b => b.addEventListener('click', () => markTraining(b.dataset.checkin, 'attended')));
-                document.querySelectorAll('[data-cancel]').forEach(b => b.addEventListener('click', () => {
-                    const late = confirm('האם זהו ביטול מאוחר (מנוכה מהכרטיסייה)? אישור = כן, ביטול = לא');
-                    markTraining(b.dataset.cancel, late ? 'late-cancel' : 'cancelled');
-                }));
+                var c = DATA.clients.find(function (x) { return x.id === id; });
+                if (!c) return;
+                var rem = (c.packageTotal || 0) - (c.packageUsed || 0);
+                var todayStart = new Date(new Date().setHours(0, 0, 0, 0));
+                var upcoming = DATA.events.filter(function (e) { return e.type === 'training' && e.clientId === id && e.status === 'scheduled' && parseDateStr(e.date) >= todayStart; }).sort(function (a, b) { return a.date.localeCompare(b.date); });
+                var history = (c.history || []).slice().reverse();
+                document.getElementById('clDetailBody').innerHTML =
+                    '<div class="modal-title">' + escapeHtml(c.name) + '</div>' + (c.phone ? '<div class="client-phone" style="margin-bottom:10px">' + escapeHtml(c.phone) + '</div>' : '') +
+                    '<div class="stat-grid" style="margin:12px 0"><div class="stat"><div class="num">' + rem + '</div><div class="lbl">אימונים נותרו</div></div><div class="stat"><div class="num">' + (c.packageUsed || 0) + '/' + (c.packageTotal || 0) + '</div><div class="lbl">נוצלו</div></div></div>' +
+                    (c.goals ? '<div class="section-title">מטרות</div><div>' + escapeHtml(c.goals) + '</div>' : '') +
+                    (c.medical ? '<div class="section-title">הערות רפואיות</div><div>' + escapeHtml(c.medical) + '</div>' : '') +
+                    '<div class="section-title">אימונים קרובים</div>' +
+                    (upcoming.length ? upcoming.map(function (e) {
+                        return '<div class="ev-card" style="--c:' + TYPE_META.training.color + ';--cbg:' + TYPE_META.training.bg + '"><div class="ev-time"><div class="t1">' + e.startTime + '</div><div class="t2">' + shortDate(e.date) + '</div></div><div class="ev-body"><div class="ev-title">' + escapeHtml(e.title || 'אימון אישי') + '</div><div class="row-btns"><button class="btn btn-ghost btn-sm" data-checkin="' + e.id + '">' + ICONS.check + ' הגיע</button><button class="btn btn-danger btn-sm" data-cancel="' + e.id + '">ביטול</button></div></div></div>';
+                    }).join('') : '<div class="empty-note">אין אימונים עתידיים מתוזמנים</div>') +
+                    '<div class="section-title">היסטוריה</div>' +
+                    (history.length ? history.slice(0, 10).map(function (h) {
+                        return '<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:12.5px"><span>' + h.date + '</span><span style="color:' + (h.status === 'attended' ? 'var(--training)' : 'var(--mda)') + '">' + (h.status === 'attended' ? 'הגיע' : h.status === 'late-cancel' ? 'ביטול מאוחר' : 'ביטול') + '</span></div>';
+                    }).join('') : '<div class="empty-note">אין היסטוריה עדיין</div>') +
+                    '<div class="row-btns"><button class="btn btn-ghost" id="editClFromDetail">עריכת פרטים</button></div>';
+                document.getElementById('editClFromDetail').addEventListener('click', function () { closeModal('modalClientDetail'); openClientModal(id); });
+                document.querySelectorAll('[data-checkin]').forEach(function (b) { b.addEventListener('click', function () { markTraining(b.dataset.checkin, 'attended'); }); });
+                document.querySelectorAll('[data-cancel]').forEach(function (b) {
+                    b.addEventListener('click', function () {
+                        var late = confirm('האם זהו ביטול מאוחר (מנוכה מהכרטיסייה)? אישור = כן, ביטול = לא');
+                        markTraining(b.dataset.cancel, late ? 'late-cancel' : 'cancelled');
+                    });
+                });
                 document.getElementById('modalClientDetail').classList.add('open');
             }
             function markTraining(eventId, status) {
-                const ev = DATA.events.find(e => e.id === eventId);
+                var ev = DATA.events.find(function (e) { return e.id === eventId; });
                 if (!ev) return;
                 ev.status = status;
-                const c = DATA.clients.find(x => x.id === ev.clientId);
+                var c = DATA.clients.find(function (x) { return x.id === ev.clientId; });
                 if (c) {
                     c.history = c.history || [];
-                    c.history.push({ id: uid(), date: ev.date, status, eventId });
-                    if (status === 'attended' || status === 'late-cancel') { c.packageUsed = (c.packageUsed || 0) + 1; }
+                    c.history.push({ id: uid(), date: ev.date, status: status, eventId: eventId });
+                    if (status === 'attended' || status === 'late-cancel') c.packageUsed = (c.packageUsed || 0) + 1;
                 }
-                saveData();
-                openClientDetail(ev.clientId);
-                renderClients();
+                saveData(); openClientDetail(ev.clientId); renderClients();
             }
             function autoFinalizeTrainings() {
-                if (!storageReady) return;
-                const now = new Date();
-                let changed = false;
-                DATA.events.forEach(ev => {
-                    if (ev.type === 'training' && ev.status === 'scheduled') {
-                        const { end } = eventRange(ev);
-                        if (end.getTime() <= now.getTime()) {
-                            ev.status = 'attended';
-                            const c = DATA.clients.find(x => x.id === ev.clientId);
-                            if (c) {
-                                c.history = c.history || [];
-                                c.history.push({ id: uid(), date: ev.date, status: 'attended', eventId: ev.id });
-                                c.packageUsed = (c.packageUsed || 0) + 1;
-                            }
-                            changed = true;
-                        }
+                if (!storageReady || isGuest) return;
+                var now = new Date(), changed = false;
+                DATA.events.forEach(function (ev) {
+                    if (ev.type === 'training' && ev.status === 'scheduled' && eventRange(ev).end.getTime() <= now.getTime()) {
+                        ev.status = 'attended';
+                        var c = DATA.clients.find(function (x) { return x.id === ev.clientId; });
+                        if (c) { c.history = c.history || []; c.history.push({ id: uid(), date: ev.date, status: 'attended', eventId: ev.id }); c.packageUsed = (c.packageUsed || 0) + 1; }
+                        changed = true;
                     }
                 });
-                if (changed) {
-                    saveData();
-                    renderSchedule();
-                    renderClients();
-                    if (state.view === 'finance') renderFinance();
-                }
+                if (changed) { saveData(); renderSchedule(); renderClients(); if (state.view === 'finance') renderFinance(); }
             }
 
-            /* ---------------- FINANCE ---------------- */
-            document.getElementById('finPrev').addEventListener('click', () => { const d = new Date(state.financeMonth); d.setMonth(d.getMonth() - 1); state.financeMonth = d; renderFinance(); });
-            document.getElementById('finNext').addEventListener('click', () => { const d = new Date(state.financeMonth); d.setMonth(d.getMonth() + 1); state.financeMonth = d; renderFinance(); });
+            function shiftMult(ev) { return parseDateStr(ev.date).getDay() === 6 ? 1.5 : 1; } /* שבת = 150% */
+            /* ---------- finance ---------- */
+            document.getElementById('finPrev').addEventListener('click', function () { var d = new Date(state.financeMonth); d.setMonth(d.getMonth() - 1); state.financeMonth = d; renderFinance(); });
+            document.getElementById('finNext').addEventListener('click', function () { var d = new Date(state.financeMonth); d.setMonth(d.getMonth() + 1); state.financeMonth = d; renderFinance(); });
 
             function renderFinance() {
-                const y = state.financeMonth.getFullYear(), m = state.financeMonth.getMonth();
+                var y = state.financeMonth.getFullYear(), m = state.financeMonth.getMonth();
                 document.getElementById('finLabel').textContent = MONTHS[m] + ' ' + y;
-                const inMonth = DATA.events.filter(e => { const d = parseDateStr(e.date); return d.getFullYear() === y && d.getMonth() === m; });
-
-                const now = new Date();
-                let gymHours = 0, gymCommission = 0, mdaHours = 0, trainingCount = 0, trainingIncome = 0, trainingScheduled = 0;
-                inMonth.forEach(ev => {
-                    const { start, end } = eventRange(ev);
-                    const hrs = (end - start) / 3600000;
-                    const isDone = end.getTime() <= now.getTime(); // הפעילות כבר הסתיימה בפועל
-                    if (ev.type === 'gym' && isDone) { gymHours += hrs; gymCommission += (ev.commission || 0); }
-                    if (ev.type === 'mda' && isDone) { mdaHours += hrs; }
+                var inMonth = DATA.events.filter(function (e) { var d = parseDateStr(e.date); return d.getFullYear() === y && d.getMonth() === m; });
+                var now = new Date(), gymH = 0, gymBase = 0, gymC = 0, mdaH = 0, tCount = 0, tInc = 0, tSched = 0;
+                inMonth.forEach(function (ev) {
+                    var r = eventRange(ev), hrs = (r.end - r.start) / 3600000, done = r.end.getTime() <= now.getTime();
+                    if (ev.type === 'gym' && done) { gymH += hrs; gymBase += hrs * DATA.settings.gymHourlyRate * shiftMult(ev); gymC += (ev.commission || 0); }
+                    if (ev.type === 'mda' && done) mdaH += hrs;
                     if (ev.type === 'training') {
-                        trainingScheduled++;
-                        if (ev.status === 'attended' || ev.status === 'late-cancel') { trainingCount++; trainingIncome += (ev.price != null ? ev.price : DATA.settings.trainingPrice); }
+                        tSched++;
+                        if (ev.status === 'attended' || ev.status === 'late-cancel') { tCount++; tInc += (ev.price != null ? ev.price : DATA.settings.trainingPrice); }
                     }
                 });
-                const gymIncome = gymHours * DATA.settings.gymHourlyRate + gymCommission;
-                const totalIncome = gymIncome + trainingIncome;
-                const totalWorkHours = gymHours + (trainingCount * 1); // approx 1hr per training session for hours summary
+                var gymInc = gymBase + gymC, total = gymInc + tInc;
+                document.getElementById('financeHolder').innerHTML =
+                    '<div class="card hero"><div class="section-title" style="margin-top:0">סה"כ הכנסה חודשית</div><div style="font-size:34px;font-weight:800;font-variant-numeric:tabular-nums">' + money(total) + '</div></div>' +
+                    '<div class="stat-grid">' +
+                    '<div class="stat tap" id="statGym"><div class="num">' + money(gymInc) + '</div><div class="lbl">הכנסה מניהול (לחץ לפירוט)</div></div>' +
+                    '<div class="stat tap" id="statTraining"><div class="num">' + money(tInc) + '</div><div class="lbl">הכנסה מאימונים (לחץ לפירוט)</div></div>' +
+                    '<div class="stat"><div class="num">' + gymH.toFixed(1) + '</div><div class="lbl">שעות ניהול</div></div>' +
+                    '<div class="stat tap" id="statTrainCount"><div class="num">' + tCount + '/' + tSched + '</div><div class="lbl">אימונים שבוצעו (לחץ לפירוט)</div></div>' +
+                    '<div class="stat"><div class="num">' + mdaH.toFixed(1) + '</div><div class="lbl">שעות התנדבות מד"א</div></div>' +
+                    '<div class="stat"><div class="num">' + money(gymC) + '</div><div class="lbl">עמלות מכירה</div></div></div>' +
+                    '<div class="section-title">פילוח הכנסה</div><div class="card">' + financeBar('ניהול', gymInc, total || 1, 'var(--gym)', false) + financeBar('אימונים', tInc, total || 1, 'var(--training)', false) + '</div>' +
+                    '<div class="section-title">חלוקת שעות</div><div class="card">' + financeBar('ניהול', gymH, (gymH + mdaH) || 1, 'var(--gym)', true) + financeBar('מד"א (התנדבות)', mdaH, (gymH + mdaH) || 1, 'var(--mda)', true) + '</div>';
+                document.getElementById('statGym').addEventListener('click', function () { openGymFinanceDetail(y, m); });
+                document.getElementById('statTraining').addEventListener('click', function () { openTrainingFinanceDetail(y, m); });
+                document.getElementById('statTrainCount').addEventListener('click', function () { openTrainingCountDetail(y, m); });
+            }
+            function financeBar(label, val, total, color, hours) {
+                var pct = val > 0 ? Math.max(2, Math.min(100, val / total * 100)) : 0;
+                return '<div class="bar-row"><span class="lbl">' + label + '</span><div class="bar-track"><div class="bar-fill" style="width:' + pct + '%;background:' + color + '"></div></div><span class="val">' + (hours ? parseFloat(val.toFixed(1)) + " שע'" : money(val)) + '</span></div>';
+            }
+            function evCardHtml(color, bg, t1, t2, title, meta) {
+                return '<div class="ev-card" style="--c:' + color + ';--cbg:' + bg + '"><div class="ev-time"><div class="t1">' + t1 + '</div><div class="t2">' + t2 + '</div></div><div class="ev-body"><div class="ev-title">' + escapeHtml(title) + '</div><div class="ev-meta">' + meta + '</div></div></div>';
+            }
+            function showFinDetail(html) {
+                document.getElementById('finDetailBody').innerHTML = html;
+                document.getElementById('modalFinanceDetail').classList.add('open');
+            }
+            function summaryRow(title, right, sub) {
+                return '<div class="client-card" style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;align-items:center"><div style="font-weight:700">' + escapeHtml(title) + '</div><div style="font-weight:800;color:var(--accent)">' + right + '</div></div>' + (sub ? '<div style="font-size:12px;color:var(--text-muted);margin-top:4px">' + sub + '</div>' : '') + '</div>';
+            }
+            function openGymFinanceDetail(y, m) {
+                var now = new Date();
+                var shifts = DATA.events.filter(function (e) {
+                    if (e.type !== 'gym') return false;
+                    var d = parseDateStr(e.date);
+                    return d.getFullYear() === y && d.getMonth() === m && eventRange(e).end.getTime() <= now.getTime();
+                }).sort(function (a, b) { return a.date.localeCompare(b.date) || a.startTime.localeCompare(b.startTime); });
+                var hours = 0, tips = 0, income = 0;
+                var list = shifts.map(function (ev) {
+                    var r = eventRange(ev), hrs = (r.end - r.start) / 3600000, inc = hrs * DATA.settings.gymHourlyRate * shiftMult(ev) + (ev.commission || 0);
+                    hours += hrs; tips += (ev.commission || 0); income += inc;
+                    return evCardHtml(TYPE_META.gym.color, TYPE_META.gym.bg, ev.startTime, shortDate(ev.date), (ev.title || 'משמרת ניהול') + ' · ' + shortDate(ev.date), hrs.toFixed(1) + ' שעות · ' + money(inc) + (ev.commission ? ' (כולל עמלות ' + money(ev.commission) + ')' : '') + (shiftMult(ev) > 1 ? ' · שבת ×150%' : ''));
+                }).join('');
+                showFinDetail('<div class="modal-title">פירוט הכנסות ממשמרות</div><div class="empty-note" style="padding:2px 0 14px;text-align:right">' + MONTHS[m] + ' ' + y + ' · סה"כ ' + money(income) + ' מתוך ' + hours.toFixed(1) + ' שעות' + (tips ? ' ועמלות ' + money(tips) : '') + '</div>' +
+                    '<div class="section-title" style="margin-top:0">סיכום</div>' + (shifts.length ? summaryRow('כל המשמרות', money(income), shifts.length + ' משמרות · ' + hours.toFixed(1) + ' שעות') : '') +
+                    '<div class="section-title">פירוט</div>' + (list || '<div class="empty-note">אין משמרות שהושלמו בחודש זה</div>'));
+            }
+            function trainingHeld(y, m) {
+                return DATA.events.filter(function (e) {
+                    if (e.type !== 'training' || !(e.status === 'attended' || e.status === 'late-cancel')) return false;
+                    var d = parseDateStr(e.date);
+                    return d.getFullYear() === y && d.getMonth() === m;
+                }).sort(function (a, b) { return a.date.localeCompare(b.date) || a.startTime.localeCompare(b.startTime); });
+            }
+            function clientName(ev) {
+                var c = ev.clientId ? DATA.clients.find(function (x) { return x.id === ev.clientId; }) : null;
+                return c ? c.name : 'ללא שיוך';
+            }
+            function openTrainingFinanceDetail(y, m) {
+                var held = trainingHeld(y, m), by = {}, total = 0;
+                held.forEach(function (ev) {
+                    var price = ev.price != null ? ev.price : DATA.settings.trainingPrice, n = clientName(ev);
+                    by[n] = by[n] || { count: 0, income: 0 };
+                    by[n].count++; by[n].income += price; total += price;
+                });
+                var summary = Object.keys(by).sort(function (a, b) { return by[b].income - by[a].income; }).map(function (n) { return summaryRow(n, money(by[n].income), by[n].count + ' אימונים'); }).join('');
+                var list = held.map(function (ev) {
+                    var price = ev.price != null ? ev.price : DATA.settings.trainingPrice;
+                    return evCardHtml(TYPE_META.training.color, TYPE_META.training.bg, ev.startTime, shortDate(ev.date), clientName(ev), money(price) + (ev.status === 'late-cancel' ? ' · ביטול מאוחר (מחויב)' : ''));
+                }).join('');
+                showFinDetail('<div class="modal-title">פירוט הכנסות מאימונים</div><div class="empty-note" style="padding:2px 0 14px;text-align:right">' + MONTHS[m] + ' ' + y + ' · סה"כ ' + money(total) + ' מתוך ' + held.length + ' אימונים</div>' +
+                    '<div class="section-title" style="margin-top:0">סיכום לפי מתאמן</div>' + (summary || '<div class="empty-note">אין אימונים שבוצעו בחודש זה</div>') +
+                    '<div class="section-title">כל האימונים</div>' + (list || '<div class="empty-note">אין אימונים שבוצעו בחודש זה</div>'));
+            }
+            function openTrainingCountDetail(y, m) {
+                var held = trainingHeld(y, m), counts = {};
+                held.forEach(function (ev) { var n = clientName(ev); counts[n] = (counts[n] || 0) + 1; });
+                var rows = Object.keys(counts).sort(function (a, b) { return counts[b] - counts[a]; }).map(function (n) { return summaryRow(n, counts[n] + ' אימונים'); }).join('') || '<div class="empty-note">אין אימונים שבוצעו בחודש זה</div>';
+                showFinDetail('<div class="modal-title">אימונים שבוצעו</div><div class="empty-note" style="padding:2px 0 14px;text-align:right">' + MONTHS[m] + ' ' + y + ' · סה"כ ' + held.length + ' אימונים</div>' + rows);
+            }
 
-                const holder = document.getElementById('financeHolder');
-                holder.innerHTML = `
-                            <div class="card">
-                              <div class="section-title" style="margin-top:0;">סה"כ הכנסה חודשית</div>
-                              <div style="font-size:32px;font-weight:800;font-variant-numeric:tabular-nums;">${money(totalIncome)}</div>
-                            </div>
-                            <div class="stat-grid">
-                              <div class="stat"><div class="num">${money(gymIncome)}</div><div class="lbl">הכנסה מניהול</div></div>
-                              <div class="stat"><div class="num">${money(trainingIncome)}</div><div class="lbl">הכנסה מאימונים</div></div>
-                              <div class="stat"><div class="num">${gymHours.toFixed(1)}</div><div class="lbl">שעות ניהול</div></div>
-                              <div class="stat"><div class="num">${trainingCount}/${trainingScheduled}</div><div class="lbl">אימונים שבוצעו</div></div>
-                              <div class="stat"><div class="num">${mdaHours.toFixed(1)}</div><div class="lbl">שעות התנדבות מד"א</div></div>
-                              <div class="stat"><div class="num">${money(gymCommission)}</div><div class="lbl">עמלות מכירה</div></div>
-                            </div>
-                           <div class="section-title">פילוח הכנסה</div>
-                            <div class="card">
-                                ${financeBar('ניהול', gymIncome, totalIncome || 1, 'var(--gym)', 'money')}
-                                ${financeBar('אימונים', trainingIncome, totalIncome || 1, 'var(--training)', 'money')}
-                            </div>
-                            <div class="section-title">חלוקת שעות</div>
-                            <div class="card">
-                                ${financeBar('ניהול', gymHours, (gymHours + mdaHours) || 1, 'var(--gym)', 'hours')}
-                                ${financeBar('מד"א (התנדבות)', mdaHours, (gymHours + mdaHours) || 1, 'var(--mda)', 'hours')}
-                            </div>
-                          `;
-            }
-            function financeBar(label, val, total, color, unit) {
-                const pct = Math.max(2, Math.min(100, (val / total) * 100));
-                const displayVal = unit === 'hours' ? parseFloat(val.toFixed(1)) + ' שע\'' : money(val);
-                return `<div class="bar-row"><span class="lbl">${label}</span><div class="bar-track"><div class="bar-fill" style="width:${pct}%;background:${color}"></div></div><span class="val">${displayVal}</span></div>`;
-            }
-
-            /* ---------------- התראות מקומיות (תזכורות + סיכום בוקר) ---------------- */
-            // הערה חשובה: זהו מנגנון תזכורות מקומי (Local Notifications).
-            // הוא פועל כל עוד הדפדפן/האפליקציה המותקנת רצים (ברקע אם התקנת אותה למסך הבית).
-            // התראות Push אמיתיות שמגיעות גם כשהאפליקציה סגורה לחלוטין דורשות שרת דחיפה (Firebase Cloud Messaging + פונקציה בענן)
-            // שלא ניתן להוסיף בקובץ סטטי בלבד - זה שיפור עתידי אפשרי אם תרצה.
-            function isStandaloneMode() {
-                return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
-            }
-            function isIOSDevice() {
-                return /iphone|ipad|ipod/i.test(navigator.userAgent) && !window.MSStream;
-            }
-            let deferredInstallPrompt = null;
-            window.addEventListener('beforeinstallprompt', (e) => {
-                e.preventDefault();
-                deferredInstallPrompt = e;
-                const btn = document.getElementById('installAppBtn');
-                if (btn) btn.style.display = 'block';
-            });
-
-            function showAppNotification(title, body, tag) {
-                const opts = { body: body, icon: './icon-192.png', badge: './icon-192.png', tag: tag, dir: 'rtl', lang: 'he' };
-                if (navigator.serviceWorker && navigator.serviceWorker.ready) {
-                    navigator.serviceWorker.ready.then(function (reg) {
-                        reg.showNotification(title, opts);
-                    }).catch(function () {
-                        try { new Notification(title, opts); } catch (e) { /* ignore */ }
+            /* ---------- recurring manager ---------- */
+            function openRecurringManager() { renderRecurringList(); document.getElementById('modalRecurring').classList.add('open'); }
+            function renderRecurringList() {
+                var todayStr = toDateStr(new Date()), groups = {};
+                DATA.events.forEach(function (ev) { if (ev.recurringId) (groups[ev.recurringId] = groups[ev.recurringId] || []).push(ev); });
+                var ids = Object.keys(groups), holder = document.getElementById('recurringBody');
+                if (!ids.length) { holder.innerHTML = '<div class="empty-note">אין כרגע אירועים חוזרים מוגדרים</div>'; return; }
+                holder.innerHTML = ids.map(function (rid) {
+                    var list = groups[rid].sort(function (a, b) { return a.date.localeCompare(b.date); }), first = list[0];
+                    var meta = TYPE_META[first.type] || TYPE_META.personal;
+                    var future = list.filter(function (e) { return e.date >= todayStr; }), past = list.length - future.length;
+                    var cl = first.type === 'training' && first.clientId ? DATA.clients.find(function (c) { return c.id === first.clientId; }) : null;
+                    var nameLine = (first.title || meta.label) + (cl ? ' · ' + cl.name : '');
+                    return '<div class="client-card"><div style="display:flex;align-items:center;gap:8px"><span class="ev-icon" style="--c:' + meta.color + '">' + meta.icon + '</span><div style="flex:1"><div style="font-weight:700">' + escapeHtml(nameLine) + '</div><div style="font-size:12px;color:var(--text-muted)">כל יום ' + DOW[parseDateStr(first.date).getDay()] + "' · " + first.startTime + '–' + first.endTime + '</div></div></div>' +
+                        '<div style="font-size:12px;color:var(--text-muted);margin-top:8px">' + future.length + ' מופעים עתידיים' + (past ? ' · ' + past + ' כבר עברו' : '') + '</div>' +
+                        '<div class="row-btns"><button class="btn btn-danger btn-sm" data-cancel-recurring="' + rid + '"' + (future.length ? '' : ' disabled style="opacity:.5"') + '>ביטול האירוע החוזר מהיום ואילך</button></div></div>';
+                }).join('');
+                holder.querySelectorAll('[data-cancel-recurring]').forEach(function (btn) {
+                    btn.addEventListener('click', function () {
+                        var rid = btn.dataset.cancelRecurring;
+                        if (!confirm('לבטל את כל המופעים העתידיים של האירוע החוזר הזה (מהיום ואילך)? מופעים שכבר עברו יישארו.')) return;
+                        DATA.events = DATA.events.filter(function (e) { return !(e.recurringId === rid && e.date >= todayStr); });
+                        saveData(); renderRecurringList(); renderSchedule();
+                        if (state.view === 'finance') renderFinance();
                     });
-                } else {
-                    try { new Notification(title, opts); } catch (e) { /* ignore */ }
-                }
+                });
             }
 
-            function getNotifiedSet() {
-                try { return new Set(JSON.parse(localStorage.getItem('lev_notified_events') || '[]')); }
-                catch (e) { return new Set(); }
+            /* ---------- local notifications ---------- */
+            function isStandaloneMode() { return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true; }
+            function isIOSDevice() { return /iphone|ipad|ipod/i.test(navigator.userAgent) && !window.MSStream; }
+            var deferredInstallPrompt = null;
+            window.addEventListener('beforeinstallprompt', function (e) {
+                e.preventDefault(); deferredInstallPrompt = e;
+                var btn = document.getElementById('installAppBtn'); if (btn) btn.style.display = 'flex';
+            });
+            function showAppNotification(title, body, tag) {
+                var opts = { body: body, icon: './icon-192.png', badge: './icon-192.png', tag: tag, dir: 'rtl', lang: 'he' };
+                if (navigator.serviceWorker && navigator.serviceWorker.ready) {
+                    navigator.serviceWorker.ready.then(function (reg) { reg.showNotification(title, opts); }).catch(function () { try { new Notification(title, opts); } catch (e) { } });
+                } else { try { new Notification(title, opts); } catch (e) { } }
             }
-            function saveNotifiedSet(set) {
-                try { localStorage.setItem('lev_notified_events', JSON.stringify(Array.from(set).slice(-500))); }
-                catch (e) { /* ignore */ }
-            }
-
+            function getNotifiedSet() { try { return new Set(JSON.parse(localStorage.getItem('lev_notified_events') || '[]')); } catch (e) { return new Set(); } }
+            function saveNotifiedSet(set) { try { localStorage.setItem('lev_notified_events', JSON.stringify(Array.from(set).slice(-500))); } catch (e) { } }
             function checkReminders() {
                 if (!storageReady) return;
                 if (!('Notification' in window) || Notification.permission !== 'granted') return;
-                const now = new Date();
-
+                var now = new Date();
                 if (DATA.settings.notificationsEnabled) {
-                    const reminderMs = (DATA.settings.reminderMinutes || 60) * 60000;
-                    const notified = getNotifiedSet();
+                    var rms = (DATA.settings.reminderMinutes || 60) * 60000, notified = getNotifiedSet();
                     DATA.events.forEach(function (ev) {
-                        const key = 'ev_' + ev.id;
+                        var key = 'ev_' + ev.id;
                         if (notified.has(key)) return;
-                        const range = eventRange(ev);
-                        const diff = range.start.getTime() - now.getTime();
-                        if (diff > 0 && diff <= reminderMs) {
-                            const meta = TYPE_META[ev.type];
-                            let body = ev.title || meta.label;
-                            if (ev.type === 'training' && ev.clientId) {
-                                const c = DATA.clients.find(function (x) { return x.id === ev.clientId; });
-                                if (c) body = 'אימון עם ' + c.name;
-                            }
-                            showAppNotification('עוד ' + Math.round(diff / 60000) + ' דק\' - ' + meta.label, body + ' בשעה ' + ev.startTime, key);
-                            notified.add(key);
-                            saveNotifiedSet(notified);
+                        var diff = eventRange(ev).start.getTime() - now.getTime();
+                        if (diff > 0 && diff <= rms) {
+                            var meta = TYPE_META[ev.type] || TYPE_META.personal, body = ev.title || meta.label;
+                            if (ev.type === 'training' && ev.clientId) { var c = DATA.clients.find(function (x) { return x.id === ev.clientId; }); if (c) body = 'אימון עם ' + c.name; }
+                            showAppNotification('עוד ' + Math.round(diff / 60000) + " דק' - " + meta.label, body + ' בשעה ' + ev.startTime, key);
+                            notified.add(key); saveNotifiedSet(notified);
                         }
                     });
                 }
-
                 if (DATA.settings.morningSummaryEnabled) {
-                    const todayStr = toDateStr(now);
-                    const lastSummary = localStorage.getItem('lev_last_summary_date');
-                    const parts = (DATA.settings.morningSummaryTime || '07:00').split(':').map(Number);
-                    const summaryTime = new Date(now); summaryTime.setHours(parts[0] || 7, parts[1] || 0, 0, 0);
-                    if (lastSummary !== todayStr && now.getTime() >= summaryTime.getTime()) {
-                        const todays = eventsOnDate(now);
-                        let body;
-                        if (todays.length === 0) body = 'אין פעילויות מתוכננות להיום';
-                        else body = todays.map(function (e) { return e.startTime + ' - ' + (e.title || TYPE_META[e.type].label); }).join(' | ');
-                        showAppNotification('סיכום היום שלך', body, 'morning-summary');
-                        try { localStorage.setItem('lev_last_summary_date', todayStr); } catch (e) { /* ignore */ }
+                    var todayStr = toDateStr(now), last = localStorage.getItem('lev_last_summary_date');
+                    var parts = (DATA.settings.morningSummaryTime || '07:00').split(':').map(Number);
+                    var st = new Date(now); st.setHours(parts[0] || 7, parts[1] || 0, 0, 0);
+                    if (last !== todayStr && now.getTime() >= st.getTime()) {
+                        var todays = eventsOnDate(now);
+                        var body2 = todays.length ? todays.map(function (e) { return e.startTime + ' - ' + (e.title || TYPE_META[e.type].label); }).join(' | ') : 'אין פעילויות מתוכננות להיום';
+                        showAppNotification('סיכום היום שלך', body2, 'morning-summary');
+                        try { localStorage.setItem('lev_last_summary_date', todayStr); } catch (e) { }
                     }
                 }
             }
             setInterval(checkReminders, 30000);
-            setInterval(function () {
-                autoFinalizeTrainings(); // ← חדש
-                if (state.view === 'finance') renderFinance();
-            }, 60000);
-            /* ---------------- SETTINGS ---------------- */
+            setInterval(function () { autoFinalizeTrainings(); if (state.view === 'finance') renderFinance(); }, 60000);
+
+            /* ---------- settings ---------- */
             function renderSettings() {
-                const s = DATA.settings;
-                const holder = document.getElementById('settingsHolder');
-                const notifSupported = ('Notification' in window);
-                const permStatus = notifSupported ? Notification.permission : 'unsupported';
-                let permNote = '';
-                if (!notifSupported) permNote = 'הדפדפן הזה לא תומך בהתראות.';
-                else if (permStatus === 'granted') permNote = 'הרשאת התראות ניתנה ✓';
-                else if (permStatus === 'denied') permNote = 'ההתראות חסומות ברמת הדפדפן/המכשיר. יש לאפשר זאת ידנית בהגדרות המכשיר כדי שהתזכורות יעבדו.';
-                else permNote = 'יש להפעיל את המתג כדי לאשר קבלת התראות מהדפדפן.';
+                var s = DATA.settings, holder = document.getElementById('settingsHolder');
+                var supported = ('Notification' in window), perm = supported ? Notification.permission : 'unsupported', note;
+                if (!supported) note = 'הדפדפן הזה לא תומך בהתראות.';
+                else if (perm === 'granted') note = 'הרשאת התראות ניתנה ✓';
+                else if (perm === 'denied') note = 'ההתראות חסומות ברמת הדפדפן/המכשיר. יש לאפשר זאת ידנית בהגדרות המכשיר כדי שהתזכורות יעבדו.';
+                else note = 'יש להפעיל את המתג כדי לאשר קבלת התראות מהדפדפן.';
+                var recCount = new Set(DATA.events.filter(function (e) { return e.recurringId; }).map(function (e) { return e.recurringId; })).size;
+                holder.innerHTML =
+                    '<div class="section-title" style="margin-top:0">תעריפים</div><div class="card"><label>תעריף שעתי – ניהול (₪) — בשבת ×150% אוטומטית</label><input type="number" id="s_rate" value="' + s.gymHourlyRate + '" step="0.1"><label>מחיר אימון אישי (₪)</label><input type="number" id="s_price" value="' + s.trainingPrice + '" step="5"></div>' +
+                    '<div class="section-title">חסימות ומרווחים</div><div class="card"><label>זמן נסיעה/התארגנות בין פעילויות (דקות)</label><input type="number" id="s_buffer" value="' + s.bufferMinutes + '" step="5"><label>שעות מנוחה נדרשות אחרי משמרת לילה במד"א</label><input type="number" id="s_rest" value="' + s.mdaRestHours + '" step="0.5"></div>' +
+                    '<div class="section-title">אירועים חוזרים</div><div class="card"><div class="empty-note" style="padding:6px 0 12px;text-align:right">' + recCount + ' סדרות אירועים חוזרים מוגדרות כרגע.</div><button class="btn btn-ghost" id="openRecurringBtn">' + ICONS.repeat + ' ניהול אירועים חוזרים</button></div>' +
+                    '<div class="section-title">התראות ותזכורות</div><div class="card">' +
+                    '<div class="toggle-row"><div><div class="t-main">תזכורות לפני פעילות</div><div class="t-sub">התראה בדפדפן/באפליקציה המותקנת לפני כל פעילות</div></div><div class="switch ' + (s.notificationsEnabled ? 'on' : '') + '" id="s_notif"></div></div>' +
+                    '<label>כמה דקות לפני להתריע</label><input type="number" id="s_remind_min" value="' + (s.reminderMinutes || 60) + '" min="5" step="5">' +
+                    '<div class="toggle-row"><div><div class="t-main">סיכום בוקר יומי</div><div class="t-sub">התראה יומית עם רשימת הפעילויות של היום</div></div><div class="switch ' + (s.morningSummaryEnabled ? 'on' : '') + '" id="s_morning"></div></div>' +
+                    '<label>שעת סיכום בוקר</label><input type="time" id="s_morning_time" value="' + (s.morningSummaryTime || '07:00') + '">' +
+                    '<div class="alert soft">' + ICONS.bell + '<div><b>סטטוס הרשאה</b>' + note + '</div></div>' +
+                    '<div class="alert soft">' + ICONS.warn + '<div><b>לתשומת לבך</b>התראות אלו פועלות כל עוד הדפדפן פתוח, או ברקע אם התקנת את האפליקציה למסך הבית. התראות שמגיעות גם כשהאפליקציה סגורה לחלוטין דורשות שרת דחיפה ייעודי ואינן זמינות בגרסה הזו.</div></div></div>' +
+                    '<div class="section-title">כללי</div><div class="card"><div class="toggle-row"><div><div class="t-main">מצב כהה</div><div class="t-sub">עיצוב נוח לעיניים בשעות החושך</div></div><div class="switch ' + (s.theme === 'dark' ? 'on' : '') + '" id="s_theme"></div></div></div>' +
+                    '<div class="section-title">התקנה ומצב לא-מקוון</div><div class="card"><div class="empty-note" style="padding:6px 0 12px;text-align:right">התקנת האפליקציה למסך הבית מאפשרת פתיחה מהירה, ועובדת גם עם קליטה חלשה - הנתונים יסתנכרנו אוטומטית ברגע שהאינטרנט יחזור.</div><button class="btn btn-ghost" id="installAppBtn" style="display:' + (isStandaloneMode() ? 'none' : 'flex') + ';margin-bottom:8px">' + ICONS.download + ' התקנת האפליקציה על המכשיר</button></div>' +
+                    '<div class="section-title">סנכרון יומן</div><div class="card"><div class="empty-note" style="padding:6px 0 12px;text-align:right">אפשר לייצא את הלו"ז כקובץ ICS ולייבא אותו ידנית ליומן של Google / Apple.</div><button class="btn btn-ghost" id="exportIcsBtn">ייצוא ICS</button></div>' +
+                    '<div class="section-title">נתונים</div><div class="card"><button class="btn btn-danger" id="resetBtn">' + ICONS.trash + ' איפוס כל הנתונים</button></div>' +
+                    '<div class="empty-note">הנתונים נשמרים באופן פרטי בחשבון שלך בלבד.</div>';
 
-                holder.innerHTML = `
-                            <div class="section-title" style="margin-top:0;">תעריפים</div>
-                            <div class="card">
-                              <label>תעריף שעתי – ניהול (₪)</label><input type="number" id="s_rate" value="${s.gymHourlyRate}" step="0.1">
-                              <label>מחיר אימון אישי (₪)</label><input type="number" id="s_price" value="${s.trainingPrice}" step="5">
-                            </div>
-                            <div class="section-title">חסימות ומרווחים</div>
-                            <div class="card">
-                              <label>זמן נסיעה/התארגנות בין פעילויות (דקות)</label><input type="number" id="s_buffer" value="${s.bufferMinutes}" step="5">
-                              <label>שעות מנוחה נדרשות אחרי משמרת לילה במד"א</label><input type="number" id="s_rest" value="${s.mdaRestHours}" step="0.5">
-                            </div>
-                            <div class="section-title">התראות ותזכורות</div>
-                            <div class="card">
-                              <div class="toggle-row">
-                                <div><div class="t-main">תזכורות לפני פעילות</div><div class="t-sub">התראה בדפדפן/באפליקציה המותקנת לפני כל פעילות</div></div>
-                                <div class="switch ${s.notificationsEnabled ? 'on' : ''}" id="s_notif"></div>
-                              </div>
-                              <label>כמה דקות לפני להתריע</label><input type="number" id="s_remind_min" value="${s.reminderMinutes || 60}" min="5" step="5">
-                              <div class="toggle-row">
-                                <div><div class="t-main">סיכום בוקר יומי</div><div class="t-sub">התראה יומית עם רשימת הפעילויות של היום</div></div>
-                                <div class="switch ${s.morningSummaryEnabled ? 'on' : ''}" id="s_morning"></div>
-                              </div>
-                              <label>שעת סיכום בוקר</label><input type="time" id="s_morning_time" value="${s.morningSummaryTime || '07:00'}">
-                              <div class="alert soft">${ICONS.bell}<div><b>סטטוס הרשאה</b>${permNote}</div></div>
-                              <div class="alert soft">${ICONS.warn}<div><b>לתשומת לבך</b>התראות אלו פועלות כל עוד הדפדפן פתוח, או ברקע אם התקנת את האפליקציה למסך הבית. התראות שמגיעות גם כשהאפליקציה סגורה לחלוטין דורשות שרת דחיפה ייעודי ואינן זמינות בגרסה הזו.</div></div>
-                            </div>
-                            <div class="section-title">כללי</div>
-                            <div class="card">
-                              <div class="toggle-row"><div><div class="t-main">מצב כהה</div><div class="t-sub">עיצוב נוח לעיניים בשעות החושך (ברירת מחדל, ניתן לשינוי)</div></div>
-                                <div class="switch ${s.theme === 'dark' ? 'on' : ''}" id="s_theme"></div></div>
-                            </div>
-                            <div class="section-title">התקנה ומצב לא-מקוון</div>
-                            <div class="card">
-                              <div class="empty-note" style="padding:6px 0 12px;text-align:right;">התקנת האפליקציה למסך הבית מאפשרת פתיחה מהירה כמו אפליקציה רגילה, ועובדת גם עם קליטה חלשה - הנתונים יסתנכרנו אוטומטית ברגע שהאינטרנט יחזור.</div>
-                             <button class="btn btn-ghost" id="installAppBtn" style="display:${isStandaloneMode() ? 'none' : 'flex'};margin-bottom:8px;">${ICONS.download} התקנת האפליקציה על המכשיר</button>
-                            </div>
-                            <div class="section-title">סנכרון יומן</div>
-                            <div class="card">
-                              <div class="empty-note" style="padding:6px 0 12px;text-align:right;">סנכרון דו-כיווני מלא עם Google Calendar / Apple Calendar דורש חיבור לשרת חיצוני (למשל Supabase) שאינו זמין בתצוגה העצמאית הזו. אפשר לייצא את הלו"ז כקובץ ICS ולייבא אותו ידנית ליומן.</div>
-                              <button class="btn btn-ghost" id="exportIcsBtn">ייצוא ICS</button>
-                            </div>
-                            <div class="section-title">נתונים</div>
-                            <div class="card">
-                              <button class="btn btn-danger" id="resetBtn">${ICONS.trash} איפוס כל הנתונים</button>
-                            </div>
-                            <div class="empty-note">הנתונים נשמרים באופן פרטי בחשבון שלך בלבד.</div>
-                          `;
-                document.getElementById('s_theme').addEventListener('click', function () {
-                    this.classList.toggle('on');
-                    s.theme = this.classList.contains('on') ? 'dark' : 'light';
-                    applyTheme(); saveData();
-                });
-                ['s_rate', 's_price', 's_buffer', 's_rest'].forEach(id => {
-                    document.getElementById(id).addEventListener('change', e => {
-                        const map = { s_rate: 'gymHourlyRate', s_price: 'trainingPrice', s_buffer: 'bufferMinutes', s_rest: 'mdaRestHours' };
-                        s[map[id]] = parseFloat(e.target.value) || 0;
-                        saveData();
-                    });
-                });
-
-                document.getElementById('s_notif').addEventListener('click', function () {
-                    const sw = this;
-                    if (!sw.classList.contains('on')) {
-                        if (!notifSupported) { alert('הדפדפן הזה לא תומך בהתראות'); return; }
-                        Notification.requestPermission().then(function (perm) {
-                            if (perm === 'granted') {
-                                sw.classList.add('on');
-                                s.notificationsEnabled = true;
-                            } else {
-                                s.notificationsEnabled = false;
-                                alert('לא ניתנה הרשאה להתראות. יש לאפשר זאת בהגדרות הדפדפן/המכשיר.');
-                            }
-                            saveData(); renderSettings();
-                        });
-                    } else {
-                        sw.classList.remove('on');
-                        s.notificationsEnabled = false;
-                        saveData();
-                    }
-                });
-                document.getElementById('s_remind_min').addEventListener('change', e => { s.reminderMinutes = parseInt(e.target.value) || 60; saveData(); });
-
-                document.getElementById('s_morning').addEventListener('click', function () {
-                    const sw = this;
-                    if (!sw.classList.contains('on')) {
-                        if (!notifSupported) { alert('הדפדפן הזה לא תומך בהתראות'); return; }
-                        Notification.requestPermission().then(function (perm) {
-                            if (perm === 'granted') {
-                                sw.classList.add('on');
-                                s.morningSummaryEnabled = true;
-                            } else {
-                                s.morningSummaryEnabled = false;
-                                alert('לא ניתנה הרשאה להתראות. יש לאפשר זאת בהגדרות הדפדפן/המכשיר.');
-                            }
-                            saveData(); renderSettings();
-                        });
-                    } else {
-                        sw.classList.remove('on');
-                        s.morningSummaryEnabled = false;
-                        saveData();
-                    }
-                });
-                document.getElementById('s_morning_time').addEventListener('change', e => { s.morningSummaryTime = e.target.value || '07:00'; saveData(); });
-
-                const installBtn = document.getElementById('installAppBtn');
-                if (installBtn) {
-                    installBtn.addEventListener('click', function () {
-                        if (deferredInstallPrompt) {
-                            deferredInstallPrompt.prompt();
-                            deferredInstallPrompt.userChoice.then(function () {
-                                deferredInstallPrompt = null;
+                document.getElementById('s_theme').addEventListener('click', function () { this.classList.toggle('on'); s.theme = this.classList.contains('on') ? 'dark' : 'light'; applyTheme(); saveData(); });
+                var map = { s_rate: 'gymHourlyRate', s_price: 'trainingPrice', s_buffer: 'bufferMinutes', s_rest: 'mdaRestHours' };
+                Object.keys(map).forEach(function (id) { document.getElementById(id).addEventListener('change', function (e) { s[map[id]] = parseFloat(e.target.value) || 0; saveData(); }); });
+                document.getElementById('openRecurringBtn').addEventListener('click', openRecurringManager);
+                function bindNotif(elId, key) {
+                    document.getElementById(elId).addEventListener('click', function () {
+                        var sw = this;
+                        if (!sw.classList.contains('on')) {
+                            if (!supported) { alert('הדפדפן הזה לא תומך בהתראות'); return; }
+                            Notification.requestPermission().then(function (p) {
+                                if (p === 'granted') { sw.classList.add('on'); s[key] = true; }
+                                else { s[key] = false; alert('לא ניתנה הרשאה להתראות. יש לאפשר זאת בהגדרות הדפדפן/המכשיר.'); }
+                                saveData(); renderSettings();
                             });
-                        } else if (isIOSDevice()) {
-                            alert('כדי להתקין באייפון/אייפד: לחצו על כפתור השיתוף (Share) בסרגל של ספארי, ואז "הוספה למסך הבית".');
-                        } else {
-                            alert('כדי להתקין: פתחו את תפריט הדפדפן (שלוש נקודות למעלה) ובחרו "התקנת אפליקציה" או "הוספה למסך הבית".');
-                        }
+                        } else { sw.classList.remove('on'); s[key] = false; saveData(); }
                     });
                 }
-
-                document.getElementById('resetBtn').addEventListener('click', () => {
+                bindNotif('s_notif', 'notificationsEnabled');
+                bindNotif('s_morning', 'morningSummaryEnabled');
+                document.getElementById('s_remind_min').addEventListener('change', function (e) { s.reminderMinutes = parseInt(e.target.value) || 60; saveData(); });
+                document.getElementById('s_morning_time').addEventListener('change', function (e) { s.morningSummaryTime = e.target.value || '07:00'; saveData(); });
+                var ib = document.getElementById('installAppBtn');
+                if (ib) ib.addEventListener('click', function () {
+                    if (deferredInstallPrompt) { deferredInstallPrompt.prompt(); deferredInstallPrompt.userChoice.then(function () { deferredInstallPrompt = null; }); }
+                    else if (isIOSDevice()) alert('כדי להתקין באייפון/אייפד: לחצו על כפתור השיתוף (Share) בסרגל של ספארי, ואז "הוספה למסך הבית".');
+                    else alert('כדי להתקין: פתחו את תפריט הדפדפן (שלוש נקודות למעלה) ובחרו "התקנת אפליקציה" או "הוספה למסך הבית".');
+                });
+                document.getElementById('resetBtn').addEventListener('click', function () {
                     if (confirm('פעולה זו תמחק את כל האירועים, המתאמנים וההגדרות. להמשיך?')) {
                         DATA = JSON.parse(JSON.stringify(DEFAULT_DATA));
                         saveData(); applyTheme(); renderAll();
@@ -2331,32 +1998,26 @@
                 });
                 document.getElementById('exportIcsBtn').addEventListener('click', exportIcs);
             }
-
             function exportIcs() {
-                let ics = 'BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//לוז אישי//HE\r\n';
-                DATA.events.forEach(ev => {
-                    const { start, end } = eventRange(ev);
-                    const fmt = d => d.getFullYear() + pad(d.getMonth() + 1) + pad(d.getDate()) + 'T' + pad(d.getHours()) + pad(d.getMinutes()) + '00';
-                    ics += 'BEGIN:VEVENT\r\nUID:' + ev.id + '@personal-schedule\r\nDTSTART:' + fmt(start) + '\r\nDTEND:' + fmt(end) + '\r\nSUMMARY:' + (ev.title || TYPE_META[ev.type].label) + '\r\nEND:VEVENT\r\n';
+                var ics = 'BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//לוז אישי//HE\r\n';
+                var fmt = function (d) { return d.getFullYear() + pad(d.getMonth() + 1) + pad(d.getDate()) + 'T' + pad(d.getHours()) + pad(d.getMinutes()) + '00'; };
+                DATA.events.forEach(function (ev) {
+                    var r = eventRange(ev);
+                    ics += 'BEGIN:VEVENT\r\nUID:' + ev.id + '@personal-schedule\r\nDTSTART:' + fmt(r.start) + '\r\nDTEND:' + fmt(r.end) + '\r\nSUMMARY:' + (ev.title || TYPE_META[ev.type].label) + '\r\nEND:VEVENT\r\n';
                 });
                 ics += 'END:VCALENDAR';
-                const blob = new Blob([ics], { type: 'text/calendar' });
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url; a.download = 'schedule.ics';
+                var url = URL.createObjectURL(new Blob([ics], { type: 'text/calendar' }));
+                var a = document.createElement('a'); a.href = url; a.download = 'schedule.ics';
                 document.body.appendChild(a); a.click(); document.body.removeChild(a);
                 URL.revokeObjectURL(url);
             }
 
-            /* ---------------- INIT ---------------- */
+            /* ---------- init ---------- */
             function renderAll() {
-                autoFinalizeTrainings(); // ← חדש
+                autoFinalizeTrainings();
                 updateGreeting();
                 setActiveView(state.view);
-                renderSchedule();
-                renderClients();
-                renderFinance();
-                renderSettings();
+                renderSchedule(); renderClients(); renderFinance(); renderSettings();
                 checkReminders();
             }
         })();
