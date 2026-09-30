@@ -1275,30 +1275,11 @@
                     document.getElementById('loginError').textContent = "שגיאה בהתחברות. נסה שוב.";
                 });
             });
-            function startRealtimeSync(uid) {
-                var docRef = db.collection('users').doc(uid);
-                if (dbUnsubscribe) dbUnsubscribe();
-                dbUnsubscribe = docRef.onSnapshot(function (doc) {
-                    if (storageReady && localPending) return;
-                    if (doc.exists) {
-                        var parsed = doc.data();
-                        DATA = Object.assign({}, DEFAULT_DATA, parsed);
-                        DATA.settings = Object.assign({}, DEFAULT_DATA.settings, parsed.settings || {});
-                    } else if (!doc.metadata.fromCache) {
-                        saveDataToFirebase();
-                    }
-                    storageReady = true;
-                    applyTheme();
-                    renderAll();
-                }, function (error) {
-                    console.error("שגיאה בהבאת נתונים:", error);
-                    if (error.code === 'permission-denied') {
-                        auth.signOut();
-                        document.getElementById('loginError').textContent = 'גישה נדחתה ע"י השרת: אימייל זה אינו מורשה.';
-                        document.getElementById('loginOverlay').style.display = 'flex';
-                        document.getElementById('app').style.display = 'none';
-                    } else alert('שגיאת סנכרון: ' + (error.code || error.message));
-                });
+           
+            function saveData() {
+                localPending = true;
+                if (saveTimer) clearTimeout(saveTimer);
+                saveTimer = setTimeout(function () { saveTimer = null; saveDataToFirebase(); }, 300);
             }
             function cloneData(o) { return JSON.parse(JSON.stringify(o)); }
             function stable(o) {
