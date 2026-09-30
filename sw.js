@@ -34,22 +34,25 @@ self.addEventListener('activate', event => {
 
 /* ---------- FETCH ---------- */
 self.addEventListener('fetch', event => {
-  const isHTML = event.request.mode === 'navigate' || event.request.url.endsWith('index.html');
+  const req = event.request;
+
+  // לא נוגעים בשום דבר שהוא לא GET או לא מהדומיין שלנו (Firebase, Google Auth, גופנים...)
+  if (req.method !== 'GET') return;
+  if (new URL(req.url).origin !== self.location.origin) return;
+
+  const isHTML = req.mode === 'navigate' || req.url.endsWith('index.html');
 
   if (isHTML) {
-    // network-first, ותמיד עוקף מטמון HTTP (no-store) כדי לא לקבל גרסה תקועה גם ברמת הדפדפן/שרת
     event.respondWith(
-      fetch(event.request, { cache: 'no-store' })
+      fetch(req, { cache: 'no-store' })
         .then(response => {
           const clone = response.clone();
-          caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
+          caches.open(CACHE_NAME).then(cache => cache.put(req, clone));
           return response;
         })
-        .catch(() => caches.match(event.request))
+        .catch(() => caches.match(req))
     );
   } else {
-    event.respondWith(
-      caches.match(event.request).then(response => response || fetch(event.request))
-    );
+    event.respondWith(caches.match(req).then(r => r || fetch(req)));
   }
 });
