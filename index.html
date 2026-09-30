@@ -1441,33 +1441,35 @@
             }
 
             let dirty = false;
+            let localPending = false;   // שינוי מקומי שעדיין לא נשלח ל-SDK
 
             function saveData() {
-                dirty = true;
+                localPending = true;
                 if (saveTimer) clearTimeout(saveTimer);
-                saveTimer = setTimeout(saveDataToFirebase, 300);
+                saveTimer = setTimeout(() => { saveTimer = null; saveDataToFirebase(); }, 300);
             }
 
             function saveDataToFirebase() {
                 if (isGuest) return;
                 const user = auth.currentUser;
                 if (!user) { console.warn('אין משתמש מחובר - לא נשמר'); return; }
+                localPending = false;
                 db.collection('users').doc(user.uid)
                     .set(JSON.parse(JSON.stringify(DATA)))
-                    .then(() => { dirty = false; })
+                    .then(() => console.log('נשמר בשרת ✓'))
                     .catch(e => {
                         console.error('שגיאת שמירה ב-Firebase', e);
                         alert('השמירה נכשלה: ' + (e.code || e.message));
                     });
             }
 
-            // שמירה מיידית כשהאפליקציה עוברת לרקע / נסגרת
             function flushSave() {
-                if (dirty) {
-                    if (saveTimer) clearTimeout(saveTimer);
+                if (localPending) {
+                    if (saveTimer) { clearTimeout(saveTimer); saveTimer = null; }
                     saveDataToFirebase();
                 }
             }
+
             document.addEventListener('visibilitychange', () => {
                 if (document.visibilityState === 'hidden') flushSave();
             });
