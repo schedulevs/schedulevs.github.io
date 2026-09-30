@@ -1345,18 +1345,7 @@
             const auth = firebase.auth();
             const db = firebase.firestore();
 
-            // הפעלת שמירה מקומית (offline persistence) - כך שהאפליקציה תעבוד גם בלי אינטרנט
-            // ותסנכרן אוטומטית את מה שהצטבר ברגע שהחיבור חוזר.
-            try {
-                db.enablePersistence({ synchronizeTabs: true }).catch(function (err) {
-                    if (err.code === 'failed-precondition') {
-                        console.warn('שמירה לא מקוונת לא הופעלה - כנראה שיש כמה טאבים פתוחים במקביל.');
-                    } else if (err.code === 'unimplemented') {
-                        console.warn('הדפדפן הנוכחי לא תומך בשמירה לא מקוונת.');
-                    }
-                });
-            } catch (e) { console.warn('enablePersistence error', e); }
-
+            db.settings({ experimentalForceLongPolling: true, merge: true });
             // רישום Service Worker - מאפשר פתיחת האפליקציה גם ללא אינטרנט (PWA)
             if ('serviceWorker' in navigator) {
                 window.addEventListener('load', function () {
@@ -1410,38 +1399,40 @@
             // פונקציה שמקשיבה לשינויים בענן (עובד דינמית על המחשב והטלפון)
             function startRealtimeSync(uid) {
                 const docRef = db.collection('users').doc(uid);
+                if (dbUnsubscribe) dbUnsubscribe();
 
                 dbUnsubscribe = docRef.onSnapshot(doc => {
-                    // השרת אישר!
-                    if (dirty || doc.metadata.hasPendingWrites) { storageReady = true; return; }
+                    // דלג רק אם יש שינוי מקומי שעוד לא נשלח (חלון של 300ms)
+                    if (storageReady && localPending) return;
 
                     if (doc.exists) {
                         const parsed = doc.data();
                         DATA = Object.assign({}, DEFAULT_DATA, parsed);
                         DATA.settings = Object.assign({}, DEFAULT_DATA.settings, parsed.settings || {});
-                    } else {
-                        // פעם ראשונה שמתחברים עם משתמש מורשה
+                    } else if (!doc.metadata.fromCache) {
                         saveDataToFirebase();
                     }
                     storageReady = true;
                     applyTheme();
                     renderAll();
-                }, error => {
-                    // כאן הקסם של האבטחה עובד!
-                    console.error("שגיאה בהבאת נתונים:", error);
 
-                    // אם השרת של Firebase חסם את הגישה (כי המייל לא תואם ל-Rules)
+                    // ⏳ = ממתין לשרת, ✓ = נשמר
+                    const g = document.getElementById('greetText');
+                    if (g) g.textContent += doc.metadata.hasPendingWrites ? ' ⏳' : ' ✓';
+                }, error => {
+                    console.error("שגיאה בהבאת נתונים:", error);
                     if (error.code === 'permission-denied') {
-                        auth.signOut(); // מנתקים אותו מיד
+                        auth.signOut();
                         document.getElementById('loginError').textContent = "גישה נדחתה ע\"י השרת: אימייל זה אינו מורשה.";
                         document.getElementById('loginOverlay').style.display = 'flex';
                         document.getElementById('app').style.display = 'none';
+                    } else {
+                        alert('שגיאת סנכרון: ' + (error.code || error.message));
                     }
                 });
             }
 
-            let dirty = false;
-            let localPending = false;   // שינוי מקומי שעדיין לא נשלח ל-SDK
+            let localPending = false;
 
             function saveData() {
                 localPending = true;
@@ -1452,13 +1443,19 @@
             function saveDataToFirebase() {
                 if (isGuest) return;
                 const user = auth.currentUser;
-                if (!user) { console.warn('אין משתמש מחובר - לא נשמר'); return; }
+                if (!user) { alert('אין משתמש מחובר - לא נשמר'); return; }
                 localPending = false;
+
+                const warn = setTimeout(() => {
+                    alert('השמירה לא אושרה ע"י Firebase תוך 8 שניות. בדוק חיבור ו-Firestore Rules.');
+                }, 8000);
+
                 db.collection('users').doc(user.uid)
                     .set(JSON.parse(JSON.stringify(DATA)))
-                    .then(() => console.log('נשמר בשרת ✓'))
+                    .then(() => { clearTimeout(warn); console.log('נשמר בשרת ✓'); })
                     .catch(e => {
-                        console.error('שגיאת שמירה ב-Firebase', e);
+                        clearTimeout(warn);
+                        console.error('שגיאת שמירה', e);
                         alert('השמירה נכשלה: ' + (e.code || e.message));
                     });
             }
