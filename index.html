@@ -1067,6 +1067,7 @@
                 border-color: var(--gym);
                 background: var(--gym-bg)
             }
+
         #greetText {
             cursor: pointer;
         }
@@ -1228,6 +1229,7 @@
                 settings: { theme: 'dark', gymHourlyRate: 35.40, trainingPrice: 80, bufferMinutes: 45, mdaRestHours: 8, lateCancelHours: 12, notificationsEnabled: false, reminderMinutes: 60, morningSummaryEnabled: false, morningSummaryTime: '07:00' }
             };
             var DATA = JSON.parse(JSON.stringify(DEFAULT_DATA));
+            var baseData = null, retryTimer = null;
             var storageReady = false, saveTimer = null, dbUnsubscribe = null, isGuest = false, localPending = false;
             var firebaseConfig = {
                 apiKey: "AIzaSyBpry7D_rk6D2DGrd-ViaM8fKHV3jvoLr8",
@@ -1298,27 +1300,131 @@
                     } else alert('שגיאת סנכרון: ' + (error.code || error.message));
                 });
             }
-            function saveData() {
-                localPending = true;
-                if (saveTimer) clearTimeout(saveTimer);
-                saveTimer = setTimeout(function () { saveTimer = null; saveDataToFirebase(); }, 300);
+            function cloneData(o) { return JSON.parse(JSON.stringify(o)); }
+            function stable(o) {
+                return JSON.stringify(o, function (k, v) {
+                    if (v && typeof v === 'object' && !Array.isArray(v)) {
+                        return Object.keys(v).sort().reduce(function (r, key) { r[key] = v[key]; return r; }, {});
+                    }
+                    return v;
+                });
             }
+
+            function applyRemoteDoc(doc) {
+                if (doc.exists) {
+                    var parsed = doc.data();
+                    DATA = Object.assign({}, DEFAULT_DATA, parsed);
+                    DATA.settings = Object.assign({}, DEFAULT_DATA.settings, parsed.settings || {});
+                    baseData = cloneData(DATA);
+                } else if (!doc.metadata.fromCache) {
+                    baseData = { events: [], clients: [], settings: {} };
+                    saveDataToFirebase();
+                }
+                storageReady = true;
+                applyTheme();
+                renderAll();
+            }
+
+            function startRealtimeSync(uid) {
+                var docRef = db.collection('users').doc(uid);
+                if (dbUnsubscribe) dbUnsubscribe();
+                dbUnsubscribe = docRef.onSnapshot(function (doc) {
+                    if (storageReady && localPending) return;
+                    applyRemoteDoc(doc);
+                }, function (error) {
+                    console.error("שגיאה בהבאת נתונים:", error);
+                    if (error.code === 'permission-denied') {
+                        auth.signOut();
+                        document.getElementById('loginError').textContent = 'גישה נדחתה ע"י השרת: אימייל זה אינו מורשה.';
+                        document.getElementById('loginOverlay').style.display = 'flex';
+                        document.getElementById('app').style.display = 'none';
+                    } else alert('שגיאת סנכרון: ' + (error.code || error.message));
+                });
+            }
+
+            /* מושך גרסה עדכנית מהשרת (כשחוזרים ללשונית / האינטרנט חוזר) */
+            function refreshFromServer() {
+                var user = auth.currentUser;
+                if (!user || localPending || !storageReady) return;
+                db.collection('users').doc(user.uid).get({ source: 'server' }).then(function (doc) {
+                    if (!localPending && doc.exists) applyRemoteDoc(doc);
+                }).catch(function () { });
+            }
+
+            /* ---- חישוב מה השתנה מקומית מאז הסנכרון האחרון ---- */
+            function indexById(a) { var m = {}; (a || []).forEach(function (x) { m[x.id] = x; }); return m; }
+            function computeChanges(base, cur) {
+                var ch = { events: { up: [], del: [] }, clients: { up: [], del: [] }, settings: {}, empty: true };
+                ['events', 'clients'].forEach(function (k) {
+                    var b = indexById(base[k]), c = indexById(cur[k]);
+                    Object.keys(c).forEach(function (id) {
+                        if (!b[id] || stable(b[id]) !== stable(c[id])) { ch[k].up.push(c[id]); ch.empty = false; }
+                    });
+                    Object.keys(b).forEach(function (id) {
+                        if (!c[id]) { ch[k].del.push(id); ch.empty = false; }
+                    });
+                });
+                Object.keys(cur.settings || {}).forEach(function (key) {
+                    if (stable((base.settings || {})[key]) !== stable(cur.settings[key])) { ch.settings[key] = cur.settings[key]; ch.empty = false; }
+                });
+                return ch;
+            }
+            function applyChanges(target, ch) {
+                ['events', 'clients'].forEach(function (k) {
+                    var list = (target[k] || []).filter(function (x) { return ch[k].del.indexOf(x.id) === -1; });
+                    ch[k].up.forEach(function (item) {
+                        var i = list.findIndex(function (x) { return x.id === item.id; });
+                        if (i >= 0) list[i] = item; else list.push(item);
+                    });
+                    target[k] = list;
+                });
+                target.settings = Object.assign({}, DEFAULT_DATA.settings, target.settings || {}, ch.settings);
+            }
+
             function saveDataToFirebase() {
                 if (isGuest) return;
                 var user = auth.currentUser;
                 if (!user) { alert('אין משתמש מחובר - לא נשמר'); return; }
+                if (retryTimer) { clearTimeout(retryTimer); retryTimer = null; }
                 localPending = false;
-                var warn = setTimeout(function () { alert('השמירה לא אושרה ע"י Firebase תוך 8 שניות. בדוק חיבור ו-Firestore Rules.'); }, 8000);
-                db.collection('users').doc(user.uid).set(JSON.parse(JSON.stringify(DATA)))
-                    .then(function () { clearTimeout(warn); })
-                    .catch(function (e) { clearTimeout(warn); console.error(e); alert('השמירה נכשלה: ' + (e.code || e.message)); });
+
+                var ch = computeChanges(baseData || { events: [], clients: [], settings: {} }, DATA);
+                if (ch.empty) return;                       // אין שינוי אמיתי = לא כותבים כלום
+
+                var ref = db.collection('users').doc(user.uid);
+                db.runTransaction(function (tx) {
+                    return tx.get(ref).then(function (doc) {
+                        var srv = doc.exists ? doc.data() : {};
+                        var merged = Object.assign({}, DEFAULT_DATA, srv);
+                        merged.settings = Object.assign({}, DEFAULT_DATA.settings, srv.settings || {});
+                        applyChanges(merged, ch);
+                        merged = cloneData(merged);
+                        tx.set(ref, merged);
+                        return merged;
+                    });
+                }).then(function (merged) {
+                    baseData = cloneData(merged);
+                    if (!localPending) { DATA = cloneData(merged); applyTheme(); renderAll(); }
+                }).catch(function (e) {
+                    console.error(e);
+                    localPending = true;                    // לא נשמר - ננסה שוב
+                    if (e.code === 'unavailable' || /offline/i.test(e.message || '')) {
+                        retryTimer = setTimeout(saveDataToFirebase, 10000);
+                    } else {
+                        alert('השמירה נכשלה: ' + (e.code || e.message));
+                    }
+                });
             }
             function flushSave() {
                 if (localPending) { if (saveTimer) { clearTimeout(saveTimer); saveTimer = null; } saveDataToFirebase(); }
             }
-            document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'hidden') flushSave(); });
+            document.addEventListener('visibilitychange', function () {
+                if (document.visibilityState === 'hidden') flushSave();
+                else refreshFromServer();
+            });
             window.addEventListener('pagehide', flushSave);
-
+            window.addEventListener('focus', refreshFromServer);
+            window.addEventListener('online', function () { if (localPending) saveDataToFirebase(); else refreshFromServer(); });
             /* ---------- state ---------- */
             var state = { view: 'schedule', scheduleMode: 'day', selectedDate: new Date(), financeMonth: new Date(), editingEventId: null, editingClientId: null, detailClientId: null };
 
