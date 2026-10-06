@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="he" dir="rtl" data-theme="dark">
 <head>
@@ -1230,7 +1231,11 @@
             };
             var DATA = JSON.parse(JSON.stringify(DEFAULT_DATA));
             var baseData = null, retryTimer = null;
-            var storageReady = false, saveTimer = null, dbUnsubscribe = null, isGuest = false, localPending = false;
+            var storageReady = false, saveTimer = null, dbUnsubscribe = null, localPending = false;
+            var LEV_EMAIL = 'levloovmordehai@gmail.com';
+            // ברכה מותאמת אישית לפי המייל המחובר (לתצוגה בלבד, אין קשר להרשאות)
+            var CUSTOM_GREETINGS = { 'hilit101010@gmail.com': 'היי הילית 💗' };
+            var currentEmail = '';
             var firebaseConfig = {
                 apiKey: "AIzaSyBpry7D_rk6D2DGrd-ViaM8fKHV3jvoLr8",
                 authDomain: "scheduleapp-230f2.firebaseapp.com",
@@ -1242,6 +1247,8 @@
             };
             if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
             var auth = firebase.auth(), db = firebase.firestore();
+            // מסמך קבוע ומשותף - כל המחוברים קוראים את אותו מסמך. ההרשאות נקבעות רק ב-Firestore Rules
+            function sharedRef() { return db.collection('schedules').doc('lev'); }
             try { db.enablePersistence({ synchronizeTabs: true }).catch(function (e) { console.warn('persistence:', e.code); }); } catch (e) { console.warn(e); }
 
             if ('serviceWorker' in navigator) {
@@ -1258,11 +1265,11 @@
             }
             auth.onAuthStateChanged(function (user) {
                 if (user) {
-                    isGuest = (user.email !== 'levloovmordehai@gmail.com');
-                    document.body.classList.toggle('guest-mode', isGuest);
+                    currentEmail = (user.email || '').toLowerCase();
+                    document.body.classList.toggle('guest-mode', currentEmail !== LEV_EMAIL);
                     document.getElementById('app').style.display = 'flex';
                     hideSplash();
-                    startRealtimeSync(user.uid);
+                    startRealtimeSync();
                 } else {
                     document.getElementById('loginContent').style.display = 'block';
                     document.getElementById('app').style.display = 'none';
@@ -1275,7 +1282,7 @@
                     document.getElementById('loginError').textContent = "שגיאה בהתחברות. נסה שוב.";
                 });
             });
-           
+
             function saveData() {
                 localPending = true;
                 if (saveTimer) clearTimeout(saveTimer);
@@ -1291,6 +1298,15 @@
                 });
             }
 
+            /* העתקה חד-פעמית: הנתונים הישנים של לב (users/uid) עוברים למסמך המשותף */
+            function migrateFromOldDoc() {
+                var user = auth.currentUser;
+                if (!user || currentEmail !== LEV_EMAIL) return;
+                db.collection('users').doc(user.uid).get().then(function (old) {
+                    if (old.exists) return sharedRef().set(old.data());
+                }).catch(function () { });
+            }
+
             function applyRemoteDoc(doc) {
                 if (doc.exists) {
                     var parsed = doc.data();
@@ -1298,16 +1314,15 @@
                     DATA.settings = Object.assign({}, DEFAULT_DATA.settings, parsed.settings || {});
                     baseData = cloneData(DATA);
                 } else if (!doc.metadata.fromCache) {
-                    baseData = { events: [], clients: [], settings: {} };
-                    saveDataToFirebase();
+                    migrateFromOldDoc();
                 }
                 storageReady = true;
                 applyTheme();
                 renderAll();
             }
 
-            function startRealtimeSync(uid) {
-                var docRef = db.collection('users').doc(uid);
+            function startRealtimeSync() {
+                var docRef = sharedRef();
                 if (dbUnsubscribe) dbUnsubscribe();
                 dbUnsubscribe = docRef.onSnapshot(function (doc) {
                     if (storageReady && localPending) return;
@@ -1325,9 +1340,8 @@
 
             /* מושך גרסה עדכנית מהשרת (כשחוזרים ללשונית / האינטרנט חוזר) */
             function refreshFromServer() {
-                var user = auth.currentUser;
-                if (!user || localPending || !storageReady) return;
-                db.collection('users').doc(user.uid).get({ source: 'server' }).then(function (doc) {
+                if (!auth.currentUser || localPending || !storageReady) return;
+                sharedRef().get({ source: 'server' }).then(function (doc) {
                     if (!localPending && doc.exists) applyRemoteDoc(doc);
                 }).catch(function () { });
             }
@@ -1363,7 +1377,6 @@
             }
 
             function saveDataToFirebase() {
-                if (isGuest) return;
                 var user = auth.currentUser;
                 if (!user) { alert('אין משתמש מחובר - לא נשמר'); return; }
                 if (retryTimer) { clearTimeout(retryTimer); retryTimer = null; }
@@ -1372,7 +1385,7 @@
                 var ch = computeChanges(baseData || { events: [], clients: [], settings: {} }, DATA);
                 if (ch.empty) return;                       // אין שינוי אמיתי = לא כותבים כלום
 
-                var ref = db.collection('users').doc(user.uid);
+                var ref = sharedRef();
                 db.runTransaction(function (tx) {
                     return tx.get(ref).then(function (doc) {
                         var srv = doc.exists ? doc.data() : {};
@@ -1388,6 +1401,11 @@
                     if (!localPending) { DATA = cloneData(merged); applyTheme(); renderAll(); }
                 }).catch(function (e) {
                     console.error(e);
+                    if (e.code === 'permission-denied') {   // אין הרשאת כתיבה - השרת חסם
+                        localPending = false;
+                        if (!window.__wd) { window.__wd = true; alert('אין הרשאת עריכה בחשבון הזה (צפייה בלבד).'); }
+                        return;
+                    }
                     localPending = true;                    // לא נשמר - ננסה שוב
                     if (e.code === 'unavailable' || /offline/i.test(e.message || '')) {
                         retryTimer = setTimeout(saveDataToFirebase, 10000);
@@ -1479,8 +1497,8 @@
                 var h = new Date().getHours(), g = 'ערב טוב';
                 if (h < 5) g = 'לילה טוב'; else if (h < 12) g = 'בוקר טוב'; else if (h < 17) g = 'צהריים טובים'; else if (h < 20) g = 'אחר הצהריים טובים';
                 var el = document.getElementById('greetText');
-
-                if (el) el.textContent = g + ', ' + (isGuest ? 'אורח' : 'לב');
+                var custom = CUSTOM_GREETINGS[currentEmail];
+                if (el) el.textContent = custom ? custom : g + ', לב';
             }
 
             /* ---------- schedule ---------- */
@@ -1838,7 +1856,7 @@
                 saveData(); openClientDetail(ev.clientId); renderClients();
             }
             function autoFinalizeTrainings() {
-                if (!storageReady || isGuest) return;
+                if (!storageReady || window.__wd || currentEmail !== LEV_EMAIL) return;
                 var now = new Date(), changed = false;
                 DATA.events.forEach(function (ev) {
                     if (ev.type === 'training' && ev.status === 'scheduled' && eventRange(ev).end.getTime() <= now.getTime()) {
