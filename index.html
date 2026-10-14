@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="he" dir="rtl" data-theme="dark">
 <head>
@@ -38,6 +36,8 @@
             --training-bg: rgba(130,205,179,.15);
             --personal: #a9b6c2;
             --personal-bg: rgba(169,182,194,.15);
+            --consult: #f0a56e;
+            --consult-bg: rgba(240,165,110,.15);
             --holiday-chag: #b9a8e2;
             --holiday-chag-bg: rgba(185,168,226,.16);
             --holiday-fast: #e2a898;
@@ -71,6 +71,8 @@
             --training-bg: rgba(63,157,128,.11);
             --personal: #7b8a99;
             --personal-bg: rgba(123,138,153,.12);
+            --consult: #d2823f;
+            --consult-bg: rgba(210,130,63,.12);
             --holiday-chag: #7b62c2;
             --holiday-chag-bg: rgba(123,98,194,.1);
             --holiday-fast: #bd6a58;
@@ -121,6 +123,12 @@
             input:focus, select:focus, textarea:focus {
                 outline: 2px solid var(--accent);
                 outline-offset: 1px
+            }
+
+            input[type=color] {
+                padding: 3px;
+                height: 42px;
+                cursor: pointer
             }
 
         label {
@@ -454,7 +462,14 @@
             width: 16px;
             height: 16px;
             color: var(--c);
-            flex: none
+            flex: none;
+            font-size: 14px;
+            line-height: 1
+        }
+
+        .emo {
+            font-size: 15px;
+            line-height: 1
         }
 
         .ev-title {
@@ -756,15 +771,15 @@
 
         .type-picker {
             display: grid;
-            grid-template-columns: repeat(4,1fr);
-            gap: 8px
+            grid-template-columns: repeat(5,1fr);
+            gap: 6px
         }
 
         .type-opt {
             background: var(--surface-2);
             border: 1.5px solid var(--border);
             border-radius: 14px;
-            padding: 10px 4px;
+            padding: 10px 2px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -778,8 +793,10 @@
             }
 
             .type-opt span {
-                font-size: 11px;
-                font-weight: 700
+                font-size: 10px;
+                font-weight: 700;
+                text-align: center;
+                line-height: 1.15
             }
 
             .type-opt.selected {
@@ -1028,7 +1045,7 @@
             color: var(--accent-ink)
         }
 
-        .guest-mode #fabAdd, .guest-mode #addClientBtn, .guest-mode #emptyAddBtn, .guest-mode #saveEvBtn, .guest-mode #delEvBtn, .guest-mode #saveClBtn, .guest-mode #delClBtn, .guest-mode #resetBtn, .guest-mode #editClFromDetail, .guest-mode .row-btns .btn-danger, .guest-mode .row-btns button[data-cancel] {
+        .guest-mode #fabAdd, .guest-mode #addClientBtn, .guest-mode #emptyAddBtn, .guest-mode #saveEvBtn, .guest-mode #delEvBtn, .guest-mode #saveClBtn, .guest-mode #delClBtn, .guest-mode #resetBtn, .guest-mode #editClFromDetail, .guest-mode .row-btns .btn-danger, .guest-mode .row-btns button[data-cancel], .guest-mode .cat-del, .guest-mode #addCatBtn {
             display: none !important
         }
 
@@ -1070,8 +1087,48 @@
             }
 
         #greetText {
-            cursor: pointer;
+            cursor: pointer
         }
+
+        .emoji-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 8px
+        }
+
+        .emoji-opt {
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            width: 38px;
+            height: 38px;
+            font-size: 18px
+        }
+
+        .cat-row {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+            margin-bottom: 8px
+        }
+
+            .cat-row .cat-emoji {
+                width: 54px;
+                flex: none;
+                text-align: center;
+                font-size: 18px
+            }
+
+            .cat-row .cat-name {
+                flex: 1;
+                min-width: 0
+            }
+
+            .cat-row .cat-color {
+                width: 54px;
+                flex: none
+            }
     </style>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
@@ -1147,10 +1204,12 @@
                 download: S('<path d="M12 3v12m0 0-4.5-4.5M12 15l4.5-4.5"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/>'),
                 repeat: S('<path d="M17 2.1l4 4-4 4"/><path d="M3 12.6v-1.5A4 4 0 0 1 7 7h14"/><path d="M7 21.9l-4-4 4-4"/><path d="M21 11.4v1.5A4 4 0 0 1 17 17H3"/>')
             };
+            ICONS.chat = S('<path d="M21 12a8 8 0 0 1-11.6 7.1L3 20.5l1.5-5A8 8 0 1 1 21 12z"/>');
             var TYPE_META = {
                 mda: { label: 'מד"א', color: 'var(--mda)', bg: 'var(--mda-bg)', icon: ICONS.pulse },
                 gym: { label: 'משמרת ניהול', color: 'var(--gym)', bg: 'var(--gym-bg)', icon: ICONS.brief },
                 training: { label: 'אימון אישי', color: 'var(--training)', bg: 'var(--training-bg)', icon: ICONS.dumb },
+                consult: { label: 'ייעוץ כושר', color: 'var(--consult)', bg: 'var(--consult-bg)', icon: ICONS.chat },
                 personal: { label: 'זמן פרטי', color: 'var(--personal)', bg: 'var(--personal-bg)', icon: ICONS.moon }
             };
             var HTM = {
@@ -1202,6 +1261,18 @@
             function escapeHtml(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
             function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2, 7); }
 
+            /* ---------- custom categories / meta helpers ---------- */
+            var EMOJIS = ['🏠', '👪', '❤️', '🎓', '📚', '🎮', '🎬', '🍽️', '☕', '✈️', '🏖️', '🛒', '💼', '🧘', '⚽', '🎵', '🚗', '🩺', '🐶', '🎉', '🛌', '📞', '🔧', '⭐'];
+            function hexToRgba(h, a) { var n = parseInt(h.slice(1), 16); return 'rgba(' + (n >> 16 & 255) + ',' + (n >> 8 & 255) + ',' + (n & 255) + ',' + a + ')'; }
+            function metaOf(ev) {
+                var base = TYPE_META[ev.type] || TYPE_META.personal;
+                if (ev.type !== 'personal' || !ev.catId) return base;
+                var c = ((DATA.settings && DATA.settings.categories) || []).find(function (x) { return x.id === ev.catId; });
+                if (!c) return base;
+                return { label: c.name, color: c.color, bg: hexToRgba(c.color, .15), icon: '<span class="emo">' + escapeHtml(c.emoji || '🙂') + '</span>' };
+            }
+            function plusHour(t) { var a = (t || '00:00').split(':').map(Number); return pad((a[0] + 1) % 24) + ':' + pad(a[1] || 0); }
+
             /* ---------- holidays ---------- */
             var HOLIDAY_MAP = {};
             HOLIDAY_RAW.forEach(function (r) {
@@ -1227,7 +1298,7 @@
             /* ---------- data & firebase ---------- */
             var DEFAULT_DATA = {
                 events: [], clients: [],
-                settings: { theme: 'dark', gymHourlyRate: 35.40, trainingPrice: 80, bufferMinutes: 45, mdaRestHours: 8, lateCancelHours: 12, notificationsEnabled: false, reminderMinutes: 60, morningSummaryEnabled: false, morningSummaryTime: '07:00' }
+                settings: { theme: 'dark', gymHourlyRate: 35.40, trainingPrice: 80, consultPrice: 40, categories: [], bufferMinutes: 45, mdaRestHours: 8, lateCancelHours: 12, notificationsEnabled: false, reminderMinutes: 60, morningSummaryEnabled: false, morningSummaryTime: '07:00' }
             };
             var DATA = JSON.parse(JSON.stringify(DEFAULT_DATA));
             var baseData = null, retryTimer = null;
@@ -1448,7 +1519,7 @@
                 }
                 if (draft.type === 'mda' && draft.mdaShiftType === 'night') {
                     var until2 = new Date(r.end.getTime() + restMs);
-                    DATA.events.filter(function (e) { return (e.type === 'gym' || e.type === 'training') && e.id !== excludeId; }).forEach(function (ev) {
+                    DATA.events.filter(function (e) { return (e.type === 'gym' || e.type === 'training' || e.type === 'consult') && e.id !== excludeId; }).forEach(function (ev) {
                         var o = eventRange(ev);
                         if (o.start.getTime() < until2.getTime() && o.end.getTime() > r.end.getTime()) issues.push({ type: 'conflicts-with-rest', restUntil: until2, ev: ev });
                     });
@@ -1534,11 +1605,11 @@
                     for (var i = 0; i < 7; i++) (function (d) {
                         var chip = document.createElement('button');
                         chip.className = 'daychip' + (sameDate(d, sel) ? ' selected' : '');
-                        var types = Array.from(new Set(eventsOnDate(d).map(function (e) { return e.type; })));
+                        var types = Array.from(new Set(eventsOnDate(d).map(function (e) { return metaOf(e).color; })));
                         var hol = getPrimaryHoliday(toDateStr(d));
                         chip.innerHTML = '<span class="dow">' + DOW[d.getDay()] + '</span><span class="num">' + d.getDate() + '</span>' +
                             (hol ? '<span class="chip-holiday" style="color:' + HTM[hol.type].color + '">' + escapeHtml(holidayLabel(hol, true)) + '</span>'
-                                : '<span class="dots">' + types.map(function (t) { return '<span style="background:' + TYPE_META[t].color + '"></span>'; }).join('') + '</span>');
+                                : '<span class="dots">' + types.map(function (t) { return '<span style="background:' + t + '"></span>'; }).join('') + '</span>');
                         if (hol && !sameDate(d, sel)) { chip.style.background = HTM[hol.type].bg; chip.style.borderColor = HTM[hol.type].color; }
                         chip.addEventListener('click', function () { state.selectedDate = d; renderSchedule(); });
                         strip.appendChild(chip);
@@ -1557,11 +1628,11 @@
                         if (sameDate(d, today)) cls += ' today';
                         if (sameDate(d, sel)) cls += ' selected';
                         cell.className = cls;
-                        var types = Array.from(new Set(eventsOnDate(d).map(function (e) { return e.type; }))).slice(0, 4);
+                        var types = Array.from(new Set(eventsOnDate(d).map(function (e) { return metaOf(e).color; }))).slice(0, 4);
                         var hol = getPrimaryHoliday(toDateStr(d));
                         cell.innerHTML = '<span class="mc-num">' + d.getDate() + '</span>' +
                             (hol ? '<span class="mc-holiday" style="color:' + HTM[hol.type].color + '">' + escapeHtml(holidayLabel(hol, true)) + '</span>'
-                                : '<span class="mc-dots">' + types.map(function (t) { return '<span style="background:' + TYPE_META[t].color + '"></span>'; }).join('') + '</span>');
+                                : '<span class="mc-dots">' + types.map(function (t) { return '<span style="background:' + t + '"></span>'; }).join('') + '</span>');
                         if (hol && !sameDate(d, sel)) { cell.style.background = HTM[hol.type].bg; cell.style.borderColor = HTM[hol.type].color; }
                         cell.addEventListener('click', function () {
                             state.selectedDate = d; state.scheduleMode = 'day';
@@ -1592,14 +1663,14 @@
                 }
                 holder.innerHTML = '';
                 evs.forEach(function (ev) {
-                    var meta = TYPE_META[ev.type] || TYPE_META.personal;
+                    var meta = metaOf(ev);
                     var conflicts = findConflicts(ev, ev.id), fatigue = findFatigueIssues(ev, ev.id);
                     var card = document.createElement('div');
                     card.className = 'ev-card';
                     card.style.setProperty('--c', meta.color); card.style.setProperty('--cbg', meta.bg);
                     var cl = ev.clientId ? DATA.clients.find(function (c) { return c.id === ev.clientId; }) : null;
                     var ml = '';
-                    if (ev.type === 'training' && cl) ml = cl.name;
+                    if ((ev.type === 'training' || ev.type === 'consult') && cl) ml = cl.name;
                     if (ev.type === 'mda') ml = ev.mdaShiftType === 'morning' ? 'משמרת בוקר' : ev.mdaShiftType === 'evening' ? 'משמרת ערב' : 'משמרת לילה';
                     if (ev.type === 'gym' && ev.commission) ml = 'עמלות: ' + money(ev.commission);
                     var warn = '';
@@ -1608,7 +1679,7 @@
                     card.innerHTML = '<div class="ev-time"><div class="t1">' + ev.startTime + '</div><div class="t2">' + ev.endTime + '</div></div>' +
                         '<div class="ev-body"><div class="ev-title-row"><span class="ev-icon">' + meta.icon + '</span><span class="ev-title">' + escapeHtml(ev.title || meta.label) + '</span></div>' +
                         (ml ? '<div class="ev-meta">' + escapeHtml(ml) + '</div>' : '') +
-                        '<span class="ev-tag">' + meta.label + '</span>' + (ev.recurringId ? ' <span class="ev-tag muted">🔁 חוזר</span>' : '') + warn + '</div>';
+                        '<span class="ev-tag">' + escapeHtml(meta.label) + '</span>' + (ev.recurringId ? ' <span class="ev-tag muted">🔁 חוזר</span>' : '') + warn + '</div>';
                     card.addEventListener('click', function () { openEventModal(ev.id); });
                     holder.appendChild(card);
                 });
@@ -1625,7 +1696,7 @@
                 state.editingEventId = id;
                 var ev = id ? DATA.events.find(function (e) { return e.id === id; }) : null;
                 document.getElementById('evModalTitle').textContent = ev ? 'עריכת פעילות' : 'פעילות חדשה';
-                var draft = ev ? Object.assign({}, ev) : { id: null, type: 'gym', title: '', date: presetDate || toDateStr(state.selectedDate), startTime: '08:00', endTime: '12:00', useBuffer: true, notes: '', mdaShiftType: 'morning', clientId: '', commission: 0, price: DATA.settings.trainingPrice, recurring: false };
+                var draft = ev ? Object.assign({}, ev) : { id: null, type: 'gym', title: '', date: presetDate || toDateStr(state.selectedDate), startTime: '08:00', endTime: '12:00', useBuffer: true, notes: '', mdaShiftType: 'morning', clientId: '', commission: 0, price: null, catId: '', recurring: false };
                 renderEventForm(draft);
                 document.getElementById('modalEvent').classList.add('open');
             }
@@ -1633,7 +1704,7 @@
             document.querySelectorAll('[data-close]').forEach(function (el) { el.addEventListener('click', function () { closeModal(el.dataset.close); }); });
 
             function renderEventForm(draft) {
-                var body = document.getElementById('evModalBody'), clients = DATA.clients;
+                var body = document.getElementById('evModalBody'), clients = DATA.clients, newCat = null;
                 body.innerHTML =
                     '<div class="type-picker" id="typePicker">' + Object.keys(TYPE_META).map(function (t) {
                         return '<button class="type-opt ' + (draft.type === t ? 'selected' : '') + '" data-type="' + t + '" style="--c:' + TYPE_META[t].color + ';--cbg:' + TYPE_META[t].bg + '">' + TYPE_META[t].icon + '<span>' + TYPE_META[t].label + '</span></button>';
@@ -1654,13 +1725,36 @@
                         draft.type = btn.dataset.type;
                         document.querySelectorAll('#typePicker .type-opt').forEach(function (b) { b.classList.toggle('selected', b === btn); });
                         document.getElementById('f_title').placeholder = TYPE_META[draft.type].label;
+                        newCat = null;
+                        if (!draft.id && (draft.type === 'training' || draft.type === 'consult')) document.getElementById('f_end').value = plusHour(document.getElementById('f_start').value);
                         renderTypeExtra(draft); refreshConflictPreview(draft);
                     });
                 });
                 renderTypeExtra(draft);
                 renderRecurringBox(draft);
                 ['f_date', 'f_start', 'f_end'].forEach(function (id) { document.getElementById(id).addEventListener('change', function () { updatePresetSel(); refreshConflictPreview(draft); }); });
+                // אימון / ייעוץ: שעת סיום מתעדכנת אוטומטית ל-+שעה משעת ההתחלה
+                document.getElementById('f_start').addEventListener('change', function () {
+                    if ((draft.type === 'training' || draft.type === 'consult') && this.value) {
+                        document.getElementById('f_end').value = plusHour(this.value);
+                        updatePresetSel(); refreshConflictPreview(draft);
+                    }
+                });
 
+                function renderNewCat() {
+                    var nb = document.getElementById('newCatBox'); if (!nb) return;
+                    if (!newCat) { nb.innerHTML = ''; return; }
+                    nb.innerHTML = '<label>שם הקטגוריה</label><input id="nc_name" value="' + escapeHtml(newCat.name) + '" placeholder="למשל: משפחה, לימודים, חברים">' +
+                        '<label>אימוג\'י / אייקון</label><input id="nc_emoji" value="' + escapeHtml(newCat.emoji) + '" maxlength="8" style="text-align:center;font-size:20px">' +
+                        '<div class="emoji-row">' + EMOJIS.map(function (e) { return '<button type="button" class="emoji-opt">' + e + '</button>'; }).join('') + '</div>' +
+                        '<label>צבע</label><input type="color" id="nc_color" value="' + newCat.color + '">';
+                    document.getElementById('nc_name').addEventListener('input', function (e) { newCat.name = e.target.value; });
+                    document.getElementById('nc_emoji').addEventListener('input', function (e) { newCat.emoji = e.target.value; });
+                    document.getElementById('nc_color').addEventListener('input', function (e) { newCat.color = e.target.value; });
+                    nb.querySelectorAll('.emoji-opt').forEach(function (b) {
+                        b.addEventListener('click', function () { newCat.emoji = b.textContent; document.getElementById('nc_emoji').value = b.textContent; });
+                    });
+                }
                 function updatePresetSel() {
                     var st = document.getElementById('f_start').value, en = document.getElementById('f_end').value;
                     document.querySelectorAll('#shiftPresets .preset').forEach(function (b) { b.classList.toggle('selected', b.dataset.s === st && b.dataset.e === en); });
@@ -1691,9 +1785,19 @@
                             });
                         });
                         updatePresetSel();
-                    } else if (d.type === 'training') {
-                        box.innerHTML = '<label>מתאמן</label><select id="f_client"><option value="">— ללא שיוך —</option>' + clients.map(function (c) { return '<option value="' + c.id + '"' + (d.clientId === c.id ? ' selected' : '') + '>' + escapeHtml(c.name) + '</option>'; }).join('') + '</select>' +
-                            '<label>תעריף לאימון (₪)</label><input type="number" id="f_price" value="' + (d.price != null ? d.price : DATA.settings.trainingPrice) + '" min="0" step="5">';
+                    } else if (d.type === 'training' || d.type === 'consult') {
+                        box.innerHTML = '<label>' + (d.type === 'consult' ? 'לקוח (אופציונלי)' : 'מתאמן') + '</label><select id="f_client"><option value="">— ללא שיוך —</option>' + clients.map(function (c) { return '<option value="' + c.id + '"' + (d.clientId === c.id ? ' selected' : '') + '>' + escapeHtml(c.name) + '</option>'; }).join('') + '</select>' +
+                            '<label>' + (d.type === 'consult' ? 'תעריף לייעוץ (₪)' : 'תעריף לאימון (₪)') + '</label><input type="number" id="f_price" value="' + (d.price != null ? d.price : (d.type === 'consult' ? DATA.settings.consultPrice : DATA.settings.trainingPrice)) + '" min="0" step="5">';
+                    } else if (d.type === 'personal') {
+                        var cats = DATA.settings.categories || [];
+                        box.innerHTML = '<label>קטגוריה</label><select id="f_cat"><option value="">זמן פרטי (רגיל)</option>' +
+                            cats.map(function (c) { return '<option value="' + c.id + '"' + (d.catId === c.id ? ' selected' : '') + '>' + escapeHtml((c.emoji || '') + ' ' + c.name) + '</option>'; }).join('') +
+                            '<option value="__new">➕ קטגוריה חדשה…</option></select><div id="newCatBox"></div>';
+                        document.getElementById('f_cat').addEventListener('change', function (e) {
+                            if (e.target.value === '__new') newCat = { name: '', emoji: '🙂', color: '#86c2b8' };
+                            else { newCat = null; d.catId = e.target.value; }
+                            renderNewCat();
+                        });
                     } else box.innerHTML = '';
                 }
                 function refreshConflictPreview(d) {
@@ -1701,7 +1805,7 @@
                     var box = document.getElementById('conflictBox');
                     if (!test.date || !test.startTime || !test.endTime) { box.innerHTML = ''; return; }
                     var conflicts = findConflicts(test, d.id), fatigue = findFatigueIssues(test, d.id), html = '';
-                    if (conflicts.length) html += '<div class="alert">' + ICONS.warn + '<div><b>זוהתה חפיפה</b>חופפת ל' + conflicts.map(function (c) { return TYPE_META[c.type].label + ' (' + c.startTime + '–' + c.endTime + ')'; }).join(', ') + (test.useBuffer ? ' (כולל זמן חוצץ)' : '') + '</div></div>';
+                    if (conflicts.length) html += '<div class="alert">' + ICONS.warn + '<div><b>זוהתה חפיפה</b>חופפת ל' + conflicts.map(function (c) { return escapeHtml(metaOf(c).label) + ' (' + c.startTime + '–' + c.endTime + ')'; }).join(', ') + (test.useBuffer ? ' (כולל זמן חוצץ)' : '') + '</div></div>';
                     fatigue.forEach(function (f) {
                         var t = pad(f.restUntil.getHours()) + ':' + pad(f.restUntil.getMinutes());
                         if (f.type === 'blocked-after-shift') html += '<div class="alert">' + ICONS.warn + '<div><b>מתחת לזמן מנוחה</b>נדרשת מנוחה עד השעה ' + t + ' לאחר משמרת לילה במד"א</div></div>';
@@ -1720,11 +1824,20 @@
                     draft.notes = document.getElementById('f_notes').value.trim();
                     if (draft.type === 'mda') draft.mdaShiftType = document.getElementById('f_shift').value;
                     if (draft.type === 'gym') draft.commission = parseFloat(document.getElementById('f_comm').value) || 0;
-                    if (draft.type === 'training') {
+                    if (draft.type === 'training' || draft.type === 'consult') {
                         draft.clientId = document.getElementById('f_client').value || '';
-                        draft.price = parseFloat(document.getElementById('f_price').value) || DATA.settings.trainingPrice;
+                        draft.price = parseFloat(document.getElementById('f_price').value) || (draft.type === 'consult' ? DATA.settings.consultPrice : DATA.settings.trainingPrice);
                     }
                     if (!draft.date || !draft.startTime || !draft.endTime) { alert('נא למלא תאריך ושעות'); return; }
+                    if (draft.type === 'personal') {
+                        if (newCat) {
+                            var nm = (newCat.name || '').trim();
+                            if (!nm) { alert('נא להזין שם לקטגוריה'); return; }
+                            var cat = { id: uid(), name: nm, emoji: newCat.emoji || '🙂', color: newCat.color };
+                            DATA.settings.categories = (DATA.settings.categories || []).concat([cat]);
+                            draft.catId = cat.id;
+                        } else draft.catId = document.getElementById('f_cat').value;
+                    }
                     if (draft.id) {
                         var idx = DATA.events.findIndex(function (e) { return e.id === draft.id; });
                         DATA.events[idx] = draft;
@@ -1878,17 +1991,18 @@
                 var y = state.financeMonth.getFullYear(), m = state.financeMonth.getMonth();
                 document.getElementById('finLabel').textContent = MONTHS[m] + ' ' + y;
                 var inMonth = DATA.events.filter(function (e) { var d = parseDateStr(e.date); return d.getFullYear() === y && d.getMonth() === m; });
-                var now = new Date(), gymH = 0, gymBase = 0, gymC = 0, mdaH = 0, tCount = 0, tInc = 0, tSched = 0;
+                var now = new Date(), gymH = 0, gymBase = 0, gymC = 0, mdaH = 0, tCount = 0, tInc = 0, tSched = 0, cCount = 0, cInc = 0;
                 inMonth.forEach(function (ev) {
                     var r = eventRange(ev), hrs = (r.end - r.start) / 3600000, done = r.end.getTime() <= now.getTime();
                     if (ev.type === 'gym' && done) { gymH += hrs; gymBase += hrs * DATA.settings.gymHourlyRate * shiftMult(ev); gymC += (ev.commission || 0); }
                     if (ev.type === 'mda' && done) mdaH += hrs;
+                    if (ev.type === 'consult' && done) { cCount++; cInc += (ev.price != null ? ev.price : DATA.settings.consultPrice); }
                     if (ev.type === 'training') {
                         tSched++;
                         if (ev.status === 'attended' || ev.status === 'late-cancel') { tCount++; tInc += (ev.price != null ? ev.price : DATA.settings.trainingPrice); }
                     }
                 });
-                var gymInc = gymBase + gymC, total = gymInc + tInc;
+                var gymInc = gymBase + gymC, total = gymInc + tInc + cInc;
                 document.getElementById('financeHolder').innerHTML =
                     '<div class="card hero"><div class="section-title" style="margin-top:0">סה"כ הכנסה חודשית</div><div style="font-size:34px;font-weight:800;font-variant-numeric:tabular-nums">' + money(total) + '</div></div>' +
                     '<div class="stat-grid">' +
@@ -1897,8 +2011,10 @@
                     '<div class="stat"><div class="num">' + gymH.toFixed(1) + '</div><div class="lbl">שעות ניהול</div></div>' +
                     '<div class="stat tap" id="statTrainCount"><div class="num">' + tCount + '/' + tSched + '</div><div class="lbl">אימונים שבוצעו (לחץ לפירוט)</div></div>' +
                     '<div class="stat"><div class="num">' + mdaH.toFixed(1) + '</div><div class="lbl">שעות התנדבות מד"א</div></div>' +
-                    '<div class="stat"><div class="num">' + money(gymC) + '</div><div class="lbl">עמלות מכירה</div></div></div>' +
-                    '<div class="section-title">פילוח הכנסה</div><div class="card">' + financeBar('ניהול', gymInc, total || 1, 'var(--gym)', false) + financeBar('אימונים', tInc, total || 1, 'var(--training)', false) + '</div>' +
+                    '<div class="stat"><div class="num">' + money(gymC) + '</div><div class="lbl">עמלות מכירה</div></div>' +
+                    '<div class="stat"><div class="num">' + money(cInc) + '</div><div class="lbl">הכנסה מייעוצים</div></div>' +
+                    '<div class="stat"><div class="num">' + cCount + '</div><div class="lbl">ייעוצים שבוצעו</div></div></div>' +
+                    '<div class="section-title">פילוח הכנסה</div><div class="card">' + financeBar('ניהול', gymInc, total || 1, 'var(--gym)', false) + financeBar('אימונים', tInc, total || 1, 'var(--training)', false) + financeBar('ייעוץ', cInc, total || 1, 'var(--consult)', false) + '</div>' +
                     '<div class="section-title">חלוקת שעות</div><div class="card">' + financeBar('ניהול', gymH, (gymH + mdaH) || 1, 'var(--gym)', true) + financeBar('מד"א (התנדבות)', mdaH, (gymH + mdaH) || 1, 'var(--mda)', true) + '</div>';
                 document.getElementById('statGym').addEventListener('click', function () { openGymFinanceDetail(y, m); });
                 document.getElementById('statTraining').addEventListener('click', function () { openTrainingFinanceDetail(y, m); });
@@ -1978,9 +2094,9 @@
                 if (!ids.length) { holder.innerHTML = '<div class="empty-note">אין כרגע אירועים חוזרים מוגדרים</div>'; return; }
                 holder.innerHTML = ids.map(function (rid) {
                     var list = groups[rid].sort(function (a, b) { return a.date.localeCompare(b.date); }), first = list[0];
-                    var meta = TYPE_META[first.type] || TYPE_META.personal;
+                    var meta = metaOf(first);
                     var future = list.filter(function (e) { return e.date >= todayStr; }), past = list.length - future.length;
-                    var cl = first.type === 'training' && first.clientId ? DATA.clients.find(function (c) { return c.id === first.clientId; }) : null;
+                    var cl = (first.type === 'training' || first.type === 'consult') && first.clientId ? DATA.clients.find(function (c) { return c.id === first.clientId; }) : null;
                     var nameLine = (first.title || meta.label) + (cl ? ' · ' + cl.name : '');
                     return '<div class="client-card"><div style="display:flex;align-items:center;gap:8px"><span class="ev-icon" style="--c:' + meta.color + '">' + meta.icon + '</span><div style="flex:1"><div style="font-weight:700">' + escapeHtml(nameLine) + '</div><div style="font-size:12px;color:var(--text-muted)">כל יום ' + DOW[parseDateStr(first.date).getDay()] + "' · " + first.startTime + '–' + first.endTime + '</div></div></div>' +
                         '<div style="font-size:12px;color:var(--text-muted);margin-top:8px">' + future.length + ' מופעים עתידיים' + (past ? ' · ' + past + ' כבר עברו' : '') + '</div>' +
@@ -2024,7 +2140,7 @@
                         if (notified.has(key)) return;
                         var diff = eventRange(ev).start.getTime() - now.getTime();
                         if (diff > 0 && diff <= rms) {
-                            var meta = TYPE_META[ev.type] || TYPE_META.personal, body = ev.title || meta.label;
+                            var meta = metaOf(ev), body = ev.title || meta.label;
                             if (ev.type === 'training' && ev.clientId) { var c = DATA.clients.find(function (x) { return x.id === ev.clientId; }); if (c) body = 'אימון עם ' + c.name; }
                             showAppNotification('עוד ' + Math.round(diff / 60000) + " דק' - " + meta.label, body + ' בשעה ' + ev.startTime, key);
                             notified.add(key); saveNotifiedSet(notified);
@@ -2037,7 +2153,7 @@
                     var st = new Date(now); st.setHours(parts[0] || 7, parts[1] || 0, 0, 0);
                     if (last !== todayStr && now.getTime() >= st.getTime()) {
                         var todays = eventsOnDate(now);
-                        var body2 = todays.length ? todays.map(function (e) { return e.startTime + ' - ' + (e.title || TYPE_META[e.type].label); }).join(' | ') : 'אין פעילויות מתוכננות להיום';
+                        var body2 = todays.length ? todays.map(function (e) { return e.startTime + ' - ' + (e.title || metaOf(e).label); }).join(' | ') : 'אין פעילויות מתוכננות להיום';
                         showAppNotification('סיכום היום שלך', body2, 'morning-summary');
                         try { localStorage.setItem('lev_last_summary_date', todayStr); } catch (e) { }
                     }
@@ -2047,6 +2163,33 @@
             setInterval(function () { autoFinalizeTrainings(); if (state.view === 'finance') renderFinance(); }, 60000);
 
             /* ---------- settings ---------- */
+            function catSettingsHtml(s) {
+                var cats = s.categories || [];
+                return '<div class="section-title">קטגוריות זמן פרטי</div><div class="card">' +
+                    (cats.length ? cats.map(function (c) {
+                        return '<div class="cat-row" data-cat="' + c.id + '"><input class="cat-emoji" value="' + escapeHtml(c.emoji || '') + '" maxlength="8"><input class="cat-name" value="' + escapeHtml(c.name) + '"><input type="color" class="cat-color" value="' + c.color + '"><button class="icon-btn cat-del" type="button">' + ICONS.trash + '</button></div>';
+                    }).join('') : '<div class="empty-note" style="padding:6px 0 12px;text-align:right">אין קטגוריות עדיין. אפשר ליצור גם ישירות בעת הוספת אירוע "זמן פרטי".</div>') +
+                    '<button class="btn btn-ghost" id="addCatBtn" type="button" style="margin-top:8px">' + ICONS.plus + ' קטגוריה חדשה</button></div>';
+            }
+            function bindCats(s) {
+                s.categories = s.categories || [];
+                document.querySelectorAll('.cat-row').forEach(function (row) {
+                    var find = function () { return s.categories.find(function (c) { return c.id === row.dataset.cat; }); };
+                    row.querySelector('.cat-emoji').addEventListener('change', function (e) { var c = find(); if (c) { c.emoji = e.target.value; saveData(); renderSchedule(); } });
+                    row.querySelector('.cat-name').addEventListener('change', function (e) { var c = find(); if (c) { c.name = e.target.value.trim() || c.name; saveData(); renderSchedule(); } });
+                    row.querySelector('.cat-color').addEventListener('change', function (e) { var c = find(); if (c) { c.color = e.target.value; saveData(); renderSchedule(); } });
+                    row.querySelector('.cat-del').addEventListener('click', function () {
+                        if (!confirm('למחוק את הקטגוריה? אירועים קיימים יחזרו להיות "זמן פרטי" רגיל.')) return;
+                        s.categories = s.categories.filter(function (c) { return c.id !== row.dataset.cat; });
+                        saveData(); renderSettings(); renderSchedule();
+                    });
+                });
+                var add = document.getElementById('addCatBtn');
+                if (add) add.addEventListener('click', function () {
+                    s.categories.push({ id: uid(), name: 'קטגוריה חדשה', emoji: '🙂', color: '#86c2b8' });
+                    saveData(); renderSettings();
+                });
+            }
             function renderSettings() {
                 var s = DATA.settings, holder = document.getElementById('settingsHolder');
                 var supported = ('Notification' in window), perm = supported ? Notification.permission : 'unsupported', note;
@@ -2056,8 +2199,9 @@
                 else note = 'יש להפעיל את המתג כדי לאשר קבלת התראות מהדפדפן.';
                 var recCount = new Set(DATA.events.filter(function (e) { return e.recurringId; }).map(function (e) { return e.recurringId; })).size;
                 holder.innerHTML =
-                    '<div class="section-title" style="margin-top:0">תעריפים</div><div class="card"><label>תעריף שעתי – ניהול (₪) — בשבת ×150% אוטומטית</label><input type="number" id="s_rate" value="' + s.gymHourlyRate + '" step="0.1"><label>מחיר אימון אישי (₪)</label><input type="number" id="s_price" value="' + s.trainingPrice + '" step="5"></div>' +
+                    '<div class="section-title" style="margin-top:0">תעריפים</div><div class="card"><label>תעריף שעתי – ניהול (₪) — בשבת ×150% אוטומטית</label><input type="number" id="s_rate" value="' + s.gymHourlyRate + '" step="0.1"><label>מחיר אימון אישי (₪)</label><input type="number" id="s_price" value="' + s.trainingPrice + '" step="5"><label>מחיר ייעוץ כושר (₪)</label><input type="number" id="s_cprice" value="' + (s.consultPrice != null ? s.consultPrice : 40) + '" step="5"></div>' +
                     '<div class="section-title">חסימות ומרווחים</div><div class="card"><label>זמן נסיעה/התארגנות בין פעילויות (דקות)</label><input type="number" id="s_buffer" value="' + s.bufferMinutes + '" step="5"><label>שעות מנוחה נדרשות אחרי משמרת לילה במד"א</label><input type="number" id="s_rest" value="' + s.mdaRestHours + '" step="0.5"></div>' +
+                    catSettingsHtml(s) +
                     '<div class="section-title">אירועים חוזרים</div><div class="card"><div class="empty-note" style="padding:6px 0 12px;text-align:right">' + recCount + ' סדרות אירועים חוזרים מוגדרות כרגע.</div><button class="btn btn-ghost" id="openRecurringBtn">' + ICONS.repeat + ' ניהול אירועים חוזרים</button></div>' +
                     '<div class="section-title">התראות ותזכורות</div><div class="card">' +
                     '<div class="toggle-row"><div><div class="t-main">תזכורות לפני פעילות</div><div class="t-sub">התראה בדפדפן/באפליקציה המותקנת לפני כל פעילות</div></div><div class="switch ' + (s.notificationsEnabled ? 'on' : '') + '" id="s_notif"></div></div>' +
@@ -2073,7 +2217,7 @@
                     '<div class="empty-note">הנתונים נשמרים באופן פרטי בחשבון שלך בלבד.</div>';
 
                 document.getElementById('s_theme').addEventListener('click', function () { this.classList.toggle('on'); s.theme = this.classList.contains('on') ? 'dark' : 'light'; applyTheme(); saveData(); });
-                var map = { s_rate: 'gymHourlyRate', s_price: 'trainingPrice', s_buffer: 'bufferMinutes', s_rest: 'mdaRestHours' };
+                var map = { s_rate: 'gymHourlyRate', s_price: 'trainingPrice', s_cprice: 'consultPrice', s_buffer: 'bufferMinutes', s_rest: 'mdaRestHours' };
                 Object.keys(map).forEach(function (id) { document.getElementById(id).addEventListener('change', function (e) { s[map[id]] = parseFloat(e.target.value) || 0; saveData(); }); });
                 document.getElementById('openRecurringBtn').addEventListener('click', openRecurringManager);
                 function bindNotif(elId, key) {
@@ -2106,13 +2250,14 @@
                     }
                 });
                 document.getElementById('exportIcsBtn').addEventListener('click', exportIcs);
+                bindCats(s);
             }
             function exportIcs() {
                 var ics = 'BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//לוז אישי//HE\r\n';
                 var fmt = function (d) { return d.getFullYear() + pad(d.getMonth() + 1) + pad(d.getDate()) + 'T' + pad(d.getHours()) + pad(d.getMinutes()) + '00'; };
                 DATA.events.forEach(function (ev) {
                     var r = eventRange(ev);
-                    ics += 'BEGIN:VEVENT\r\nUID:' + ev.id + '@personal-schedule\r\nDTSTART:' + fmt(r.start) + '\r\nDTEND:' + fmt(r.end) + '\r\nSUMMARY:' + (ev.title || TYPE_META[ev.type].label) + '\r\nEND:VEVENT\r\n';
+                    ics += 'BEGIN:VEVENT\r\nUID:' + ev.id + '@personal-schedule\r\nDTSTART:' + fmt(r.start) + '\r\nDTEND:' + fmt(r.end) + '\r\nSUMMARY:' + (ev.title || metaOf(ev).label) + '\r\nEND:VEVENT\r\n';
                 });
                 ics += 'END:VCALENDAR';
                 var url = URL.createObjectURL(new Blob([ics], { type: 'text/calendar' }));
