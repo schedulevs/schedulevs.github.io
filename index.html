@@ -1045,7 +1045,7 @@
             color: var(--accent-ink)
         }
 
-        .guest-mode #fabAdd, .guest-mode #addClientBtn, .guest-mode #emptyAddBtn, .guest-mode #saveEvBtn, .guest-mode #delEvBtn, .guest-mode #saveClBtn, .guest-mode #delClBtn, .guest-mode #resetBtn, .guest-mode #editClFromDetail, .guest-mode .row-btns .btn-danger, .guest-mode .row-btns button[data-cancel], .guest-mode .cat-del, .guest-mode #addCatBtn {
+        .guest-mode #fabAdd, .guest-mode #addClientBtn, .guest-mode #emptyAddBtn, .guest-mode #saveEvBtn, .guest-mode #delEvBtn, .guest-mode #saveClBtn, .guest-mode #delClBtn, .guest-mode #resetBtn, .guest-mode #editClFromDetail, .guest-mode .row-btns .btn-danger, .guest-mode .row-btns button[data-cancel], .guest-mode .cat-del, .guest-mode #addCatBtn, .guest-mode #addBonusBtn, .guest-mode .bonus-del {
             display: none !important
         }
 
@@ -1085,6 +1085,15 @@
                 border-color: var(--gym);
                 background: var(--gym-bg)
             }
+
+        .preset-row.three {
+            grid-template-columns: repeat(3,1fr)
+        }
+
+        .preset.mda-p.selected {
+            border-color: var(--mda);
+            background: var(--mda-bg)
+        }
 
         #greetText {
             cursor: pointer
@@ -1220,6 +1229,8 @@
                 memorial: { color: 'var(--holiday-memorial)', bg: 'var(--holiday-memorial-bg)', label: 'יום זיכרון' }
             };
             var TC = { c: 'chag', m: 'minor', h: 'cholhamoed', f: 'fast', r: 'memorial' };
+            // שעות קבועות למשמרות מד"א לפי סוג משמרת
+            var MDA_TIMES = { morning: ['06:30', '15:30'], evening: ['14:30', '23:30'], night: ['22:30', '07:30'] };
             // start|end|name|type  (c=חג, m=מועד, h=חול המועד, f=צום, r=יום זיכרון)
             var HOLIDAY_RAW = [
                 '2026-02-02|2026-02-02|ט"ו בשבט|m', '2026-03-02|2026-03-02|תענית אסתר|f', '2026-03-03|2026-03-03|פורים|c', '2026-03-04|2026-03-04|שושן פורים|m',
@@ -1297,7 +1308,7 @@
 
             /* ---------- data & firebase ---------- */
             var DEFAULT_DATA = {
-                events: [], clients: [],
+                events: [], clients: [], bonuses: [],
                 settings: { theme: 'dark', gymHourlyRate: 35.40, trainingPrice: 80, consultPrice: 40, categories: [], bufferMinutes: 45, mdaRestHours: 8, lateCancelHours: 12, notificationsEnabled: false, reminderMinutes: 60, morningSummaryEnabled: false, morningSummaryTime: '07:00' }
             };
             var DATA = JSON.parse(JSON.stringify(DEFAULT_DATA));
@@ -1420,8 +1431,8 @@
             /* ---- חישוב מה השתנה מקומית מאז הסנכרון האחרון ---- */
             function indexById(a) { var m = {}; (a || []).forEach(function (x) { m[x.id] = x; }); return m; }
             function computeChanges(base, cur) {
-                var ch = { events: { up: [], del: [] }, clients: { up: [], del: [] }, settings: {}, empty: true };
-                ['events', 'clients'].forEach(function (k) {
+                var ch = { events: { up: [], del: [] }, clients: { up: [], del: [] }, bonuses: { up: [], del: [] }, settings: {}, empty: true };
+                ['events', 'clients', 'bonuses'].forEach(function (k) {
                     var b = indexById(base[k]), c = indexById(cur[k]);
                     Object.keys(c).forEach(function (id) {
                         if (!b[id] || stable(b[id]) !== stable(c[id])) { ch[k].up.push(c[id]); ch.empty = false; }
@@ -1436,7 +1447,7 @@
                 return ch;
             }
             function applyChanges(target, ch) {
-                ['events', 'clients'].forEach(function (k) {
+                ['events', 'clients', 'bonuses'].forEach(function (k) {
                     var list = (target[k] || []).filter(function (x) { return ch[k].del.indexOf(x.id) === -1; });
                     ch[k].up.forEach(function (item) {
                         var i = list.findIndex(function (x) { return x.id === item.id; });
@@ -1727,7 +1738,13 @@
                         document.getElementById('f_title').placeholder = TYPE_META[draft.type].label;
                         newCat = null;
                         if (!draft.id && (draft.type === 'training' || draft.type === 'consult')) document.getElementById('f_end').value = plusHour(document.getElementById('f_start').value);
-                        renderTypeExtra(draft); refreshConflictPreview(draft);
+                        renderTypeExtra(draft);
+                        if (draft.type === 'mda' && !draft.id) {
+                            var mt = MDA_TIMES[draft.mdaShiftType || 'morning'];
+                            document.getElementById('f_start').value = mt[0];
+                            document.getElementById('f_end').value = mt[1];
+                        }
+                        refreshConflictPreview(draft);
                     });
                 });
                 renderTypeExtra(draft);
@@ -1768,8 +1785,21 @@
                 function renderTypeExtra(d) {
                     var box = document.getElementById('typeExtra');
                     if (d.type === 'mda') {
-                        box.innerHTML = '<label>סוג משמרת</label><select id="f_shift"><option value="morning"' + (d.mdaShiftType === 'morning' ? ' selected' : '') + '>בוקר</option><option value="evening"' + (d.mdaShiftType === 'evening' ? ' selected' : '') + '>ערב</option><option value="night"' + (d.mdaShiftType === 'night' ? ' selected' : '') + '>לילה</option></select>';
-                        document.getElementById('f_shift').addEventListener('change', function (e) { d.mdaShiftType = e.target.value; refreshConflictPreview(d); });
+                        var cur = d.mdaShiftType || 'morning';
+                        box.innerHTML = '<label>משמרת מד"א (מעדכן את השעות)</label><div class="preset-row three" id="mdaPresets">' +
+                            '<button type="button" class="preset mda-p' + (cur === 'morning' ? ' selected' : '') + '" data-k="morning">🌅 בוקר<small>06:30–15:30</small></button>' +
+                            '<button type="button" class="preset mda-p' + (cur === 'evening' ? ' selected' : '') + '" data-k="evening">🌇 ערב<small>14:30–23:30</small></button>' +
+                            '<button type="button" class="preset mda-p' + (cur === 'night' ? ' selected' : '') + '" data-k="night">🌙 לילה<small>22:30–07:30</small></button></div>';
+                        document.querySelectorAll('#mdaPresets .preset').forEach(function (b) {
+                            b.addEventListener('click', function () {
+                                d.mdaShiftType = b.dataset.k;
+                                var t = MDA_TIMES[d.mdaShiftType];
+                                document.getElementById('f_start').value = t[0];
+                                document.getElementById('f_end').value = t[1];
+                                document.querySelectorAll('#mdaPresets .preset').forEach(function (x) { x.classList.toggle('selected', x === b); });
+                                refreshConflictPreview(d);
+                            });
+                        });
                     } else if (d.type === 'gym') {
                         box.innerHTML = '<label>משמרת מהירה (מעדכן את השעות)</label><div class="preset-row" id="shiftPresets">' +
                             '<button type="button" class="preset" data-s="06:00" data-e="11:00">🌅 בוקר<small>06:00–11:00</small></button>' +
@@ -1822,7 +1852,7 @@
                     draft.endTime = document.getElementById('f_end').value;
                     draft.useBuffer = document.getElementById('f_buffer').classList.contains('on');
                     draft.notes = document.getElementById('f_notes').value.trim();
-                    if (draft.type === 'mda') draft.mdaShiftType = document.getElementById('f_shift').value;
+                    if (draft.type === 'mda') draft.mdaShiftType = draft.mdaShiftType || 'morning';
                     if (draft.type === 'gym') draft.commission = parseFloat(document.getElementById('f_comm').value) || 0;
                     if (draft.type === 'training' || draft.type === 'consult') {
                         draft.clientId = document.getElementById('f_client').value || '';
@@ -2010,6 +2040,7 @@
                     '<div class="stat tap" id="statTraining"><div class="num">' + money(tInc) + '</div><div class="lbl">הכנסה מאימונים (לחץ לפירוט)</div></div>' +
                     '<div class="stat"><div class="num">' + gymH.toFixed(1) + '</div><div class="lbl">שעות ניהול</div></div>' +
                     '<div class="stat tap" id="statTrainCount"><div class="num">' + tCount + '/' + tSched + '</div><div class="lbl">אימונים שבוצעו (לחץ לפירוט)</div></div>' +
+                    '<div class="stat tap" id="statBonus"><div class="num">' + bonusRows(y, m).length + '</div><div class="lbl">בונוסים – לקוחות ומנויים (לחץ לפירוט)</div></div>' +
                     '<div class="stat"><div class="num">' + mdaH.toFixed(1) + '</div><div class="lbl">שעות התנדבות מד"א</div></div>' +
                     '<div class="stat"><div class="num">' + money(gymC) + '</div><div class="lbl">עמלות מכירה</div></div>' +
                     '<div class="stat"><div class="num">' + money(cInc) + '</div><div class="lbl">הכנסה מייעוצים</div></div>' +
@@ -2019,6 +2050,7 @@
                 document.getElementById('statGym').addEventListener('click', function () { openGymFinanceDetail(y, m); });
                 document.getElementById('statTraining').addEventListener('click', function () { openTrainingFinanceDetail(y, m); });
                 document.getElementById('statTrainCount').addEventListener('click', function () { openTrainingCountDetail(y, m); });
+                document.getElementById('statBonus').addEventListener('click', function () { openBonusDetail(y, m); });
             }
             function financeBar(label, val, total, color, hours) {
                 var pct = val > 0 ? Math.max(2, Math.min(100, val / total * 100)) : 0;
@@ -2083,6 +2115,67 @@
                 held.forEach(function (ev) { var n = clientName(ev); counts[n] = (counts[n] || 0) + 1; });
                 var rows = Object.keys(counts).sort(function (a, b) { return counts[b] - counts[a]; }).map(function (n) { return summaryRow(n, counts[n] + ' אימונים'); }).join('') || '<div class="empty-note">אין אימונים שבוצעו בחודש זה</div>';
                 showFinDetail('<div class="modal-title">אימונים שבוצעו</div><div class="empty-note" style="padding:2px 0 14px;text-align:right">' + MONTHS[m] + ' ' + y + ' · סה"כ ' + held.length + ' אימונים</div>' + rows);
+            }
+
+            /* ---------- bonuses (לקוחות ומנויים) ---------- */
+            function bonusRows(y, m) {
+                return (DATA.bonuses || []).filter(function (b) {
+                    var d = parseDateStr(b.date);
+                    return d.getFullYear() === y && d.getMonth() === m;
+                }).sort(function (a, b) { return a.date.localeCompare(b.date); });
+            }
+            function bonusLine(r) { return shortDate(r.date) + ' - ' + r.name + (r.plan ? ', מנוי ' + r.plan : ''); }
+            function copyText(text) {
+                if (navigator.clipboard && navigator.clipboard.writeText) return navigator.clipboard.writeText(text);
+                return new Promise(function (res, rej) {
+                    var ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta); ta.select();
+                    try { document.execCommand('copy'); res(); } catch (e) { rej(e); }
+                    document.body.removeChild(ta);
+                });
+            }
+            var BONUS_PLANS = ['Day Use', 'Anytime', 'Freedom', 'VIP', 'פילאטיס משולב'];
+            function openBonusDetail(y, m) {
+                var n = bonusRows(y, m).length;
+                showFinDetail('<div class="modal-title">בונוסים – לקוחות ומנויים</div><div class="empty-note" style="padding:2px 0 6px;text-align:right">' + MONTHS[m] + ' ' + y + ' · ' + n + ' לקוחות</div>' + bonusSectionHtml(y, m));
+                bindBonus(y, m);
+            }
+            function bonusSectionHtml(y, m) {
+                var rows = bonusRows(y, m), t = new Date();
+                var defDate = (t.getFullYear() === y && t.getMonth() === m) ? toDateStr(t) : y + '-' + pad(m + 1) + '-01';
+                return '<div class="section-title" style="margin-top:6px">רשומות</div>' +
+                    (rows.length ? rows.map(function (r) {
+                        return '<div class="client-card" style="margin-bottom:8px;display:flex;align-items:center;gap:8px"><div style="flex:1;min-width:0"><div style="font-weight:700">' + escapeHtml(r.name || 'ללא שם') + '</div><div style="font-size:12px;color:var(--text-muted)">' + shortDate(r.date) + (r.plan ? ' · מנוי ' + escapeHtml(r.plan) : '') + '</div></div><button type="button" class="icon-btn bonus-del" data-id="' + r.id + '">' + ICONS.trash + '</button></div>';
+                    }).join('') : '<div class="empty-note" style="padding:10px 0">עוד לא הוזנו לקוחות בחודש זה</div>') +
+                    '<div class="card"><label>תאריך</label><input type="date" id="b_date" value="' + defDate + '"><label>שם לקוח</label><input id="b_name" placeholder="שם לקוח"><label>מנוי</label><select id="b_plan">' + BONUS_PLANS.map(function (p) { return '<option value="' + p + '">' + p + '</option>'; }).join('') + '</select><button type="button" class="btn btn-primary" id="addBonusBtn" style="margin-top:12px">' + ICONS.plus + ' הוספה</button></div>' +
+                    (rows.length ? '<button type="button" class="btn btn-ghost" id="copyBonusBtn">העתקת הכל ללוח</button>' : '');
+            }
+            function bindBonus(y, m) {
+                function rerender() {
+                    openBonusDetail(y, m);
+                    if (state.view === 'finance') renderFinance();
+                }
+                var add = document.getElementById('addBonusBtn');
+                if (add) add.addEventListener('click', function () {
+                    var date = document.getElementById('b_date').value;
+                    var name = document.getElementById('b_name').value.trim();
+                    var plan = document.getElementById('b_plan').value.trim();
+                    if (!date || (!name && !plan)) { alert('נא למלא תאריך ושם לקוח'); return; }
+                    DATA.bonuses = DATA.bonuses || [];
+                    DATA.bonuses.push({ id: uid(), date: date, name: name, plan: plan });
+                    saveData(); rerender();
+                });
+                document.querySelectorAll('.bonus-del').forEach(function (btn) {
+                    btn.addEventListener('click', function () {
+                        DATA.bonuses = (DATA.bonuses || []).filter(function (b) { return b.id !== btn.dataset.id; });
+                        saveData(); rerender();
+                    });
+                });
+                var cp = document.getElementById('copyBonusBtn');
+                if (cp) cp.addEventListener('click', function () {
+                    var text = bonusRows(y, m).map(bonusLine).join('\n');
+                    copyText(text).then(function () { cp.textContent = 'הועתק ✓'; setTimeout(function () { cp.textContent = 'העתקת הכל ללוח'; }, 1800); })
+                        .catch(function () { alert('ההעתקה נכשלה'); });
+                });
             }
 
             /* ---------- recurring manager ---------- */
