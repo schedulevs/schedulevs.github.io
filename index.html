@@ -1264,7 +1264,7 @@
             function sameDate(a, b) { return toDateStr(a) === toDateStr(b); }
             function combineDateTime(ds, ts) { var a = (ts || '00:00').split(':').map(Number); var d = parseDateStr(ds); d.setHours(a[0], a[1], 0, 0); return d; }
             function eventRange(ev) {
-                var start = combineDateTime(ev.date, ev.startTime), end = combineDateTime(ev.date, ev.endTime);
+                var start = combineDateTime(ev.date, ev.startTime), end = combineDateTime(ev.endDate || ev.date, ev.endTime);
                 if (end.getTime() <= start.getTime()) end = addDays(end, 1);
                 return { start: start, end: end };
             }
@@ -1512,16 +1512,19 @@
             /* ---------- conflicts ---------- */
             function bufMs(ev) { return (ev.type !== 'personal' && ev.useBuffer !== false) ? DATA.settings.bufferMinutes * 60000 : 0; }
             function findConflicts(draft, excludeId) {
+                if (draft.endDate) return [];   // אירוע מתמשך לא נחשב חפיפה
                 var r = eventRange(draft), b = bufMs(draft);
                 var ps = r.start.getTime() - b, pe = r.end.getTime() + b;
                 return DATA.events.filter(function (ev) {
                     if (ev.id === excludeId) return false;
+                    if (ev.endDate) return false;
                     var o = eventRange(ev), ob = bufMs(ev);
                     return ps < o.end.getTime() + ob && o.start.getTime() - ob < pe;
                 });
             }
             function findFatigueIssues(draft, excludeId) {
                 var issues = [], restMs = DATA.settings.mdaRestHours * 3600000, r = eventRange(draft);
+                if (draft.endDate) return issues;
                 if (draft.type !== 'mda' && draft.mdaShiftType !== 'night') {
                     DATA.events.filter(function (e) { return e.type === 'mda' && e.mdaShiftType === 'night' && e.id !== excludeId; }).forEach(function (mda) {
                         var mEnd = eventRange(mda).end, until = new Date(mEnd.getTime() + restMs);
@@ -1687,10 +1690,12 @@
                     var warn = '';
                     if (conflicts.length) warn += '<div class="ev-warn">' + ICONS.warn + ' חפיפה עם ' + conflicts.length + ' פעילות/יות</div>';
                     if (fatigue.length) warn += '<div class="ev-warn">' + ICONS.warn + ' בטווח מנוחה נדרש אחרי משמרת לילה</div>';
-                    card.innerHTML = '<div class="ev-time"><div class="t1">' + ev.startTime + '</div><div class="t2">' + ev.endTime + '</div></div>' +
+                    card.innerHTML = '<div class="ev-time">' + (ev.endDate
+                        ? '<div class="t1" style="font-size:12px">' + shortDate(ev.date) + '</div><div class="t2">עד ' + shortDate(ev.endDate) + '</div>'
+                        : '<div class="t1">' + ev.startTime + '</div><div class="t2">' + ev.endTime + '</div>') + '</div>' +
                         '<div class="ev-body"><div class="ev-title-row"><span class="ev-icon">' + meta.icon + '</span><span class="ev-title">' + escapeHtml(ev.title || meta.label) + '</span></div>' +
                         (ml ? '<div class="ev-meta">' + escapeHtml(ml) + '</div>' : '') +
-                        '<span class="ev-tag">' + escapeHtml(meta.label) + '</span>' + (ev.recurringId ? ' <span class="ev-tag muted">🔁 חוזר</span>' : '') + warn + '</div>';
+                        '<span class="ev-tag">' + escapeHtml(meta.label) + '</span>' + (ev.recurringId ? ' <span class="ev-tag muted">🔁 חוזר</span>' : '') + (ev.endDate ? ' <span class="ev-tag muted">📆 מתמשך</span>' : '') + warn + '</div>';
                     card.addEventListener('click', function () { openEventModal(ev.id); });
                     holder.appendChild(card);
                 });
@@ -1707,7 +1712,7 @@
                 state.editingEventId = id;
                 var ev = id ? DATA.events.find(function (e) { return e.id === id; }) : null;
                 document.getElementById('evModalTitle').textContent = ev ? 'עריכת פעילות' : 'פעילות חדשה';
-                var draft = ev ? Object.assign({}, ev) : { id: null, type: 'gym', title: '', date: presetDate || toDateStr(state.selectedDate), startTime: '08:00', endTime: '12:00', useBuffer: true, notes: '', mdaShiftType: 'morning', clientId: '', commission: 0, price: null, catId: '', recurring: false };
+                var draft = ev ? Object.assign({}, ev, { ongoing: !!ev.endDate }) : { id: null, type: 'gym', title: '', date: presetDate || toDateStr(state.selectedDate), endDate: '', ongoing: false, startTime: '08:00', endTime: '12:00', useBuffer: true, notes: '', mdaShiftType: 'morning', clientId: '', commission: 0, price: null, catId: '', recurring: false };
                 renderEventForm(draft);
                 document.getElementById('modalEvent').classList.add('open');
             }
@@ -1721,8 +1726,8 @@
                         return '<button class="type-opt ' + (draft.type === t ? 'selected' : '') + '" data-type="' + t + '" style="--c:' + TYPE_META[t].color + ';--cbg:' + TYPE_META[t].bg + '">' + TYPE_META[t].icon + '<span>' + TYPE_META[t].label + '</span></button>';
                     }).join('') + '</div>' +
                     '<label>כותרת (אופציונלי)</label><input id="f_title" value="' + escapeHtml(draft.title || '') + '" placeholder="' + TYPE_META[draft.type].label + '">' +
-                    '<div class="field-row"><div><label>תאריך</label><input type="date" id="f_date" value="' + draft.date + '"></div><div></div></div>' +
-                    '<div class="field-row"><div><label>שעת התחלה</label><input type="time" id="f_start" value="' + draft.startTime + '"></div><div><label>שעת סיום</label><input type="time" id="f_end" value="' + draft.endTime + '"></div></div>' +
+                    '<div class="field-row"><div><label id="f_date_lbl">תאריך</label><input type="date" id="f_date" value="' + draft.date + '"></div><div id="endDateWrap" style="display:none"><label>עד תאריך</label><input type="date" id="f_enddate" value="' + (draft.endDate || draft.date) + '"></div></div>' +
+                    '<div class="field-row" id="timeRow"><div><label>שעת התחלה</label><input type="time" id="f_start" value="' + draft.startTime + '"></div><div><label>שעת סיום</label><input type="time" id="f_end" value="' + draft.endTime + '"></div></div>' +
                     '<div id="typeExtra"></div>' +
                     '<div class="toggle-row"><div><div class="t-main">חסימת זמן נסיעה/התארגנות</div><div class="t-sub">' + DATA.settings.bufferMinutes + " דק' לפני ואחרי</div></div><div class=\"switch " + (draft.useBuffer !== false ? 'on' : '') + '" id="f_buffer"></div></div>' +
                     '<div id="recurringBox"></div>' +
@@ -1749,7 +1754,8 @@
                 });
                 renderTypeExtra(draft);
                 renderRecurringBox(draft);
-                ['f_date', 'f_start', 'f_end'].forEach(function (id) { document.getElementById(id).addEventListener('change', function () { updatePresetSel(); refreshConflictPreview(draft); }); });
+                applyOngoing(draft);
+                ['f_date', 'f_start', 'f_end'].forEach(function (id) { document.getElementById(id).addEventListener('change', function () { updatePresetSel(); applyOngoing(draft); refreshConflictPreview(draft); }); });
                 // אימון / ייעוץ: שעת סיום מתעדכנת אוטומטית ל-+שעה משעת ההתחלה
                 document.getElementById('f_start').addEventListener('change', function () {
                     if ((draft.type === 'training' || draft.type === 'consult') && this.value) {
@@ -1781,6 +1787,16 @@
                     if (d.id) { box.innerHTML = ''; return; }
                     box.innerHTML = '<div class="toggle-row"><div><div class="t-main">אירוע חוזר 🔁</div><div class="t-sub">כל שבוע, באותו יום ואותה שעה, למשך שנה קדימה</div></div><div class="switch ' + (d.recurring ? 'on' : '') + '" id="f_recurring"></div></div>';
                     document.getElementById('f_recurring').addEventListener('click', function () { this.classList.toggle('on'); d.recurring = this.classList.contains('on'); });
+                }
+                /* זמן פרטי מתמשך: מציג שדה "עד תאריך", מסתיר שעות ואירוע חוזר */
+                function applyOngoing(d) {
+                    var on = d.type === 'personal' && !!d.ongoing;
+                    document.getElementById('endDateWrap').style.display = on ? '' : 'none';
+                    document.getElementById('timeRow').style.display = on ? 'none' : '';
+                    document.getElementById('f_date_lbl').textContent = on ? 'מתאריך' : 'תאריך';
+                    var rb = document.getElementById('recurringBox'); if (rb) rb.style.display = on ? 'none' : '';
+                    var ed = document.getElementById('f_enddate'), sd = document.getElementById('f_date').value;
+                    if (on && sd && (!ed.value || ed.value < sd)) ed.value = sd;
                 }
                 function renderTypeExtra(d) {
                     var box = document.getElementById('typeExtra');
@@ -1820,17 +1836,29 @@
                             '<label>' + (d.type === 'consult' ? 'תעריף לייעוץ (₪)' : 'תעריף לאימון (₪)') + '</label><input type="number" id="f_price" value="' + (d.price != null ? d.price : (d.type === 'consult' ? DATA.settings.consultPrice : DATA.settings.trainingPrice)) + '" min="0" step="5">';
                     } else if (d.type === 'personal') {
                         var cats = DATA.settings.categories || [];
-                        box.innerHTML = '<label>קטגוריה</label><select id="f_cat"><option value="">זמן פרטי (רגיל)</option>' +
+                        box.innerHTML = '<label>סוג אירוע</label><div class="preset-row" id="ongoingPresets">' +
+                            '<button type="button" class="preset' + (!d.ongoing ? ' selected' : '') + '" data-k="regular">אירוע רגיל</button>' +
+                            '<button type="button" class="preset' + (d.ongoing ? ' selected' : '') + '" data-k="ongoing">אירוע מתמשך<small>מתאריך עד תאריך</small></button></div>' +
+                            '<label>קטגוריה</label><select id="f_cat"><option value="">זמן פרטי (רגיל)</option>' +
                             cats.map(function (c) { return '<option value="' + c.id + '"' + (d.catId === c.id ? ' selected' : '') + '>' + escapeHtml((c.emoji || '') + ' ' + c.name) + '</option>'; }).join('') +
                             '<option value="__new">➕ קטגוריה חדשה…</option></select><div id="newCatBox"></div>';
+                        document.querySelectorAll('#ongoingPresets .preset').forEach(function (b) {
+                            b.addEventListener('click', function () {
+                                d.ongoing = b.dataset.k === 'ongoing';
+                                document.querySelectorAll('#ongoingPresets .preset').forEach(function (x) { x.classList.toggle('selected', x === b); });
+                                applyOngoing(d); refreshConflictPreview(d);
+                            });
+                        });
                         document.getElementById('f_cat').addEventListener('change', function (e) {
                             if (e.target.value === '__new') newCat = { name: '', emoji: '🙂', color: '#86c2b8' };
                             else { newCat = null; d.catId = e.target.value; }
                             renderNewCat();
                         });
                     } else box.innerHTML = '';
+                    applyOngoing(d);
                 }
                 function refreshConflictPreview(d) {
+                    if (d.type === 'personal' && d.ongoing) { document.getElementById('conflictBox').innerHTML = ''; return; }
                     var test = { id: d.id, type: d.type, date: document.getElementById('f_date').value, startTime: document.getElementById('f_start').value, endTime: document.getElementById('f_end').value, useBuffer: document.getElementById('f_buffer').classList.contains('on'), mdaShiftType: d.mdaShiftType };
                     var box = document.getElementById('conflictBox');
                     if (!test.date || !test.startTime || !test.endTime) { box.innerHTML = ''; return; }
@@ -1858,6 +1886,13 @@
                         draft.clientId = document.getElementById('f_client').value || '';
                         draft.price = parseFloat(document.getElementById('f_price').value) || (draft.type === 'consult' ? DATA.settings.consultPrice : DATA.settings.trainingPrice);
                     }
+                    if (draft.type === 'personal' && draft.ongoing) {
+                        var endD = document.getElementById('f_enddate').value;
+                        if (!draft.date || !endD) { alert('נא למלא תאריך התחלה ותאריך סיום'); return; }
+                        if (endD < draft.date) { alert('תאריך הסיום חייב להיות אחרי תאריך ההתחלה'); return; }
+                        draft.endDate = endD; draft.startTime = '00:00'; draft.endTime = '23:59'; draft.recurring = false;
+                    } else { delete draft.endDate; }
+                    delete draft.ongoing;
                     if (!draft.date || !draft.startTime || !draft.endTime) { alert('נא למלא תאריך ושעות'); return; }
                     if (draft.type === 'personal') {
                         if (newCat) {
